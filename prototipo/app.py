@@ -1,5 +1,6 @@
-from menu import *
-from variaveisGlobais import *
+from fases import *
+
+faseAtual = menuPrincipal
 
 #   Loop que mantém o jogo aberto.
 while jogoAberto:
@@ -8,16 +9,18 @@ while jogoAberto:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             jogoAberto = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                faseAtual.tecla = "baixo"
+            elif event.key == pygame.K_w or event.key == pygame.K_UP:
+                faseAtual.tecla = "cima"
+            else:
+                faseAtual.tecla = "outra"
 
-#   Evitar que os elementos sejam desenhados mais que uma vez.
-    if not menu.elementosMostrados:
-        tela.blit(menu.sprite, (menu.posicaoX, menu.posicaoY))
+            faseAtual.eventos()
 
-        tela.blit(menuContinuar.sprite, (menuContinuar.posicaoX, menuContinuar.posicaoY))
-        tela.blit(menuNovoJogo.sprite, (menuNovoJogo.posicaoX, menuNovoJogo.posicaoY))
-        tela.blit(menuConfiguracoes.sprite, (menuConfiguracoes.posicaoX, menuConfiguracoes.posicaoY))
-        tela.blit(menuSair.sprite, (menuSair.posicaoX, menuSair.posicaoY))
-        menu.elementosMostrados = True
+    faseAtual.iniciar()
+    faseAtual.atualizar()
 
 #   Atualizar os elementos na tela.
     pygame.display.flip()

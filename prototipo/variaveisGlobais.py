@@ -6,6 +6,7 @@ tela = pygame.display.set_mode(tamanhoTela)
 pygame.display.set_caption("Any way out?")
 jogoAberto = True
 clock = pygame.time.Clock()
+faseAtual = None
 
 
 #   Cores --------------------
