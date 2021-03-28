@@ -9,6 +9,7 @@ class Cena:
         self.largura = 800
         self.altura = 600
         self.fundo = ""
+        self.tecla = ""
 
     def iniciar(self):
         pass
@@ -23,7 +24,7 @@ class MenuPrincipal(Cena):
         super().__init__()
         self.fundo = pygame.image.load("../Assets/menuPrincipal/fundo.jpg")
         self.opcaoAtual = "continuar"
-        self.tecla = ""
+
 
     def iniciar(self):
 #   Evitar que os elementos sejam desenhados mais que uma vez.
