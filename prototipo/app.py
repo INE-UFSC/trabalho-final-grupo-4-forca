@@ -1,6 +1,6 @@
 from cenas import *
 
-faseAtual = menuPrincipal
+cenaAtual = menuPrincipal
 
 #   Loop que mantém o jogo aberto.
 while jogoAberto:
@@ -11,16 +11,16 @@ while jogoAberto:
             jogoAberto = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s or event.key == pygame.K_DOWN:
-                faseAtual.tecla = "baixo"
+                cenaAtual.tecla = "baixo"
             elif event.key == pygame.K_w or event.key == pygame.K_UP:
-                faseAtual.tecla = "cima"
+                cenaAtual.tecla = "cima"
             else:
-                faseAtual.tecla = "outra"
+                cenaAtual.tecla = "outra"
 
-            faseAtual.eventos()
+            cenaAtual.eventos()
 
-    faseAtual.iniciar()
-    faseAtual.atualizar()
+    cenaAtual.iniciar()
+    cenaAtual.atualizar()
 
 #   Atualizar os elementos na tela.
     pygame.display.flip()
