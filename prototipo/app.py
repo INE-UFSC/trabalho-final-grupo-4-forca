@@ -1,4 +1,4 @@
-from fases import *
+from cenas import *
 
 faseAtual = menuPrincipal
 
