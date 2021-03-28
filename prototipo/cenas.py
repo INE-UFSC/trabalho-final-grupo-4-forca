@@ -28,7 +28,7 @@ class MenuPrincipal(Cena):
     def iniciar(self):
 #   Evitar que os elementos sejam desenhados mais que uma vez.
         tela.blit(self.fundo, (0, 0))
-        tela.blit(menu.sprite, (menu.posicaoX, menu.posicaoY))
+        tela.blit(menuTitulo.sprite, (menuTitulo.posicaoX, menuTitulo.posicaoY))
         tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
         tela.blit(menuContinuar.sprite, (menuContinuar.posicaoX, menuContinuar.posicaoY))
         tela.blit(menuNovoJogo.sprite, (menuNovoJogo.posicaoX, menuNovoJogo.posicaoY))

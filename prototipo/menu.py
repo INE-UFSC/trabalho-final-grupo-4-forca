@@ -3,7 +3,7 @@ import pygame
 #   Código principal do Menu.
 
 
-class Menu:
+class MenuBotao:
 
     def __init__(self):
         self.posicaoX = 120
@@ -11,7 +11,13 @@ class Menu:
         self.sprite = pygame.image.load("../Assets/menuPrincipal/titulo.png")
 
 
-class MenuContinuar(Menu):
+class MenuTitulo(MenuBotao):
+
+    def __init__(self):
+        super().__init__()
+
+
+class MenuContinuar(MenuBotao):
 
     def __init__(self, sprite, x, y):
         super().__init__()
@@ -20,7 +26,7 @@ class MenuContinuar(Menu):
         self.sprite = pygame.image.load(sprite)
 
 
-class MenuNovoJogo(Menu):
+class MenuNovoJogo(MenuBotao):
 
     def __init__(self, sprite, x, y):
         super().__init__()
@@ -29,7 +35,7 @@ class MenuNovoJogo(Menu):
         self.sprite = pygame.image.load(sprite)
 
 
-class MenuConfiguracoes(Menu):
+class MenuConfiguracoes(MenuBotao):
 
     def __init__(self, sprite, x, y):
         super().__init__()
@@ -38,7 +44,7 @@ class MenuConfiguracoes(Menu):
         self.sprite = pygame.image.load(sprite)
 
 
-class MenuSair(Menu):
+class MenuSair(MenuBotao):
 
     def __init__(self, sprite, x, y):
         super().__init__()
@@ -47,7 +53,7 @@ class MenuSair(Menu):
         self.sprite = pygame.image.load(sprite)
 
 
-class MenuSeta(Menu):
+class MenuSeta(MenuBotao):
 
     def __init__(self, sprite, x, y):
         super().__init__()
@@ -56,7 +62,7 @@ class MenuSeta(Menu):
         self.sprite = pygame.image.load(sprite)
 
 
-menu = Menu()
+menuTitulo = MenuTitulo()
 menuContinuar = MenuContinuar("../Assets/menuPrincipal/continuar.png", 280, 200)
 menuNovoJogo = MenuNovoJogo("../Assets/menuPrincipal/novoJogo.png", 280, 280)
 menuConfiguracoes = MenuConfiguracoes("../Assets/menuPrincipal/configuracoes.png", 280, 360)
