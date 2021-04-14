@@ -1,6 +1,7 @@
 import pygame
 from menu import *
 from variaveisGlobais import *
+from jogador import *
 
 
 class Cena:
@@ -42,12 +43,15 @@ class MenuPrincipal(Cena):
             elif self.opcaoAtual == "novoJogo":   self.opcaoAtual = "configuracoes"
             elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "sair"
             elif self.opcaoAtual == "sair":   self.opcaoAtual = "continuar"
+            return None
         elif self.tecla == "cima":
             if self.opcaoAtual == "continuar":    self.opcaoAtual = "sair"
             elif self.opcaoAtual == "novoJogo":   self.opcaoAtual = "continuar"
             elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "novoJogo"
             elif self.opcaoAtual == "sair":   self.opcaoAtual = "configuracoes"
-
+            return None
+        elif self.tecla == "enter" and self.opcaoAtual == "novoJogo":
+            return "cenarioteste"
     def atualizar(self):
         if self.opcaoAtual == "continuar" and menuSeta.posicaoY != 200:
             menuSeta.posicaoY = 200
@@ -65,7 +69,34 @@ class Saguao(Cena):
         super().__init__()
         self.largura = largura
         self.altura = altura
+class CenarioTeste(Cena):
+    def __init__(self):
+        super().__init__()
+        self.fundo = pygame.Surface((self.largura, self.altura))
+        self.parede = pygame.Surface((200,100))
+        self.parede.fill(vermelho)
+        self.parede0rect = self.parede.get_rect(topleft = (100, 100))
+        self.parede1rect = self.parede.get_rect(topleft = (100, 300))
+        self.parede2rect = self.parede.get_rect(topleft = (100, 500))
+        self.lista_parederect = [self.parede0rect, self.parede1rect, self.parede2rect]
+    
+    def iniciar(self):
+        tela.blit(self.fundo, (0,0))
+        tela.blit(self.parede, (100,100))
+        tela.blit(self.parede, (100, 300))
+        tela.blit(self.parede, (100, 500))
+        tela.blit(jogador.surf, jogador.rect)
+    
+    def eventos(self):
+        jogador.move(self.tecla)
+        for retangulo in self.lista_parederect:
+            if jogador.rect.colliderect(retangulo):
+                jogador.resgata_posicao()
+    def atualizar(self):
+        pass
+
 
 
 cena = Cena()
 menuPrincipal = MenuPrincipal()
+cenarioteste = CenarioTeste()
