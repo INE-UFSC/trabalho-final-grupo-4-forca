@@ -12,13 +12,17 @@ class Jogador():
     def move(self, direcao):
         self.coordant = self.rect.topleft
         if direcao == "cima":
-            self.rect.move_ip(0, -self.velocidade)
+            if self.rect.top > 0:
+                self.rect.move_ip(0, -self.velocidade)
         elif direcao == "baixo":
-            self.rect.move_ip(0, self.velocidade)
+            if self.rect.bottom < 600:
+                self.rect.move_ip(0, self.velocidade)
         elif direcao == "direita":
-            self.rect.move_ip(self.velocidade, 0)
+            if self.rect.right < 800:
+                self.rect.move_ip(self.velocidade, 0)
         elif direcao == "esquerda":
-            self.rect.move_ip(-self.velocidade, 0)
+            if self.rect.left > 0:
+                self.rect.move_ip(-self.velocidade, 0)
     
     def muda_posicao(self, x,y):
         self.rect = self.surf.get_rect(top_left = (x, y))
