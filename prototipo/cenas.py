@@ -11,6 +11,7 @@ class Cena:
         self.altura = 600
         self.fundo = ""
         self.tecla = ""
+        self.proximaCena = "nenhuma"
 
     def iniciar(self):
         pass
@@ -26,9 +27,8 @@ class MenuPrincipal(Cena):
         self.fundo = pygame.image.load("../Assets/menuPrincipal/fundo.jpg")
         self.opcaoAtual = "continuar"
 
-
-    def iniciar(self):
 #   Evitar que os elementos sejam desenhados mais que uma vez.
+    def iniciar(self):
         tela.blit(self.fundo, (0, 0))
         tela.blit(menuTitulo.sprite, (menuTitulo.posicaoX, menuTitulo.posicaoY))
         tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
@@ -51,7 +51,10 @@ class MenuPrincipal(Cena):
             elif self.opcaoAtual == "sair":   self.opcaoAtual = "configuracoes"
             return None
         elif self.tecla == "enter" and self.opcaoAtual == "novoJogo":
-            return "cenarioteste"
+            return "cenarioTeste"
+        elif self.tecla == "enter" and self.opcaoAtual == "sair":
+            return "fecharJogo"
+
     def atualizar(self):
         if self.opcaoAtual == "continuar" and menuSeta.posicaoY != 200:
             menuSeta.posicaoY = 200
@@ -69,20 +72,23 @@ class Saguao(Cena):
         super().__init__()
         self.largura = largura
         self.altura = altura
+
+
 class CenarioTeste(Cena):
+
     def __init__(self):
         super().__init__()
         self.fundo = pygame.Surface((self.largura, self.altura))
         self.parede = pygame.Surface((200,100))
         self.parede.fill(vermelho)
-        self.parede0rect = self.parede.get_rect(topleft = (100, 100))
-        self.parede1rect = self.parede.get_rect(topleft = (100, 300))
-        self.parede2rect = self.parede.get_rect(topleft = (100, 500))
+        self.parede0rect = self.parede.get_rect(topleft=(100, 100))
+        self.parede1rect = self.parede.get_rect(topleft=(100, 300))
+        self.parede2rect = self.parede.get_rect(topleft=(100, 500))
         self.lista_parederect = [self.parede0rect, self.parede1rect, self.parede2rect]
     
     def iniciar(self):
-        tela.blit(self.fundo, (0,0))
-        tela.blit(self.parede, (100,100))
+        tela.blit(self.fundo, (0, 0))
+        tela.blit(self.parede, (100, 100))
         tela.blit(self.parede, (100, 300))
         tela.blit(self.parede, (100, 500))
         tela.blit(jogador.surf, jogador.rect)
@@ -92,11 +98,11 @@ class CenarioTeste(Cena):
         for retangulo in self.lista_parederect:
             if jogador.rect.colliderect(retangulo):
                 jogador.resgata_posicao()
+
     def atualizar(self):
         pass
 
 
-
 cena = Cena()
 menuPrincipal = MenuPrincipal()
-cenarioteste = CenarioTeste()
+cenarioTeste = CenarioTeste()
