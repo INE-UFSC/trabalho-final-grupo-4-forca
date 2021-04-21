@@ -1,4 +1,5 @@
-from cenas import *
+from prototipo.cenas import *
+import pygame
 
 
 class Main:
