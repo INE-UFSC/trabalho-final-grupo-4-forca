@@ -1,4 +1,5 @@
 import pygame
+from variaveisGlobais import *
 
 
 class Jogador:
@@ -35,5 +36,50 @@ class Jogador:
     
     def resgata_posicao(self):
         self.rect = self.surf.get_rect(topleft=self.coordant)
+    
+class Inimigo():
+    def __init__(self):
+        self.surf = pygame.Surface((20,60))
+        self.rect = self.surf.get_rect(topleft = (0,0))
+        self.surf.fill((255,0,0))
+        self.velocidade = 5
+        self.estado = "caminho"
+        self.raio_de_visao = 160 #pixels
+        self.angulo_de_visao = 60 #graus
+        self.coordant = self.rect.topleft
+        
+
+    
+    def raio_de_visao_setter(self, raio_de_visao):
+        self.raio_de_visao = raio_de_visao
+        
+
+    
+    def angulo_de_visao_setter(self, angulo_de_visao):
+        self.angulo_de_visao = angulo_de_visao
+
+    
+    def estado_setter(self, estado):
+        self.estado = estado
+
+
+    def move(self, x, y):
+        self.coordant = self.rect.topleft
+        self.rect.move_ip(x, y)
+        if (self.rect.left < 0) or (self.rect.right > tamanhoTela[0]) or (self.rect.top < 0) or (self.rect.bottom > tamanhoTela[1]):
+            self.resgata_posicao()
+        
+        
+    def define_posicao(self, ponto):
+        self.rect.center = ponto
+        
+    
+    def velocidade_setter(self, velocidade):
+        self.velocidade = velocidade
+    
+    def resgata_posicao(self):
+        self.rect.topleft = self.coordant
 
 jogador = Jogador(0,0)
+inimigo = Inimigo()
+inimigo.define_posicao((100, 250))
