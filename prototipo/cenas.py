@@ -1,4 +1,3 @@
-import pygame
 from menu import *
 from variaveisGlobais import *
 from jogador import *
