@@ -108,6 +108,8 @@ class CenarioTeste(Cena):
                 inimigo.resgata_posicao()
         if inimigo.rect.colliderect(jogador.rect):
             inimigo.resgata_posicao()
+    def atualizar(self):
+        pass
 
 
 cena = Cena()
