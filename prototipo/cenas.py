@@ -2,7 +2,7 @@ from menu import *
 from variaveisGlobais import *
 from jogador import *
 from controladorInimigo import *
-
+from pathlib import Path
 
 class Cena:
 
@@ -23,34 +23,66 @@ class Cena:
 class MenuPrincipal(Cena):
 
     def __init__(self):
+        save = Path("saves/save.txt")
+        exist = 0
+        if save.is_file():
+            exist = 1
         super().__init__()
         self.fundo = bkg
-        self.opcaoAtual = "continuar"
+        if exist == 1:
+            self.opcaoAtual = "continuar"
+        else:
+            self.opcaoAtual = "novoJogo"
 
 #   Evitar que os elementos sejam desenhados mais que uma vez.
     def iniciar(self):
+        save = Path("saves/save.txt")
+        exist = 0
+        if save.is_file():
+            exist = 1
         tela.blit(self.fundo, (0, 0))
         tela.blit(menuTitulo.sprite, (menuTitulo.posicaoX, menuTitulo.posicaoY))
         tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
-        tela.blit(menuContinuar.sprite, (menuContinuar.posicaoX, menuContinuar.posicaoY))
         tela.blit(menuNovoJogo.sprite, (menuNovoJogo.posicaoX, menuNovoJogo.posicaoY))
         tela.blit(menuConfiguracoes.sprite, (menuConfiguracoes.posicaoX, menuConfiguracoes.posicaoY))
         tela.blit(menuSair.sprite, (menuSair.posicaoX, menuSair.posicaoY))
+        if exist == 1:
+            tela.blit(menuContinuar.sprite, (menuContinuar.posicaoX, menuContinuar.posicaoY))
+        else:
+            tela.blit(menuContinuar2.sprite, (menuContinuar2.posicaoX, menuContinuar2.posicaoY))
 
     def eventos(self):
-        if self.tecla == "baixo":
-            if self.opcaoAtual == "continuar":    self.opcaoAtual = "novoJogo"
-            elif self.opcaoAtual == "novoJogo":   self.opcaoAtual = "configuracoes"
-            elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "sair"
-            elif self.opcaoAtual == "sair":   self.opcaoAtual = "continuar"
-            return None
-        elif self.tecla == "cima":
-            if self.opcaoAtual == "continuar":    self.opcaoAtual = "sair"
-            elif self.opcaoAtual == "novoJogo":   self.opcaoAtual = "continuar"
-            elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "novoJogo"
-            elif self.opcaoAtual == "sair":   self.opcaoAtual = "configuracoes"
-            return None
-        elif self.tecla == "enter" and self.opcaoAtual == "novoJogo":
+        save = Path("saves/save.txt")
+        exist = 0
+        if save.is_file():
+            exist = 1
+
+        if exist == 1:
+            if self.tecla == "baixo":
+                if self.opcaoAtual == "continuar":    self.opcaoAtual = "novoJogo"
+                elif self.opcaoAtual == "novoJogo":   self.opcaoAtual = "configuracoes"
+                elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "sair"
+                elif self.opcaoAtual == "sair":   self.opcaoAtual = "continuar"
+                return None
+            elif self.tecla == "cima":
+                if self.opcaoAtual == "continuar":    self.opcaoAtual = "sair"
+                elif self.opcaoAtual == "novoJogo":   self.opcaoAtual = "continuar"
+                elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "novoJogo"
+                elif self.opcaoAtual == "sair":   self.opcaoAtual = "configuracoes"
+                return None
+        else:
+            if self.tecla == "baixo":
+                if self.opcaoAtual == "novoJogo":   self.opcaoAtual = "configuracoes"
+                elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "sair"
+                elif self.opcaoAtual == "sair":   self.opcaoAtual = "continuar"
+                return None
+            elif self.tecla == "cima":
+                if self.opcaoAtual == "novoJogo":    self.opcaoAtual = "sair"
+                elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "novoJogo"
+                elif self.opcaoAtual == "sair":   self.opcaoAtual = "configuracoes"
+                return None
+
+        if self.tecla == "enter" and self.opcaoAtual == "novoJogo":
             return "cenarioTeste"
         elif self.tecla == "enter" and self.opcaoAtual == "configuracoes":
             return "menuConfig"

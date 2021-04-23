@@ -16,75 +16,6 @@ class MenuTitulo(MenuBotao):
         super().__init__()
 
 
-class MenuContinuar(MenuBotao):
-
-    def __init__(self, sprite, x, y):
-        super().__init__()
-        self.posicaoX = x
-        self.posicaoY = y
-        self.sprite = pygame.image.load(sprite)
-
-
-class MenuNovoJogo(MenuBotao):
-
-    def __init__(self, sprite, x, y):
-        super().__init__()
-        self.posicaoX = x
-        self.posicaoY = y
-        self.sprite = pygame.image.load(sprite)
-
-
-class MenuConfiguracoes(MenuBotao):
-
-    def __init__(self, sprite, x, y):
-        super().__init__()
-        self.posicaoX = x
-        self.posicaoY = y
-        self.sprite = pygame.image.load(sprite)
-
-
-class MenuSair(MenuBotao):
-
-    def __init__(self, sprite, x, y):
-        super().__init__()
-        self.posicaoX = x
-        self.posicaoY = y
-        self.sprite = pygame.image.load(sprite)
-
-
-class MenuSeta(MenuBotao):
-
-    def __init__(self, sprite, x, y):
-        super().__init__()
-        self.posicaoX = x
-        self.posicaoY = y
-        self.sprite = pygame.image.load(sprite)
-
-
-class MenuVolume(MenuBotao):
-
-    def __init__(self, sprite, x, y):
-        super().__init__()
-        self.posicaoX = x
-        self.posicaoY = y
-        self.sprite = pygame.image.load(sprite)
-
-class MenuVoltar(MenuBotao):
-
-    def __init__(self, sprite, x, y):
-        super().__init__()
-        self.posicaoX = x
-        self.posicaoY = y
-        self.sprite = pygame.image.load(sprite)
-
-class MenuControles(MenuBotao):
-
-    def __init__(self, sprite, x, y):
-        super().__init__()
-        self.posicaoX = x
-        self.posicaoY = y
-        self.sprite = pygame.image.load(sprite)
-
 class MenuOpcao(MenuBotao):
 
     def __init__(self, sprite, x, y):
@@ -93,10 +24,9 @@ class MenuOpcao(MenuBotao):
         self.posicaoY = y
         self.sprite = pygame.image.load(sprite)
 
-
-
 menuTitulo = MenuTitulo()
 menuContinuar = MenuOpcao("../Assets/menuPrincipal/continuar.png", 280, 200)
+menuContinuar2 = MenuOpcao("../Assets/menuPrincipal/continuar_apagado.png", 280, 200)
 menuNovoJogo = MenuOpcao("../Assets/menuPrincipal/novoJogo.png", 280, 280)
 menuConfiguracoes = MenuOpcao("../Assets/menuPrincipal/configuracoes.png", 280, 360)
 menuControls = MenuOpcao("../Assets/menuPrincipal/controles.png", 280, 280)
