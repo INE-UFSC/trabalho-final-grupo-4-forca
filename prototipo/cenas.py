@@ -74,7 +74,7 @@ class MenuPrincipal(Cena):
             if self.tecla == "baixo":
                 if self.opcaoAtual == "novoJogo":   self.opcaoAtual = "configuracoes"
                 elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "sair"
-                elif self.opcaoAtual == "sair":   self.opcaoAtual = "continuar"
+                elif self.opcaoAtual == "sair":   self.opcaoAtual = "novoJogo"
                 return None
             elif self.tecla == "cima":
                 if self.opcaoAtual == "novoJogo":    self.opcaoAtual = "sair"

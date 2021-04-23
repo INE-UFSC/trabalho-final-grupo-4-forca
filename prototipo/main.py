@@ -1,4 +1,4 @@
-from prototipo.cenas import *
+from cenas import *
 import pygame
 
 
