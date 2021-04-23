@@ -29,6 +29,22 @@ class Main:
                     elif event.key == pygame.K_RETURN:
                         self.cenaAtual.tecla = "enter"
 
+                elif self.cenaAtual == menuConfig and event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                        self.cenaAtual.tecla = "baixo"
+                    elif event.key == pygame.K_w or event.key == pygame.K_UP:
+                        self.cenaAtual.tecla = "cima"
+                    elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                        self.cenaAtual.tecla = "esquerda"
+                    elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                        self.cenaAtual.tecla = "direita"
+                    elif event.key == pygame.K_RETURN:
+                        self.cenaAtual.tecla = "enter"
+
+                elif self.cenaAtual == menuControles and event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        self.cenaAtual.tecla = "enter"
+
             if self.cenaAtual == cenarioTeste:
                 pressed = pygame.key.get_pressed()
                 if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
@@ -42,6 +58,7 @@ class Main:
                 elif pressed[pygame.K_RETURN]:
                     self.cenaAtual.tecla = "enter"
 
+
             self.cenaAtual.proximaCena = self.cenaAtual.eventos()
 
             self.cenaAtual.iniciar()
@@ -51,6 +68,12 @@ class Main:
             pygame.display.flip()
             if self.cenaAtual.proximaCena == "cenarioTeste":
                 self.cenaAtual = cenarioTeste
+            elif self.cenaAtual.proximaCena == "menuConfig":
+                self.cenaAtual = menuConfig
+            elif self.cenaAtual.proximaCena == "menuControles":
+                self.cenaAtual = menuControles
+            elif self.cenaAtual.proximaCena == "menuPrincipal":
+                self.cenaAtual = menuPrincipal
             elif self.cenaAtual.proximaCena == "fecharJogo":
                 self.jogoAberto = False
 

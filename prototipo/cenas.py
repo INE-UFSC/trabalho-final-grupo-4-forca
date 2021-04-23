@@ -7,8 +7,8 @@ from controladorInimigo import *
 class Cena:
 
     def __init__(self):
-        self.largura = 800
-        self.altura = 600
+        self.largura = largura
+        self.altura = altura
         self.fundo = ""
         self.tecla = ""
         self.proximaCena = "nenhuma"
@@ -24,7 +24,7 @@ class MenuPrincipal(Cena):
 
     def __init__(self):
         super().__init__()
-        self.fundo = pygame.image.load("../Assets/menuPrincipal/fundo.jpg")
+        self.fundo = bkg
         self.opcaoAtual = "continuar"
 
 #   Evitar que os elementos sejam desenhados mais que uma vez.
@@ -52,6 +52,8 @@ class MenuPrincipal(Cena):
             return None
         elif self.tecla == "enter" and self.opcaoAtual == "novoJogo":
             return "cenarioTeste"
+        elif self.tecla == "enter" and self.opcaoAtual == "configuracoes":
+            return "menuConfig"
         elif self.tecla == "enter" and self.opcaoAtual == "sair":
             return "fecharJogo"
 
@@ -66,14 +68,74 @@ class MenuPrincipal(Cena):
             menuSeta.posicaoY = 440
 
 
+class MenuConfig(Cena):
+
+    def __init__(self):
+        super().__init__()
+        self.fundo = bkg
+        self.opcaoAtual = "volume"
+
+    def iniciar(self):
+        tela.blit(self.fundo, (0, 0))
+        tela.blit(menuTitulo.sprite, (menuTitulo.posicaoX, menuTitulo.posicaoY))
+        tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
+        tela.blit(menuVolume.sprite, (menuVolume.posicaoX, menuVolume.posicaoY))
+        tela.blit(menuControls.sprite, (menuControls.posicaoX, menuControls.posicaoY))
+        tela.blit(menuVoltar.sprite, (menuVoltar.posicaoX, menuVoltar.posicaoY))
+
+    def eventos(self):
+        if self.tecla == "baixo":
+            if self.opcaoAtual == "volume":    self.opcaoAtual = "controles"
+            elif self.opcaoAtual == "controles":   self.opcaoAtual = "voltar"
+            elif self.opcaoAtual == "voltar":   self.opcaoAtual = "volume"
+            return None
+        elif self.tecla == "cima":
+            if self.opcaoAtual == "volume":    self.opcaoAtual = "voltar"
+            elif self.opcaoAtual == "controles":    self.opcaoAtual = "volume"
+            elif self.opcaoAtual == "voltar":   self.opcaoAtual = "controles"
+            return None
+        elif self.tecla == "enter" and self.opcaoAtual == "voltar":
+            return "menuPrincipal"
+        elif self.tecla == "enter" and self.opcaoAtual == "controles":
+            return "menuControles"
+
+    def atualizar(self):
+        if self.opcaoAtual == "volume" and menuSeta.posicaoY != 200:
+            menuSeta.posicaoY = 200
+        elif self.opcaoAtual == "controles" and menuSeta.posicaoY != 280:
+            menuSeta.posicaoY = 280
+        elif self.opcaoAtual == "voltar" and menuSeta.posicaoY != 360:
+            menuSeta.posicaoY = 360
+
+
+class MenuControles(Cena):
+    def __init__(self):
+        super().__init__()
+        self.fundo = bkg
+        self.opcaoAtual = "voltar"
+
+    def iniciar(self):
+        tela.blit(self.fundo, (0, 0))
+        tela.blit(menuTitulo.sprite, (menuTitulo.posicaoX, menuTitulo.posicaoY))
+        tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
+        tela.blit(controls_info.sprite, (controls_info.posicaoX, controls_info.posicaoY))
+        tela.blit(menuVoltar2.sprite, (menuVoltar2.posicaoX, menuVoltar2.posicaoY))
+
+    def eventos(self):
+        if self.tecla == "enter" and self.opcaoAtual == "voltar":
+            return "menuConfig"
+
+    def atualizar(self):
+        if self.opcaoAtual == "voltar" and menuSeta.posicaoY != 440:
+            menuSeta.posicaoY = 440
+
+
 class Saguao(Cena):
 
     def __init__(self, largura, altura):
         super().__init__()
         self.largura = largura
         self.altura = altura
-
-
 
 
 class CenarioTeste(Cena):
@@ -115,3 +177,5 @@ class CenarioTeste(Cena):
 cena = Cena()
 menuPrincipal = MenuPrincipal()
 cenarioTeste = CenarioTeste()
+menuConfig = MenuConfig()
+menuControles = MenuControles()
