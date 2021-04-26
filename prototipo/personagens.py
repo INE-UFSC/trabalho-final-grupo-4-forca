@@ -18,6 +18,7 @@ class Personagem(pygame.sprite.Sprite):
         self.velocidade = 5
         self.estado = ""
         self.imageIndex = 0
+        self.ultimaDirecaoH = "direita"
 
     def move(self):
         pass
@@ -47,7 +48,6 @@ class Jogador(Personagem):
         self.inventario = [None] * 20
         self.inventario[0] = itens.chave
         self.inventario[18] = itens.chave
-        self.ultimaDirecaoH = "direita"
 
     def move(self, direcao, direcaoHorizontal, direcaoVertical):
         self.coordant = self.rect.topleft
@@ -98,18 +98,24 @@ class Jogador(Personagem):
     def resgata_posicao(self):
         self.rect = self.surf.get_rect(topleft=self.coordant)
 
-    def aplica_efeito(self, index : int):
+    def aplica_efeito(self, index: int):
         pass
 
-    def remove_item(self, index : int):
+    def remove_item(self, index: int):
         self.inventario[index] = None
 
 
 class Inimigo(Personagem):
-    def __init__(self, largura, altura):
-        super().__init__(largura, altura)
-        self.imagesIdle[0] = pygame.image.load("../Assets/Sprites/monstro/monsterIdle0.png")
-        self.image = pygame.transform.scale(self.imagesIdle[0], [largura, altura])
+    def __init__(self, largura, altura, *groups):
+        super().__init__(largura, altura, *groups)
+
+        self.imagesRun[0] = pygame.image.load("../Assets/Sprites/monstro/monsterRun0.png")
+        self.imagesRun[1] = pygame.image.load("../Assets/Sprites/monstro/monsterRun1.png")
+        self.imagesRun[2] = pygame.image.load("../Assets/Sprites/monstro/monsterRun2.png")
+        self.imagesRun[3] = pygame.image.load("../Assets/Sprites/monstro/monsterRun3.png")
+        self.imagesRun[4] = pygame.image.load("../Assets/Sprites/monstro/monsterRun0.png")
+
+        self.image = pygame.transform.scale(self.imagesRun[self.imageIndex], [largura, altura])
         self.surf.blit(self.image, self.coordant)
 
         self.estado = "caminho"
@@ -131,6 +137,25 @@ class Inimigo(Personagem):
         if (self.rect.left < 0) or (self.rect.right > tamanhoTela[0]) or (self.rect.top < 0) or (self.rect.bottom > tamanhoTela[1]):
             self.resgata_posicao()
 
+        # Verificar qual direção o monstro está caminhando.
+        if self.rect.topleft[0] > self.coordant[0]:
+            self.ultimaDirecaoH = "direita"
+        elif self.rect.topleft[0] < self.coordant[0]:
+            self.ultimaDirecaoH = "esquerda"
+
+        # Ajustar os sprites do jogador conforme a situação.
+        if self.ultimaDirecaoH == "direita":
+            self.image = pygame.transform.scale(self.imagesRun[int(self.imageIndex)], [self.largura, self.altura])
+        elif self.ultimaDirecaoH == "esquerda":
+            self.image = pygame.transform.scale(self.imagesRun[int(self.imageIndex)], [self.largura, self.altura])
+            self.image = pygame.transform.flip(self.image, True, False)
+
+        # Fazer o índice do sprite atual atualizar para realizar a animação.
+        if self.imageIndex < 4:
+            self.imageIndex += 0.15
+        else:
+            self.imageIndex = 0
+
     def velocidade_setter(self, velocidade):
         self.velocidade = velocidade
 
@@ -141,12 +166,13 @@ class Inimigo(Personagem):
         self.rect.center = ponto
 
 def atualizarGroups():
-    playerGroup.update()
+    personagemGroup.update()
 
 def drawGroups():
-    playerGroup.draw(tela)
+    personagemGroup.draw(tela)
 
-playerGroup = pygame.sprite.Group()
-jogador = Jogador(32, 40, playerGroup)
-inimigo = Inimigo(64, 72)
+
+personagemGroup = pygame.sprite.Group()
+jogador = Jogador(32, 40, personagemGroup)
+inimigo = Inimigo(64, 72, personagemGroup)
 inimigo.define_posicao((100, 250))

@@ -1,6 +1,6 @@
 from menu import *
 from variaveisGlobais import *
-from jogador import *
+from personagens import *
 from controladorInimigo import *
 from pathlib import Path
 
@@ -218,7 +218,6 @@ class CenarioTeste(Cena):
         tela.blit(self.parede, (100, 100))
         tela.blit(self.parede, (100, 300))
         tela.blit(self.parede, (100, 500))
-        tela.blit(inimigo.surf, inimigo.rect)
         drawGroups()
         atualizarGroups()
 

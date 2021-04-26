@@ -1,5 +1,5 @@
-from jogador import Inimigo
-from jogador import *
+from personagens import Inimigo
+from personagens import *
 import math
 
 
