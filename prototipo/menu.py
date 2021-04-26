@@ -39,11 +39,3 @@ menuSeta = MenuOpcao("../Assets/Sprites/menuPrincipal/seta.png", 210, 200)
 bkg_img = pygame.image.load("../Assets/Sprites/menuPrincipal/fundo2.jpg")
 bkg = pygame.transform.scale(bkg_img, (largura, altura))
 
-
-#menuTitulo = MenuTitulo()
-#menuContinuar = MenuContinuar("../Assets/Sprites/menuPrincipal/continuar.png", 280, 200)
-#menuNovoJogo = MenuNovoJogo("../Assets/Sprites/menuPrincipal/novoJogo.png", 280, 280)
-#menuConfiguracoes = MenuConfiguracoes("../Assets/Sprites/menuPrincipal/configuracoes.png", 280, 360)
-#menuSair = MenuSair("../Assets/Sprites/menuPrincipal/sair.png", 280, 440)
-#menuSeta = MenuSeta("../Assets/Sprites/menuPrincipal/seta.png", 210, 200)
-

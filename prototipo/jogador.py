@@ -3,15 +3,16 @@ import itens
 from variaveisGlobais import *
 
 
-class Personagem:
+class Personagem(pygame.sprite.Sprite):
 
-    def __init__(self, largura, altura):
+    def __init__(self, largura, altura, *groups):
+        super().__init__(*groups)
         self.largura = largura
         self.altura = altura
         self.surf = pygame.Surface((self.largura, self.altura))
-        self.spritesIdle = [None, None, None, None]
-        self.spritesRun = [None, None, None, None]
-        self.sprite = self.spritesIdle[0]
+        self.imagesIdle = [None, None, None, None, None]
+        self.imagesRun = [None, None, None, None, None]
+        self.image = self.imagesIdle[0]
         self.rect = self.surf.get_rect(topleft=(0, 0))
         self.coordant = self.rect.topleft
         self.velocidade = 5
@@ -24,26 +25,29 @@ class Personagem:
 
 class Jogador(Personagem):
 
-    def __init__(self, largura, altura):
-        super().__init__(largura, altura)
+    def __init__(self, largura, altura, *groups):
+        super().__init__(largura, altura, *groups)
 
-        self.spritesIdle[0] = pygame.image.load("../Assets/Sprites/jogador/playerIdle0.png")
-        self.spritesIdle[1] = pygame.image.load("../Assets/Sprites/jogador/playerIdle1.png")
-        self.spritesIdle[2] = pygame.image.load("../Assets/Sprites/jogador/playerIdle2.png")
-        self.spritesIdle[3] = pygame.image.load("../Assets/Sprites/jogador/playerIdle3.png")
-        self.spritesRun[0] = pygame.image.load("../Assets/Sprites/jogador/playerRun0.png")
-        self.spritesRun[1] = pygame.image.load("../Assets/Sprites/jogador/playerRun1.png")
-        self.spritesRun[2] = pygame.image.load("../Assets/Sprites/jogador/playerRun2.png")
-        self.spritesRun[3] = pygame.image.load("../Assets/Sprites/jogador/playerRun3.png")
+        self.imagesIdle[0] = pygame.image.load("../Assets/Sprites/jogador/playerIdle0.png")
+        self.imagesIdle[1] = pygame.image.load("../Assets/Sprites/jogador/playerIdle1.png")
+        self.imagesIdle[2] = pygame.image.load("../Assets/Sprites/jogador/playerIdle2.png")
+        self.imagesIdle[3] = pygame.image.load("../Assets/Sprites/jogador/playerIdle3.png")
+        self.imagesIdle[4] = pygame.image.load("../Assets/Sprites/jogador/playerIdle0.png")
+        self.imagesRun[0] = pygame.image.load("../Assets/Sprites/jogador/playerRun0.png")
+        self.imagesRun[1] = pygame.image.load("../Assets/Sprites/jogador/playerRun1.png")
+        self.imagesRun[2] = pygame.image.load("../Assets/Sprites/jogador/playerRun2.png")
+        self.imagesRun[3] = pygame.image.load("../Assets/Sprites/jogador/playerRun3.png")
+        self.imagesRun[4] = pygame.image.load("../Assets/Sprites/jogador/playerRun2.png")
 
-        self.sprite = pygame.transform.scale(self.spritesIdle[0], [self.largura, self.altura])
-        self.surf.blit(self.sprite, self.coordant)
+        self.image = pygame.transform.scale(self.imagesIdle[self.imageIndex], [self.largura, self.altura])
+        self.surf.blit(self.image, self.coordant)
         self.estado = "parado"
         self.vida = 3
         self.stamina = 100
         self.inventario = [None] * 20
         self.inventario[0] = itens.chave
         self.inventario[18] = itens.chave
+        self.ultimaDirecaoH = "direita"
 
     def move(self, direcao, direcaoHorizontal, direcaoVertical):
         self.coordant = self.rect.topleft
@@ -57,15 +61,37 @@ class Jogador(Personagem):
         if direcaoHorizontal == "direita":
             if self.rect.right < 800:
                 self.rect.move_ip(self.velocidade, 0)
+            self.ultimaDirecaoH = "direita"
         elif direcaoHorizontal == "esquerda":
             if self.rect.left > 0:
                 self.rect.move_ip(-self.velocidade, 0)
+            self.ultimaDirecaoH = "esquerda"
 
         if direcao == "cima" or direcao == "baixo" or direcao == "direita" or direcao == "esquerda":
             self.estado = "andando"
         else:
             self.estado = "parado"
-    
+
+        # Ajustar os sprites do jogador conforme a situação.
+        if self.estado == "andando":
+            if self.ultimaDirecaoH == "direita":
+                self.image = pygame.transform.scale(self.imagesRun[int(self.imageIndex)], [self.largura, self.altura])
+            elif self.ultimaDirecaoH == "esquerda":
+                self.image = pygame.transform.scale(self.imagesRun[int(self.imageIndex)], [self.largura, self.altura])
+                self.image = pygame.transform.flip(self.image, True, False)
+        elif self.estado == "parado":
+            if self.ultimaDirecaoH == "direita":
+                self.image = pygame.transform.scale(self.imagesIdle[int(self.imageIndex)], [self.largura, self.altura])
+            elif self.ultimaDirecaoH == "esquerda":
+                self.image = pygame.transform.scale(self.imagesIdle[int(self.imageIndex)], [self.largura, self.altura])
+                self.image = pygame.transform.flip(self.image, True, False)
+
+        # Fazer o índice do sprite atual atualizar para realizar a animação.
+        if self.imageIndex < 4:
+            self.imageIndex += 0.15
+        else:
+            self.imageIndex = 0
+
     def muda_posicao(self, x, y):
         self.rect = self.surf.get_rect(top_left=(x, y))
     
@@ -82,9 +108,9 @@ class Jogador(Personagem):
 class Inimigo(Personagem):
     def __init__(self, largura, altura):
         super().__init__(largura, altura)
-        self.spritesIdle[0] = pygame.image.load("../Assets/Sprites/monstro/monsterIdle0.png")
-        self.sprite = pygame.transform.scale(self.spritesIdle[0], [largura, altura])
-        self.surf.blit(self.sprite, self.coordant)
+        self.imagesIdle[0] = pygame.image.load("../Assets/Sprites/monstro/monsterIdle0.png")
+        self.image = pygame.transform.scale(self.imagesIdle[0], [largura, altura])
+        self.surf.blit(self.image, self.coordant)
 
         self.estado = "caminho"
         self.raio_de_visao = 160 #pixels
@@ -114,7 +140,13 @@ class Inimigo(Personagem):
     def define_posicao(self, ponto):
         self.rect.center = ponto
 
+def atualizarGroups():
+    playerGroup.update()
 
-jogador = Jogador(32, 40)
+def drawGroups():
+    playerGroup.draw(tela)
+
+playerGroup = pygame.sprite.Group()
+jogador = Jogador(32, 40, playerGroup)
 inimigo = Inimigo(64, 72)
 inimigo.define_posicao((100, 250))

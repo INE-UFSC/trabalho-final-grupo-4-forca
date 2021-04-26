@@ -85,8 +85,8 @@ class Main:
                     self.cenaAtual.tecla = "enter"
 
             self.cenaAtual.proximaCena = self.cenaAtual.eventos()
-
-            self.cenaAtual.iniciar()
+            if not self.cenaAtual.iniciou:
+                self.cenaAtual.iniciar()
             self.cenaAtual.atualizar()
 
         #   Atualizar os elementos na tela.

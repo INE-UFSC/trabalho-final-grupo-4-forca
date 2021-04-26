@@ -12,12 +12,13 @@ class Cena:
         self.fundo = ""
         self.tecla = ""
         self.proximaCena = "nenhuma"
+        self.iniciou = False
 
     def iniciar(self):
         pass
 
     def atualizar(self):
-        pass
+        atualizarGroups()
 
 
 class MenuPrincipal(Cena):
@@ -182,18 +183,14 @@ class CenarioTeste(Cena):
         self.fundo = pygame.Surface((self.largura, self.altura))
         self.parede = pygame.Surface((200,100))
         self.parede.fill(vermelho)
-        self.parede0rect = self.parede.get_rect(topleft = (100, 100))
-        self.parede1rect = self.parede.get_rect(topleft = (100, 300))
-        self.parede2rect = self.parede.get_rect(topleft = (100, 500))
+        self.parede0rect = self.parede.get_rect(topleft=(100, 100))
+        self.parede1rect = self.parede.get_rect(topleft=(100, 300))
+        self.parede2rect = self.parede.get_rect(topleft=(100, 500))
         self.lista_parederect = [self.parede0rect, self.parede1rect, self.parede2rect]
     
     def iniciar(self):
-        tela.blit(self.fundo, (0,0))
-        tela.blit(self.parede, (100,100))
-        tela.blit(self.parede, (100, 300))
-        tela.blit(self.parede, (100, 500))
-        tela.blit(jogador.surf, jogador.rect)
-        tela.blit(inimigo.surf, inimigo.rect)
+        #drawGroups()
+        self.iniciou = True
     
     def eventos(self):
         jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical)
@@ -213,11 +210,17 @@ class CenarioTeste(Cena):
         if inimigo.rect.colliderect(jogador.rect):
             inimigo.resgata_posicao()
 
-        if self.tecla=="e":
+        if self.tecla == "e":
             return "inventario"
 
     def atualizar(self):
-        pass
+        tela.blit(self.fundo, (0, 0))
+        tela.blit(self.parede, (100, 100))
+        tela.blit(self.parede, (100, 300))
+        tela.blit(self.parede, (100, 500))
+        tela.blit(inimigo.surf, inimigo.rect)
+        drawGroups()
+        atualizarGroups()
 
 
 class MenuInventario(Cena):
