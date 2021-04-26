@@ -1,4 +1,5 @@
 import pygame
+import itens
 from variaveisGlobais import *
 
 
@@ -15,6 +16,10 @@ class Jogador:
         self.velocidade = 5
         self.vida = 3
         self.stamina = 100
+
+        self.inventario = [None]*20
+        self.inventario[0] = itens.chave
+        self.inventario[18] = itens.chave
 
     def move(self, direcao):
         self.coordant = self.rect.topleft
@@ -36,6 +41,12 @@ class Jogador:
     
     def resgata_posicao(self):
         self.rect = self.surf.get_rect(topleft=self.coordant)
+
+    def aplica_efeito(self, index : int):
+        pass
+
+    def remove_item(self, index : int):
+        self.inventario[index] = None
     
 class Inimigo():
     def __init__(self):

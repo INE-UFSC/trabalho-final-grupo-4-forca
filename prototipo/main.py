@@ -1,4 +1,4 @@
-from cenas import *
+from prototipo.cenas import *
 import pygame
 
 
@@ -55,9 +55,24 @@ class Main:
                     self.cenaAtual.tecla = "esquerda"
                 elif pressed[pygame.K_d] or pressed[pygame.K_RIGHT]:
                     self.cenaAtual.tecla = "direita"
+                elif pressed[pygame.K_e]:
+                    self.cenaAtual.tecla = "e"
                 elif pressed[pygame.K_RETURN]:
                     self.cenaAtual.tecla = "enter"
-
+            if self.cenaAtual == menuInventario:
+                pressed = pygame.key.get_pressed()
+                if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
+                    self.cenaAtual.tecla = "baixo"
+                elif pressed[pygame.K_w] or pressed[pygame.K_UP]:
+                    self.cenaAtual.tecla = "cima"
+                elif pressed[pygame.K_a] or pressed[pygame.K_LEFT]:
+                    self.cenaAtual.tecla = "esquerda"
+                elif pressed[pygame.K_d] or pressed[pygame.K_RIGHT]:
+                    self.cenaAtual.tecla = "direita"
+                elif pressed[pygame.K_ESCAPE]:
+                    self.cenaAtual.tecla = "esc"
+                elif pressed[pygame.K_RETURN]:
+                    self.cenaAtual.tecla = "enter"
 
             self.cenaAtual.proximaCena = self.cenaAtual.eventos()
 
@@ -74,6 +89,8 @@ class Main:
                 self.cenaAtual = menuControles
             elif self.cenaAtual.proximaCena == "menuPrincipal":
                 self.cenaAtual = menuPrincipal
+            elif self.cenaAtual.proximaCena == "inventario":
+                self.cenaAtual = menuInventario
             elif self.cenaAtual.proximaCena == "fecharJogo":
                 self.jogoAberto = False
 
