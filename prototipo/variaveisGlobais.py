@@ -1,7 +1,9 @@
 import pygame
 
 #   Variáveis gerais ---------
-tamanhoTela = (800, 600)
+largura = 800
+altura = 600
+tamanhoTela = (largura, altura)
 tela = pygame.display.set_mode(tamanhoTela)
 pygame.display.set_caption("Any way out?")
 jogoAberto = True

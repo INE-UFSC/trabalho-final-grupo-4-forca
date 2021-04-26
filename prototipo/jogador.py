@@ -1,4 +1,5 @@
 import pygame
+import itens
 from variaveisGlobais import *
 
 
@@ -40,6 +41,9 @@ class Jogador(Personagem):
         self.estado = "parado"
         self.vida = 3
         self.stamina = 100
+        self.inventario = [None] * 20
+        self.inventario[0] = itens.chave
+        self.inventario[18] = itens.chave
 
     def move(self, direcao, direcaoHorizontal, direcaoVertical):
         self.coordant = self.rect.topleft
@@ -68,6 +72,12 @@ class Jogador(Personagem):
     def resgata_posicao(self):
         self.rect = self.surf.get_rect(topleft=self.coordant)
 
+    def aplica_efeito(self, index : int):
+        pass
+
+    def remove_item(self, index : int):
+        self.inventario[index] = None
+
 
 class Inimigo(Personagem):
     def __init__(self, largura, altura):
@@ -75,6 +85,7 @@ class Inimigo(Personagem):
         self.spritesIdle[0] = pygame.image.load("../Assets/Sprites/monstro/monsterIdle0.png")
         self.sprite = pygame.transform.scale(self.spritesIdle[0], [largura, altura])
         self.surf.blit(self.sprite, self.coordant)
+
         self.estado = "caminho"
         self.raio_de_visao = 160 #pixels
         self.angulo_de_visao = 60 #graus
@@ -94,14 +105,14 @@ class Inimigo(Personagem):
         if (self.rect.left < 0) or (self.rect.right > tamanhoTela[0]) or (self.rect.top < 0) or (self.rect.bottom > tamanhoTela[1]):
             self.resgata_posicao()
 
-    def define_posicao(self, ponto):
-        self.rect.center = ponto
-
     def velocidade_setter(self, velocidade):
         self.velocidade = velocidade
 
     def resgata_posicao(self):
         self.rect.topleft = self.coordant
+
+    def define_posicao(self, ponto):
+        self.rect.center = ponto
 
 
 jogador = Jogador(32, 40)

@@ -31,6 +31,22 @@ class Main:
                     elif event.key == pygame.K_RETURN:
                         self.cenaAtual.tecla = "enter"
 
+                elif self.cenaAtual == menuConfig and event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                        self.cenaAtual.tecla = "baixo"
+                    elif event.key == pygame.K_w or event.key == pygame.K_UP:
+                        self.cenaAtual.tecla = "cima"
+                    elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                        self.cenaAtual.tecla = "esquerda"
+                    elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                        self.cenaAtual.tecla = "direita"
+                    elif event.key == pygame.K_RETURN:
+                        self.cenaAtual.tecla = "enter"
+
+                elif self.cenaAtual == menuControles and event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        self.cenaAtual.tecla = "enter"
+
             if self.cenaAtual == cenarioTeste:
                 pressed = pygame.key.get_pressed()
                 if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
@@ -45,7 +61,26 @@ class Main:
                     self.cenaAtual.teclaHorizontal = "esquerda"
                 elif pressed[pygame.K_d] or pressed[pygame.K_RIGHT]:
                     self.cenaAtual.tecla = "direita"
+
                     self.cenaAtual.teclaHorizontal = "direita"
+
+                elif pressed[pygame.K_e]:
+                    self.cenaAtual.tecla = "e"
+                elif pressed[pygame.K_RETURN]:
+                    self.cenaAtual.tecla = "enter"
+            if self.cenaAtual == menuInventario:
+                pressed = pygame.key.get_pressed()
+                if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
+                    self.cenaAtual.tecla = "baixo"
+                elif pressed[pygame.K_w] or pressed[pygame.K_UP]:
+                    self.cenaAtual.tecla = "cima"
+                elif pressed[pygame.K_a] or pressed[pygame.K_LEFT]:
+                    self.cenaAtual.tecla = "esquerda"
+                elif pressed[pygame.K_d] or pressed[pygame.K_RIGHT]:
+                    self.cenaAtual.tecla = "direita"
+                elif pressed[pygame.K_ESCAPE]:
+                    self.cenaAtual.tecla = "esc"
+
                 elif pressed[pygame.K_RETURN]:
                     self.cenaAtual.tecla = "enter"
 
@@ -60,6 +95,14 @@ class Main:
         #   Verificar se a cena atual desencadeou algum evento.
             if self.cenaAtual.proximaCena == "cenarioTeste":
                 self.cenaAtual = cenarioTeste
+            elif self.cenaAtual.proximaCena == "menuConfig":
+                self.cenaAtual = menuConfig
+            elif self.cenaAtual.proximaCena == "menuControles":
+                self.cenaAtual = menuControles
+            elif self.cenaAtual.proximaCena == "menuPrincipal":
+                self.cenaAtual = menuPrincipal
+            elif self.cenaAtual.proximaCena == "inventario":
+                self.cenaAtual = menuInventario
             elif self.cenaAtual.proximaCena == "fecharJogo":
                 self.jogoAberto = False
 
