@@ -233,40 +233,47 @@ class MenuInventario(Cena):
         self.box_x = 150
         self.box_y = 100
         self.itemindex = 0
+        self.jaMudou = False
 
     def iniciar(self):
-        tela.blit(self.fundo, (0, 0))
-        for i in range (0, 4):
-            for j in range (0, 5):
-                tela.blit(self.container, (((j*100)+150), ((i*100)+100)))
-        tela.blit(self.selectedBox, (self.box_x, self.box_y))
-        for i in range (0, 4):
-            for j in range (0, 5):
-                if jogador.inventario[(i * 5) + j] != None:
-                    tela.blit(jogador.inventario[(i * 5) + j].image, (((j * 100) + 150), ((i * 100) + 100)))
+        self.iniciou = True
 
     def eventos(self):
-        if self.tecla=="esc":
-            return "cenarioTeste"
-        if self.tecla == "cima" and self.box_y>100:
-            self.box_y = self.box_y-100
-            self.itemindex = self.itemindex - 5
-        if self.tecla == "baixo" and self.box_y<400:
-            self.box_y = self.box_y + 100
-            self.itemindex = self.itemindex + 5
-        if self.tecla == "esquerda" and self.box_x>150:
-            self.box_x = self.box_x - 100
-            self.itemindex = self.itemindex - 1
-        if self.tecla == "direita" and self.box_x<550:
-            self.box_x = self.box_x + 100
-            self.itemindex = self.itemindex + 1
-        if self.tecla == "enter" and jogador.inventario[self.itemindex]!= None:
-            if jogador.inventario[self.itemindex].usable == True:
-                jogador.aplica_efeito(self.itemindex)                               # não entendo por que não
-                jogador.remove_item(self.itemindex)                                 # funciona na mesma linha
+        if not self.jaMudou:
+            if self.tecla=="esc":
+                return "cenarioTeste"
+            if self.tecla == "cima" and self.box_y>100:
+                self.box_y = self.box_y-100
+                self.itemindex = self.itemindex - 5
+            if self.tecla == "baixo" and self.box_y<400:
+                self.box_y = self.box_y + 100
+                self.itemindex = self.itemindex + 5
+            if self.tecla == "esquerda" and self.box_x>150:
+                self.box_x = self.box_x - 100
+                self.itemindex = self.itemindex - 1
+            if self.tecla == "direita" and self.box_x<550:
+                self.box_x = self.box_x + 100
+                self.itemindex = self.itemindex + 1
+            if self.tecla == "enter" and jogador.inventario[self.itemindex]!= None:
+                if jogador.inventario[self.itemindex].usable == True:
+                    jogador.aplica_efeito(self.itemindex)                               # não entendo por que não
+                    jogador.remove_item(self.itemindex)                                 # funciona na mesma linha
+
+        if self.tecla != "cima" and self.tecla != "baixo" and self.tecla != "direita" and self.tecla != "esquerda":
+            self.jaMudou = False
+        else:
+            self.jaMudou = True
 
     def atualizar(self):
-        pass
+        tela.blit(self.fundo, (0, 0))
+        for i in range(0, 4):
+            for j in range(0, 5):
+                tela.blit(self.container, (((j * 100) + 150), ((i * 100) + 100)))
+        tela.blit(self.selectedBox, (self.box_x, self.box_y))
+        for i in range(0, 4):
+            for j in range(0, 5):
+                if jogador.inventario[(i * 5) + j] != None:
+                    tela.blit(jogador.inventario[(i * 5) + j].image, (((j * 100) + 150), ((i * 100) + 100)))
 
 
 #cena = Cena()
