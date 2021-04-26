@@ -8,7 +8,7 @@ class MenuBotao:
     def __init__(self):
         self.posicaoX = 120
         self.posicaoY = 50
-        self.sprite = pygame.image.load("../Assets/menuPrincipal/titulo.png")
+        self.sprite = pygame.image.load("../Assets/Sprites/menuPrincipal/titulo.png")
 
 
 class MenuTitulo(MenuBotao):
@@ -63,8 +63,8 @@ class MenuSeta(MenuBotao):
 
 
 menuTitulo = MenuTitulo()
-menuContinuar = MenuContinuar("../Assets/menuPrincipal/continuar.png", 280, 200)
-menuNovoJogo = MenuNovoJogo("../Assets/menuPrincipal/novoJogo.png", 280, 280)
-menuConfiguracoes = MenuConfiguracoes("../Assets/menuPrincipal/configuracoes.png", 280, 360)
-menuSair = MenuSair("../Assets/menuPrincipal/sair.png", 280, 440)
-menuSeta = MenuSeta("../Assets/menuPrincipal/seta.png", 210, 200)
+menuContinuar = MenuContinuar("../Assets/Sprites/menuPrincipal/continuar.png", 280, 200)
+menuNovoJogo = MenuNovoJogo("../Assets/Sprites/menuPrincipal/novoJogo.png", 280, 280)
+menuConfiguracoes = MenuConfiguracoes("../Assets/Sprites/menuPrincipal/configuracoes.png", 280, 360)
+menuSair = MenuSair("../Assets/Sprites/menuPrincipal/sair.png", 280, 440)
+menuSeta = MenuSeta("../Assets/Sprites/menuPrincipal/seta.png", 210, 200)

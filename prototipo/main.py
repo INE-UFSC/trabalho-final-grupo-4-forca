@@ -12,6 +12,8 @@ class Main:
     def runGame(self):
         while self.jogoAberto:
             self.cenaAtual.tecla = "outra"
+            self.cenaAtual.teclaHorizontal = "outra"
+            self.cenaAtual.teclaVertical = "outra"
 
         #   Verificação constante de eventos.
             for event in pygame.event.get():
@@ -33,12 +35,17 @@ class Main:
                 pressed = pygame.key.get_pressed()
                 if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
                     self.cenaAtual.tecla = "baixo"
+                    self.cenaAtual.teclaVertical = "baixo"
                 elif pressed[pygame.K_w] or pressed[pygame.K_UP]:
                     self.cenaAtual.tecla = "cima"
-                elif pressed[pygame.K_a] or pressed[pygame.K_LEFT]:
+                    self.cenaAtual.teclaVertical = "cima"
+
+                if pressed[pygame.K_a] or pressed[pygame.K_LEFT]:
                     self.cenaAtual.tecla = "esquerda"
+                    self.cenaAtual.teclaHorizontal = "esquerda"
                 elif pressed[pygame.K_d] or pressed[pygame.K_RIGHT]:
                     self.cenaAtual.tecla = "direita"
+                    self.cenaAtual.teclaHorizontal = "direita"
                 elif pressed[pygame.K_RETURN]:
                     self.cenaAtual.tecla = "enter"
 
@@ -49,6 +56,8 @@ class Main:
 
         #   Atualizar os elementos na tela.
             pygame.display.flip()
+
+        #   Verificar se a cena atual desencadeou algum evento.
             if self.cenaAtual.proximaCena == "cenarioTeste":
                 self.cenaAtual = cenarioTeste
             elif self.cenaAtual.proximaCena == "fecharJogo":

@@ -24,7 +24,7 @@ class MenuPrincipal(Cena):
 
     def __init__(self):
         super().__init__()
-        self.fundo = pygame.image.load("../Assets/menuPrincipal/fundo.jpg")
+        self.fundo = pygame.image.load("../Assets/Sprites/menuPrincipal/fundo.jpg")
         self.opcaoAtual = "continuar"
 
 #   Evitar que os elementos sejam desenhados mais que uma vez.
@@ -74,11 +74,11 @@ class Saguao(Cena):
         self.altura = altura
 
 
-
-
 class CenarioTeste(Cena):
     def __init__(self):
         super().__init__()
+        self.teclaHorizontal = ""
+        self.teclaVertical = ""
         self.fundo = pygame.Surface((self.largura, self.altura))
         self.parede = pygame.Surface((200,100))
         self.parede.fill(vermelho)
@@ -96,22 +96,27 @@ class CenarioTeste(Cena):
         tela.blit(inimigo.surf, inimigo.rect)
     
     def eventos(self):
-        jogador.move(self.tecla)
+        jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical)
+
         for retangulo in self.lista_parederect:
             if jogador.rect.colliderect(retangulo):
                 jogador.resgata_posicao()
+
         if jogador.rect.colliderect(inimigo.rect):
             jogador.resgata_posicao()
         controlador.movimenta()
+
         for retangulo in self.lista_parederect:
             if inimigo.rect.colliderect(retangulo):
                 inimigo.resgata_posicao()
+
         if inimigo.rect.colliderect(jogador.rect):
             inimigo.resgata_posicao()
+
     def atualizar(self):
         pass
 
 
-cena = Cena()
+#cena = Cena()
 menuPrincipal = MenuPrincipal()
 cenarioTeste = CenarioTeste()
