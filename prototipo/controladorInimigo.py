@@ -52,6 +52,15 @@ class ControladorInimigo():
                     self.posicao_caminho = i
             self.inimigo.estado = "caminho"
     
+    def movimenta_x(self):
+        vetor_movimento = self.melhor_caminho(self.jogador.rect.center)
+        self.inimigo.move(vetor_movimento[0], 0)
+    
+    def movimenta_y(self):
+        vetor_movimento = self.melhor_caminho(self.jogador.rect.center)
+        self.inimigo.move(0, vetor_movimento[1])
+
+    
     
     def melhor_caminho(self, ponto_objetivo):
         vetor_diferenca = (ponto_objetivo[0] - self.inimigo.rect.centerx, ponto_objetivo[1] - self.inimigo.rect.centery)
