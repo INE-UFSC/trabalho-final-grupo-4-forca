@@ -210,6 +210,17 @@ class CenarioTeste(Cena):
         for retangulo in self.lista_parederect:
             if inimigo.rect.colliderect(retangulo):
                 inimigo.resgata_posicao()
+        
+        if inimigo.movimento_falhou:
+            controlador.movimenta_x()
+            for retangulo in self.lista_parederect:
+                if inimigo.rect.colliderect(retangulo):
+                    inimigo.resgata_posicao()
+        if inimigo.movimento_falhou:
+            controlador.movimenta_y()
+            for retangulo in self.lista_parederect:
+                if inimigo.rect.colliderect(retangulo):
+                    inimigo.resgata_posicao()
 
         if inimigo.rect.colliderect(jogador.rect):
             inimigo.resgata_posicao()
