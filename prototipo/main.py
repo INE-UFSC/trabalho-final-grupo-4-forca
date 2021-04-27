@@ -15,11 +15,12 @@ class Main:
             self.cenaAtual.teclaHorizontal = "outra"
             self.cenaAtual.teclaVertical = "outra"
 
-        #   Verificação constante de eventos.
+            # Verificação constante de eventos.
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.jogoAberto = False
-                elif self.cenaAtual == menuPrincipal and event.type == pygame.KEYDOWN:
+                # Verificar se as teclas especificadas foram pressionadas 1 vez.
+                elif event.type == pygame.KEYDOWN and self.cenaAtual != cenarioTeste:
                     if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                         self.cenaAtual.tecla = "baixo"
                     elif event.key == pygame.K_w or event.key == pygame.K_UP:
@@ -31,22 +32,16 @@ class Main:
                     elif event.key == pygame.K_RETURN:
                         self.cenaAtual.tecla = "enter"
 
-                elif self.cenaAtual == menuConfig and event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_s or event.key == pygame.K_DOWN:
-                        self.cenaAtual.tecla = "baixo"
-                    elif event.key == pygame.K_w or event.key == pygame.K_UP:
-                        self.cenaAtual.tecla = "cima"
-                    elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                        self.cenaAtual.tecla = "esquerda"
-                    elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                        self.cenaAtual.tecla = "direita"
-                    elif event.key == pygame.K_RETURN:
-                        self.cenaAtual.tecla = "enter"
+                    if self.cenaAtual == menuPrincipal or self.cenaAtual == menuConfig or self.cenaAtual == menuControles:
+                        if event.key == pygame.K_RETURN:
+                            self.cenaAtual.tecla = "enter"
+                    elif self.cenaAtual == menuInventario:
+                        if event.key == pygame.K_RETURN:
+                            self.cenaAtual.tecla == "enter"
+                        elif event.key == pygame.K_ESCAPE:
+                            self.cenaAtual.tecla = "esc"
 
-                elif self.cenaAtual == menuControles and event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:
-                        self.cenaAtual.tecla = "enter"
-
+            #Verificar se as teclas especificadas estão sendo pressionadas constantemente.
             if self.cenaAtual == cenarioTeste:
                 pressed = pygame.key.get_pressed()
                 # Movimentação vertical
@@ -69,22 +64,6 @@ class Main:
                     self.cenaAtual.tecla = "shift"
                 elif pressed[pygame.K_e]:
                     self.cenaAtual.tecla = "e"
-                elif pressed[pygame.K_RETURN]:
-                    self.cenaAtual.tecla = "enter"
-
-            if self.cenaAtual == menuInventario:
-                pressed = pygame.key.get_pressed()
-                if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
-                    self.cenaAtual.tecla = "baixo"
-                elif pressed[pygame.K_w] or pressed[pygame.K_UP]:
-                    self.cenaAtual.tecla = "cima"
-                elif pressed[pygame.K_a] or pressed[pygame.K_LEFT]:
-                    self.cenaAtual.tecla = "esquerda"
-                elif pressed[pygame.K_d] or pressed[pygame.K_RIGHT]:
-                    self.cenaAtual.tecla = "direita"
-                elif pressed[pygame.K_ESCAPE]:
-                    self.cenaAtual.tecla = "esc"
-
                 elif pressed[pygame.K_RETURN]:
                     self.cenaAtual.tecla = "enter"
 
