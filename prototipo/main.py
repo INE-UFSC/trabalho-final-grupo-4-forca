@@ -49,25 +49,29 @@ class Main:
 
             if self.cenaAtual == cenarioTeste:
                 pressed = pygame.key.get_pressed()
+                # Movimentação vertical
                 if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
                     self.cenaAtual.tecla = "baixo"
                     self.cenaAtual.teclaVertical = "baixo"
                 elif pressed[pygame.K_w] or pressed[pygame.K_UP]:
                     self.cenaAtual.tecla = "cima"
                     self.cenaAtual.teclaVertical = "cima"
-
+                # Movimentação horizontal
                 if pressed[pygame.K_a] or pressed[pygame.K_LEFT]:
                     self.cenaAtual.tecla = "esquerda"
                     self.cenaAtual.teclaHorizontal = "esquerda"
                 elif pressed[pygame.K_d] or pressed[pygame.K_RIGHT]:
                     self.cenaAtual.tecla = "direita"
-
                     self.cenaAtual.teclaHorizontal = "direita"
 
+                # Teclas utilitárias
+                if pressed[pygame.K_LSHIFT]:
+                    self.cenaAtual.tecla = "shift"
                 elif pressed[pygame.K_e]:
                     self.cenaAtual.tecla = "e"
                 elif pressed[pygame.K_RETURN]:
                     self.cenaAtual.tecla = "enter"
+
             if self.cenaAtual == menuInventario:
                 pressed = pygame.key.get_pressed()
                 if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:

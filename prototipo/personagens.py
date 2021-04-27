@@ -15,7 +15,7 @@ class Personagem(pygame.sprite.Sprite):
         self.image = self.imagesIdle[0]
         self.rect = self.surf.get_rect(topleft=(0, 0))
         self.coordant = self.rect.topleft
-        self.velocidade = 5
+        self.velocidade = 4
         self.estado = ""
         self.imageIndex = 0
         self.ultimaDirecaoH = "direita"
@@ -43,6 +43,7 @@ class Jogador(Personagem):
         self.image = pygame.transform.scale(self.imagesIdle[self.imageIndex], [self.largura, self.altura])
         self.surf.blit(self.image, self.coordant)
         self.estado = "parado"
+        self.velocidade = 3
         self.vida = 3
         self.stamina = 100
         self.inventario = [None] * 20
@@ -66,6 +67,15 @@ class Jogador(Personagem):
             if self.rect.left > 0:
                 self.rect.move_ip(-self.velocidade, 0)
             self.ultimaDirecaoH = "esquerda"
+
+        # Correr
+        if direcao == "shift" and self.stamina > 0:
+            self.velocidade = 5
+            self.stamina -= 1
+        else:
+            self.velocidade = 3
+            if self.stamina < 100:
+                self.stamina += 1
 
         if direcao == "cima" or direcao == "baixo" or direcao == "direita" or direcao == "esquerda":
             self.estado = "andando"
