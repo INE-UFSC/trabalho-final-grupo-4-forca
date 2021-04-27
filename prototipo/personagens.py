@@ -131,6 +131,7 @@ class Inimigo(Personagem):
         self.estado = "caminho"
         self.raio_de_visao = 160 #pixels
         self.angulo_de_visao = 60 #graus
+        self.movimento_falhou = False
 
     def raio_de_visao_setter(self, raio_de_visao):
         self.raio_de_visao = raio_de_visao
@@ -142,6 +143,7 @@ class Inimigo(Personagem):
         self.estado = estado
 
     def move(self, x, y):
+        self.movimento_falhou = False
         self.coordant = self.rect.topleft
         self.rect.move_ip(x, y)
         if (self.rect.left < 0) or (self.rect.right > tamanhoTela[0]) or (self.rect.top < 0) or (self.rect.bottom > tamanhoTela[1]):
@@ -171,6 +173,7 @@ class Inimigo(Personagem):
 
     def resgata_posicao(self):
         self.rect.topleft = self.coordant
+        self.movimento_falhou = True
 
     def define_posicao(self, ponto):
         self.rect.center = ponto
