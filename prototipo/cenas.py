@@ -24,16 +24,15 @@ class Cena:
 
 class MenuPrincipal(Cena):
 
+    in_game = 0
     def __init__(self):
+        self.config = 0
         save = Path("saves/save.txt")
         exist = 0
         if save.is_file():
             exist = 1
         super().__init__()
-
-        self.fundo = pygame.image.load("../Assets/Sprites/menuPrincipal/fundo.jpg")
         self.opcaoAtual = "continuar"
-
         self.fundo = bkg
         if exist == 1:
             self.opcaoAtual = "continuar"
@@ -89,21 +88,73 @@ class MenuPrincipal(Cena):
                 return None
 
         if self.tecla == "enter" and self.opcaoAtual == "novoJogo":
+            MenuPrincipal.in_game = 1
             return "cenarioTeste"
         elif self.tecla == "enter" and self.opcaoAtual == "configuracoes":
             return "menuConfig"
         elif self.tecla == "enter" and self.opcaoAtual == "sair":
-            return "fecharJogo"
+            return "menuSair0"
 
     def atualizar(self):
         if self.opcaoAtual == "continuar" and menuSeta.posicaoY != 200:
+            menuSeta.posicaoX = 200
             menuSeta.posicaoY = 200
         elif self.opcaoAtual == "novoJogo" and menuSeta.posicaoY != 280:
+            menuSeta.posicaoX = 200
             menuSeta.posicaoY = 280
         elif self.opcaoAtual == "configuracoes" and menuSeta.posicaoY != 360:
+            menuSeta.posicaoX = 200
             menuSeta.posicaoY = 360
         elif self.opcaoAtual == "sair" and menuSeta.posicaoY != 440:
+            menuSeta.posicaoX = 200
             menuSeta.posicaoY = 440
+
+class MenuSair0(Cena):
+    def __init__(self):
+        super().__init__()
+        self.fundo = bkg
+        self.fundo2 = bkg2
+        self.opcaoAtual = "nao"
+
+    def iniciar(self):
+        if MenuPrincipal.in_game == 1:
+            tela.blit(self.fundo2, (0, 0))
+        else:
+            tela.blit(self.fundo, (0, 0))
+        tela.blit(menuTituloSair.sprite, (menuTituloSair.posicaoX, menuTituloSair.posicaoY))
+        tela.blit(atencao_info.sprite, (atencao_info.posicaoX, atencao_info.posicaoY))
+        tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
+        tela.blit(menuSim.sprite, (menuSim.posicaoX, menuSim.posicaoY))
+        tela.blit(menuNao.sprite, (menuNao.posicaoX, menuNao.posicaoY))
+
+    def eventos(self):
+        if self.tecla == "esquerda":
+            if self.opcaoAtual == "nao":
+                self.opcaoAtual = "sim"
+            elif self.opcaoAtual == "sim":
+                self.opcaoAtual = "nao"
+            return None
+        elif self.tecla == "direita":
+            if self.opcaoAtual == "nao":
+                self.opcaoAtual = "sim"
+            elif self.opcaoAtual == "sim":
+                self.opcaoAtual = "nao"
+            return None
+        if self.tecla == "enter" and self.opcaoAtual == "nao":
+            if MenuPrincipal.in_game == 1:
+                return "menuEmJogo"
+            else:
+                return "menuPrincipal"
+        elif self.tecla == "enter" and self.opcaoAtual == "sim":
+            return "fecharJogo"
+
+    def atualizar(self):
+        if self.opcaoAtual == "nao" and menuSeta.posicaoX != 110:
+            menuSeta.posicaoX = 110
+            menuSeta.posicaoY = 360
+        elif self.opcaoAtual == "sim" and menuSeta.posicaoX != 370:
+            menuSeta.posicaoX = 370
+            menuSeta.posicaoY = 360
 
 
 class MenuConfig(Cena):
@@ -111,11 +162,15 @@ class MenuConfig(Cena):
     def __init__(self):
         super().__init__()
         self.fundo = bkg
+        self.fundo2 = bkg2
         self.opcaoAtual = "volume"
 
     def iniciar(self):
-        tela.blit(self.fundo, (0, 0))
-        tela.blit(menuTitulo.sprite, (menuTitulo.posicaoX, menuTitulo.posicaoY))
+        if MenuPrincipal.in_game == 1:
+            tela.blit(self.fundo2, (0, 0))
+        else:
+            tela.blit(self.fundo, (0, 0))
+        tela.blit(menuTituloConfigs.sprite, (menuTituloConfigs.posicaoX, menuTituloConfigs.posicaoY))
         tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
         tela.blit(menuVolume.sprite, (menuVolume.posicaoX, menuVolume.posicaoY))
         tela.blit(menuControls.sprite, (menuControls.posicaoX, menuControls.posicaoY))
@@ -133,7 +188,10 @@ class MenuConfig(Cena):
             elif self.opcaoAtual == "voltar":   self.opcaoAtual = "controles"
             return None
         elif self.tecla == "enter" and self.opcaoAtual == "voltar":
-            return "menuPrincipal"
+            if MenuPrincipal.in_game == 1:
+                return "menuEmJogo"
+            else:
+                return "menuPrincipal"
         elif self.tecla == "enter" and self.opcaoAtual == "controles":
             return "menuControles"
 
@@ -150,11 +208,15 @@ class MenuControles(Cena):
     def __init__(self):
         super().__init__()
         self.fundo = bkg
+        self.fundo2 = bkg2
         self.opcaoAtual = "voltar"
 
     def iniciar(self):
-        tela.blit(self.fundo, (0, 0))
-        tela.blit(menuTitulo.sprite, (menuTitulo.posicaoX, menuTitulo.posicaoY))
+        if MenuPrincipal.in_game == 1:
+            tela.blit(self.fundo2, (0, 0))
+        else:
+            tela.blit(self.fundo, (0, 0))
+        tela.blit(menuTituloControles.sprite, (menuTituloControles.posicaoX, menuTituloControles.posicaoY))
         tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
         tela.blit(controls_info.sprite, (controls_info.posicaoX, controls_info.posicaoY))
         tela.blit(menuVoltar2.sprite, (menuVoltar2.posicaoX, menuVoltar2.posicaoY))
@@ -164,8 +226,8 @@ class MenuControles(Cena):
             return "menuConfig"
 
     def atualizar(self):
-        if self.opcaoAtual == "voltar" and menuSeta.posicaoY != 440:
-            menuSeta.posicaoY = 440
+        if self.opcaoAtual == "voltar" and menuSeta.posicaoY != 520:
+            menuSeta.posicaoY = 520
 
 
 class Saguao(Cena):
@@ -225,6 +287,8 @@ class CenarioTeste(Cena):
         if inimigo.rect.colliderect(jogador.rect):
             inimigo.resgata_posicao()
 
+        if self.tecla == "p":
+            return "menuEmJogo"
         if self.tecla == "e":
             return "inventario"
 
@@ -238,11 +302,61 @@ class CenarioTeste(Cena):
         drawGroups()
         atualizarGroups()
 
+class MenuEmJogo(Cena):
+
+    def __init__(self):
+        super().__init__()
+        self.opcaoAtual = "continuar"
+        self.fundo = bkg
+        self.fundo2 = bkg2
+
+    def iniciar(self):
+        if MenuPrincipal.in_game == 1:
+            tela.blit(self.fundo2, (0, 0))
+        else:
+            tela.blit(self.fundo, (0, 0))
+        tela.blit(menuTituloPausa.sprite, (menuTituloPausa.posicaoX, menuTituloPausa.posicaoY))
+        tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
+        tela.blit(menuContinuar_em_jogo.sprite, (menuContinuar_em_jogo.posicaoX, menuContinuar_em_jogo.posicaoY))
+        tela.blit(menuConfiguracoesEmJogo.sprite, (menuConfiguracoesEmJogo.posicaoX, menuConfiguracoesEmJogo.posicaoY))
+        tela.blit(menuSairEmJogo.sprite, (menuSairEmJogo.posicaoX, menuSairEmJogo.posicaoY))
+
+    def eventos(self):
+        if self.tecla == "baixo":
+            if self.opcaoAtual == "continuar":    self.opcaoAtual = "configuracoes"
+            elif self.opcaoAtual == "configuracoes":   self.opcaoAtual = "sair"
+            elif self.opcaoAtual == "sair":  self.opcaoAtual = "continuar"
+            return None
+        elif self.tecla == "cima":
+            if self.opcaoAtual == "continuar":    self.opcaoAtual = "sair"
+            elif self.opcaoAtual == "configuracoes":  self.opcaoAtual = "continuar"
+            elif self.opcaoAtual == "sair":   self.opcaoAtual = "configuracoes"
+            return None
+
+        if self.tecla == "enter" and self.opcaoAtual == "continuar":
+            return "cenarioTeste"
+        elif self.tecla == "enter" and self.opcaoAtual == "configuracoes":
+            return "menuConfig"
+        elif self.tecla == "enter" and self.opcaoAtual == "sair":
+            return "menuSair0"
+        elif self.tecla == "esc":
+            return "cenarioTeste"
+
+    def atualizar(self):
+        if self.opcaoAtual == "continuar" and menuSeta.posicaoY != 200:
+            menuSeta.posicaoX = 200
+            menuSeta.posicaoY = 200
+        elif self.opcaoAtual == "configuracoes" and menuSeta.posicaoY != 280:
+            menuSeta.posicaoX = 200
+            menuSeta.posicaoY = 280
+        elif self.opcaoAtual == "sair" and menuSeta.posicaoY != 361:
+            menuSeta.posicaoX = 200
+            menuSeta.posicaoY = 361
 
 class MenuInventario(Cena):
     def __init__(self):
         super().__init__()
-        self.fundo = pygame.Surface((self.largura, self.altura))
+        self.fundo = ibkg
         self.container = pygame.Surface((100, 100))
         self.container.fill((127, 127, 127))
         self.selectedBox = pygame.Surface((100, 100))
@@ -282,7 +396,7 @@ class MenuInventario(Cena):
             self.jaMudou = True
 
     def atualizar(self):
-        tela.blit(self.fundo, (0, 0))
+        tela.blit(self.fundo, (100, 50))
         for i in range(0, 4):
             for j in range(0, 5):
                 tela.blit(self.container, (((j * 100) + 150), ((i * 100) + 100)))
@@ -298,4 +412,6 @@ menuPrincipal = MenuPrincipal()
 cenarioTeste = CenarioTeste()
 menuConfig = MenuConfig()
 menuControles = MenuControles()
+menuEmJogo = MenuEmJogo()
 menuInventario = MenuInventario()
+menuSair0 = MenuSair0()

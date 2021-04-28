@@ -1,7 +1,6 @@
 from prototipo.cenas import *
 import pygame
 
-
 class Main:
 
     def __init__(self):
@@ -35,7 +34,7 @@ class Main:
                     if self.cenaAtual == menuPrincipal or self.cenaAtual == menuConfig or self.cenaAtual == menuControles:
                         if event.key == pygame.K_RETURN:
                             self.cenaAtual.tecla = "enter"
-                    elif self.cenaAtual == menuInventario:
+                    elif self.cenaAtual == menuInventario or self.cenaAtual == menuEmJogo:
                         if event.key == pygame.K_RETURN:
                             self.cenaAtual.tecla == "enter"
                         elif event.key == pygame.K_ESCAPE:
@@ -64,6 +63,8 @@ class Main:
                     self.cenaAtual.tecla = "shift"
                 elif pressed[pygame.K_e]:
                     self.cenaAtual.tecla = "e"
+                elif pressed[pygame.K_p]:
+                    self.cenaAtual.tecla = "p"
                 elif pressed[pygame.K_RETURN]:
                     self.cenaAtual.tecla = "enter"
 
@@ -84,8 +85,12 @@ class Main:
                 self.cenaAtual = menuControles
             elif self.cenaAtual.proximaCena == "menuPrincipal":
                 self.cenaAtual = menuPrincipal
+            elif self.cenaAtual.proximaCena == "menuEmJogo":
+                self.cenaAtual = menuEmJogo
             elif self.cenaAtual.proximaCena == "inventario":
                 self.cenaAtual = menuInventario
+            elif self.cenaAtual.proximaCena == "menuSair0":
+                self.cenaAtual = menuSair0
             elif self.cenaAtual.proximaCena == "fecharJogo":
                 self.jogoAberto = False
 
