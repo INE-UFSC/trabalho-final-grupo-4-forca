@@ -1,18 +1,22 @@
 import pygame
 
-#   Variáveis gerais ---------
-largura = 800
-altura = 600
-tamanhoTela = (largura, altura)
-tela = pygame.display.set_mode(tamanhoTela)
-pygame.display.set_caption("Any way out?")
-jogoAberto = True
-clock = pygame.time.Clock()
-faseAtual = None
+
+class Global:
+
+    def __init__(self):
+        # Variáveis gerais ---------
+        pygame.display.set_caption("Any way out?")
+        self.tamanhoTela = (800, 600)
+        self.tela = pygame.display.set_mode(self.tamanhoTela)
+        self.jogoAberto = True
+        self.clock = pygame.time.Clock()
+        self.faseAtual = None
+
+        # Cores --------------------
+        self.preto = (0, 0, 0)
+        self.branco = (255, 255, 255)
+        self.verde = (0, 255, 0)
+        self.vermelho = (255, 0, 0)
 
 
-#   Cores --------------------
-preto = (0, 0, 0)
-branco = (255, 255, 255)
-verde = (0, 255, 0)
-vermelho = (255, 0, 0)
+glob = Global()

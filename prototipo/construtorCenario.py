@@ -1,5 +1,6 @@
 import pygame
-from variaveisGlobais import *
+from variaveisGlobais import glob
+
 
 class ConstrutorCenario:
     def __init__(self):
@@ -12,10 +13,10 @@ class ConstrutorCenario:
             for ii in range(size):
                 self.chao.append(Parede(x+(ii*larg), y+(i*alt), sprite, larg, alt, self.chaoGroup))
 
-    def drawGroups(self):
-        self.chaoGroup.draw(tela)
+    def draw_groups(self):
+        self.chaoGroup.draw(glob.tela)
 
-    def updateGroups(self):
+    def update_groups(self):
         self.chaoGroup.update()
 
 

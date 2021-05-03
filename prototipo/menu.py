@@ -1,9 +1,10 @@
-from variaveisGlobais import *
-#   Código principal do Menu.
+from variaveisGlobais import glob
+import pygame
+
+# Código principal do Menu.
 
 
 class MenuBotao:
-
     def __init__(self):
         self.posicaoX = 120
         self.posicaoY = 50
@@ -11,18 +12,17 @@ class MenuBotao:
 
 
 class MenuTitulo(MenuBotao):
-
     def __init__(self):
         super().__init__()
 
 
 class MenuOpcao(MenuBotao):
-
     def __init__(self, sprite, x, y):
         super().__init__()
         self.posicaoX = x
         self.posicaoY = y
         self.sprite = pygame.image.load(sprite)
+
 
 menuTitulo = MenuTitulo()
 menuTituloPausa = MenuOpcao("../Assets/Sprites/menuPrincipal/titulo_pausa.png", 120, 50)
@@ -50,7 +50,7 @@ menuSeta = MenuOpcao("../Assets/Sprites/menuPrincipal/seta.png", 210, 200)
 bkg_img = pygame.image.load("../Assets/Sprites/menuPrincipal/fundo2.jpg")
 bkg2_img = pygame.image.load("../Assets/Sprites/menuPrincipal/fundo3.jpg")
 ibkg_img = pygame.image.load("../Assets/Sprites/menuPrincipal/inventorybackground.png")
-bkg = pygame.transform.scale(bkg_img, (largura, altura))
-bkg2 = pygame.transform.scale(bkg2_img, (largura, altura))
+bkg = pygame.transform.scale(bkg_img, (glob.tamanhoTela[0], glob.tamanhoTela[1]))
+bkg2 = pygame.transform.scale(bkg2_img, (glob.tamanhoTela[0], glob.tamanhoTela[1]))
 ibkg = pygame.transform.scale(ibkg_img, (600, 520))
 

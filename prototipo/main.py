@@ -1,14 +1,16 @@
-from prototipo.cenas import *
+from prototipo.cenas.cenas import *
 import pygame
+
 
 class Main:
 
     def __init__(self):
         self.cenaAtual = menuPrincipal
         self.jogoAberto = True
+        self.clock = pygame.time.Clock()
 
 #   Loop que mantém o jogo aberto.
-    def runGame(self):
+    def run_game(self):
         while self.jogoAberto:
             self.cenaAtual.tecla = "outra"
             self.cenaAtual.teclaHorizontal = "outra"
@@ -19,7 +21,7 @@ class Main:
                 if event.type == pygame.QUIT:
                     self.jogoAberto = False
                 # Verificar se as teclas especificadas foram pressionadas 1 vez.
-                elif event.type == pygame.KEYDOWN and self.cenaAtual != cenarioTeste:
+                elif event.type == pygame.KEYDOWN and self.cenaAtual != saguao:
                     if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                         self.cenaAtual.tecla = "baixo"
                     elif event.key == pygame.K_w or event.key == pygame.K_UP:
@@ -40,8 +42,8 @@ class Main:
                         elif event.key == pygame.K_ESCAPE:
                             self.cenaAtual.tecla = "esc"
 
-            #Verificar se as teclas especificadas estão sendo pressionadas constantemente.
-            if self.cenaAtual == cenarioTeste:
+            # Verificar se as teclas especificadas estão sendo pressionadas constantemente.
+            if self.cenaAtual == saguao:
                 pressed = pygame.key.get_pressed()
                 # Movimentação vertical
                 if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
@@ -77,8 +79,8 @@ class Main:
             pygame.display.flip()
 
         #   Verificar se a cena atual desencadeou algum evento.
-            if self.cenaAtual.proximaCena == "cenarioTeste":
-                self.cenaAtual = cenarioTeste
+            if self.cenaAtual.proximaCena == "saguao":
+                self.cenaAtual = saguao
             elif self.cenaAtual.proximaCena == "menuConfig":
                 self.cenaAtual = menuConfig
             elif self.cenaAtual.proximaCena == "menuControles":
@@ -95,8 +97,8 @@ class Main:
                 self.jogoAberto = False
 
         #   Limitar o FPS do jogo.
-            clock.tick(60)
+            self.clock.tick(60)
 
 
 jogo = Main()
-jogo.runGame()
+jogo.run_game()

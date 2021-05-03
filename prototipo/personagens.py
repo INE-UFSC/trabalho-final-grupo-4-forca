@@ -1,6 +1,6 @@
 import pygame
 import itens
-from variaveisGlobais import *
+from variaveisGlobais import glob
 
 
 class Personagem(pygame.sprite.Sprite):
@@ -83,16 +83,16 @@ class Jogador(Personagem):
             self.estado = "parado"
 
         # Ajustar os sprites do jogador conforme a situação.
-        if self.estado == "andando":
-            if self.ultimaDirecaoH == "direita":
+        if self.ultimaDirecaoH == "direita":
+            if self.estado == "andando":
                 self.image = pygame.transform.scale(self.imagesRun[int(self.imageIndex)], [self.largura, self.altura])
-            elif self.ultimaDirecaoH == "esquerda":
+            elif self.estado == "parado":
+                self.image = pygame.transform.scale(self.imagesIdle[int(self.imageIndex)], [self.largura, self.altura])
+        elif self.ultimaDirecaoH == "esquerda":
+            if self.estado == "andando":
                 self.image = pygame.transform.scale(self.imagesRun[int(self.imageIndex)], [self.largura, self.altura])
                 self.image = pygame.transform.flip(self.image, True, False)
-        elif self.estado == "parado":
-            if self.ultimaDirecaoH == "direita":
-                self.image = pygame.transform.scale(self.imagesIdle[int(self.imageIndex)], [self.largura, self.altura])
-            elif self.ultimaDirecaoH == "esquerda":
+            elif self.estado == "parado":
                 self.image = pygame.transform.scale(self.imagesIdle[int(self.imageIndex)], [self.largura, self.altura])
                 self.image = pygame.transform.flip(self.image, True, False)
 
@@ -129,8 +129,8 @@ class Inimigo(Personagem):
         self.surf.blit(self.image, self.coordant)
 
         self.estado = "caminho"
-        self.raio_de_visao = 160 #pixels
-        self.angulo_de_visao = 60 #graus
+        self.raio_de_visao = 160  # pixels
+        self.angulo_de_visao = 60  # graus
         self.movimento_falhou = False
 
     def raio_de_visao_setter(self, raio_de_visao):
@@ -146,7 +146,7 @@ class Inimigo(Personagem):
         self.movimento_falhou = False
         self.coordant = self.rect.topleft
         self.rect.move_ip(x, y)
-        if (self.rect.left < 0) or (self.rect.right > tamanhoTela[0]) or (self.rect.top < 0) or (self.rect.bottom > tamanhoTela[1]):
+        if (self.rect.left < 0) or (self.rect.right > glob.tamanhoTela[0]) or (self.rect.top < 0) or (self.rect.bottom > glob.tamanhoTela[1]):
             self.resgata_posicao()
 
         # Verificar qual direção o monstro está caminhando.
@@ -178,11 +178,13 @@ class Inimigo(Personagem):
     def define_posicao(self, ponto):
         self.rect.center = ponto
 
-def atualizarGroups():
+
+def update_groups():
     personagemGroup.update()
 
-def drawGroups():
-    personagemGroup.draw(tela)
+
+def draw_groups():
+    personagemGroup.draw(glob.tela)
 
 
 personagemGroup = pygame.sprite.Group()

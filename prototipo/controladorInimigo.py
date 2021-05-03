@@ -1,16 +1,16 @@
-from personagens import Inimigo
+#from personagens import inimigo
 from personagens import *
 import math
 
 
-class ControladorInimigo():
-    def __init__(self, inimigo, caminho):
-        self.inimigo = inimigo
+class ControladorInimigo:
+    def __init__(self, enemy, caminho):
+        self.inimigo = enemy
         self.jogador = jogador
         self.caminho = caminho
         self.posicao_caminho = 1
         self.ultimo_movimento = ""
-        self.distancia_percepcao = 300 #pixels
+        self.distancia_percepcao = 300  # pixels
     
     def movimenta(self):
         if self.inimigo.estado == "caminho":
@@ -42,7 +42,6 @@ class ControladorInimigo():
             if math.dist(self.inimigo.rect.center, self.jogador.rect.center) > self.distancia_percepcao:
                 self.inimigo.estado_setter("confuso")
 
-
         elif self.inimigo.estado == "confuso":
             menor_dist = math.dist(self.inimigo.rect.center, self.caminho[0])
             for i in range(len(self.caminho)):
@@ -60,8 +59,6 @@ class ControladorInimigo():
         vetor_movimento = self.melhor_caminho(self.jogador.rect.center)
         self.inimigo.move(0, vetor_movimento[1])
 
-    
-    
     def melhor_caminho(self, ponto_objetivo):
         vetor_diferenca = (ponto_objetivo[0] - self.inimigo.rect.centerx, ponto_objetivo[1] - self.inimigo.rect.centery)
         modulo_vetor_diferenca = (vetor_diferenca[0]**2 + vetor_diferenca[1]**2)**0.5
@@ -69,7 +66,7 @@ class ControladorInimigo():
         vetor_movimento = (round(fator*vetor_diferenca[0]), round(fator*vetor_diferenca[1]))
         return vetor_movimento
 
-    def visao(self):#coordenadas mudadas para o plano cartesiano padrão
+    def visao(self):  # coordenadas mudadas para o plano cartesiano padrão
         if math.dist(self.inimigo.rect.center, self.jogador.rect.center) < 1.2 * self.inimigo.raio_de_visao:
             if self.ultimo_movimento == "direita":
                 olho = (self.inimigo.rect.right, -self.inimigo.rect.centery) 
@@ -90,7 +87,6 @@ class ControladorInimigo():
                 if (resp1 == "baixo") and (resp2 == "cima"):
                     return True
                 return False
-            
             
             elif self.ultimo_movimento == "esquerda":
                 olho = (self.inimigo.rect.left, -self.inimigo.rect.centery) 
@@ -152,6 +148,7 @@ class ControladorInimigo():
                     return True
                 return False
         return False
+
     def verifica_ponto_entre_retas(self, r1, r2, ponto):
         ponto_relacao_r1 = r1[0]*ponto[0] + r1[1]*ponto[1] + r1[2]
         ponto_relacao_r2 = r2[0]*ponto[0] + r2[1]*ponto[1] + r2[2]
@@ -172,7 +169,7 @@ class ControladorInimigo():
         return (reta[0], reta[1], c)
     
 
-controlador = ControladorInimigo(inimigo, [(100, 250),(350, 250),(350, 450),(350, 250)])
+controlador = ControladorInimigo(inimigo, [(100, 250), (350, 250), (350, 450), (350, 250)])
 '''
 se o caminho não for fechado ele deve ter a seguinte forma:
 sejam p1,p2,p3,p4,p5 os ponto pelos quais o inimigo deve passsar
