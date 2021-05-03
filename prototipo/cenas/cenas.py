@@ -1,12 +1,8 @@
-from prototipo.cenas.menu_principal import MenuPrincipal
+from prototipo.cenas.menu_principal import MenuPrincipal, MenuConfig, MenuControles, MenuSair0
 from prototipo.cenas.saguao import Saguao
-from prototipo.cenas.menu_principal import MenuConfig
-from prototipo.cenas.menu_principal import MenuControles
-from prototipo.cenas.menu_em_jogo import MenuEmJogo
-from prototipo.cenas.menu_em_jogo import MenuInventario
-from prototipo.cenas.menu_principal import MenuSair0
+from prototipo.cenas.menu_em_jogo import MenuEmJogo, MenuInventario
 
-# cena = Cena()
+
 menuPrincipal = MenuPrincipal()
 saguao = Saguao()
 menuConfig = MenuConfig()

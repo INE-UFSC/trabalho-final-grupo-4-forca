@@ -50,23 +50,47 @@ class Jogador(Personagem):
         self.inventario[0] = itens.chave
         self.inventario[18] = itens.chave
 
-    def move(self, direcao, direcaoHorizontal, direcaoVertical):
+    def move(self, direcao, direcaoHorizontal, direcaoVertical, colisoes):
+
+        for retangulo in colisoes:
+            if jogador.rect.colliderect(retangulo):
+                jogador.resgata_posicao(colisoes)
+                glob.cameraDirecaoH = 0
+                glob.cameraDirecaoV = 0
+
         self.coordant = self.rect.topleft
+
         if direcaoVertical == "cima":
-            if self.rect.top > 0:
+            if self.rect.top > 300:
                 self.rect.move_ip(0, -self.velocidade)
+                glob.cameraDirecaoV = 0
+            else:
+                glob.cameraDirecaoV = 1
         elif direcaoVertical == "baixo":
-            if self.rect.bottom < 600:
+            if self.rect.bottom < 300:
                 self.rect.move_ip(0, self.velocidade)
+                glob.cameraDirecaoV = 0
+            else:
+                glob.cameraDirecaoV = -1
+        else:
+            glob.cameraDirecaoV = 0
 
         if direcaoHorizontal == "direita":
-            if self.rect.right < 800:
+            if self.rect.right < 400:
                 self.rect.move_ip(self.velocidade, 0)
+                glob.cameraDirecaoH = 0
+            else:
+                glob.cameraDirecaoH = 1
             self.ultimaDirecaoH = "direita"
         elif direcaoHorizontal == "esquerda":
-            if self.rect.left > 0:
+            if self.rect.left > 400:
                 self.rect.move_ip(-self.velocidade, 0)
+                glob.cameraDirecaoH = 0
+            else:
+                glob.cameraDirecaoH = -1
             self.ultimaDirecaoH = "esquerda"
+        else:
+            glob.cameraDirecaoH = 0
 
         # Correr
         if direcao == "shift" and self.stamina > 0:
@@ -105,8 +129,19 @@ class Jogador(Personagem):
     def muda_posicao(self, x, y):
         self.rect = self.surf.get_rect(top_left=(x, y))
     
-    def resgata_posicao(self):
+    def resgata_posicao(self, colisoes):
         self.rect = self.surf.get_rect(topleft=self.coordant)
+        for retangulo in colisoes:
+            if self.rect.colliderect(retangulo):
+                if glob.cameraDirecaoV == 1:
+                    self.rect[1] += self.velocidade
+                elif glob.cameraDirecaoV == -1:
+                    self.rect[1] -= self.velocidade
+
+                if glob.cameraDirecaoH == 1:
+                    self.rect[0] -= self.velocidade
+                elif glob.cameraDirecaoH == -1:
+                    self.rect[0] += self.velocidade
 
     def aplica_efeito(self, index: int):
         pass
