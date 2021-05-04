@@ -21,7 +21,7 @@ class Main:
                 if event.type == pygame.QUIT:
                     self.jogoAberto = False
                 # Verificar se as teclas especificadas foram pressionadas 1 vez.
-                elif event.type == pygame.KEYDOWN and self.cenaAtual != saguao:
+                elif event.type == pygame.KEYDOWN and not self.cenaAtual.cenaJogavel:
                     if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                         self.cenaAtual.tecla = "baixo"
                     elif event.key == pygame.K_w or event.key == pygame.K_UP:
@@ -43,7 +43,7 @@ class Main:
                             self.cenaAtual.tecla = "esc"
 
             # Verificar se as teclas especificadas estão sendo pressionadas constantemente.
-            if self.cenaAtual == saguao:
+            if self.cenaAtual.cenaJogavel:
                 pressed = pygame.key.get_pressed()
                 # Movimentação vertical
                 if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
@@ -93,6 +93,8 @@ class Main:
                 self.cenaAtual = menuInventario
             elif self.cenaAtual.proximaCena == "menuSair0":
                 self.cenaAtual = menuSair0
+            elif self.cenaAtual.proximaCena == "saguao2":
+                self.cenaAtual = saguao2
             elif self.cenaAtual.proximaCena == "fecharJogo":
                 self.jogoAberto = False
 

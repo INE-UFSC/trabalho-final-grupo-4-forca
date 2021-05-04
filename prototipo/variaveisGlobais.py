@@ -11,8 +11,6 @@ class Global:
         self.jogoAberto = True
         self.clock = pygame.time.Clock()
         self.faseAtual = None
-        self.cameraDirecaoH = 0
-        self.cameraDirecaoV = 0
 
         # Cores --------------------
         self.preto = (0, 0, 0)

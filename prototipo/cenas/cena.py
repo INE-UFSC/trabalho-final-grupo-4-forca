@@ -8,6 +8,7 @@ class Cena:
         self.altura = glob.tamanhoTela[1]
         self.fundo = ""
         self.tecla = ""
+        self.cenaJogavel = False
         self.proximaCena = "nenhuma"
         self.iniciou = False
 

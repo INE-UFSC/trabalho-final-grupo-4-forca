@@ -1,6 +1,7 @@
 from prototipo.cenas.cena import Cena
 from prototipo.personagens import *
 from prototipo.controladorInimigo import *
+from prototipo.cenas.colisao import Colisao
 
 
 class Saguao(Cena):
@@ -8,17 +9,10 @@ class Saguao(Cena):
         super().__init__()
         self.teclaHorizontal = ""
         self.teclaVertical = ""
-        self.fundo = pygame.image.load("../Assets/Sprites/cenario/chaoGrande.png")  # pygame.Surface((self.largura, self.altura))
-        # self.parede = pygame.Surface((204, 147))
-        # self.parede.blit(pygame.image.load("../Assets/Sprites/cenario/parede.png"), (0, 0))#fill(vermelho)
-        self.parede = pygame.image.load("../Assets/Sprites/cenario/parede.png")
-        self.adicionalX = 0
-        self.adicionalY = 0
-        self.parede0rect = self.parede.get_rect(topleft=(100+self.adicionalX, 40+self.adicionalY))
-        self.parede1rect = self.parede.get_rect(topleft=(100+self.adicionalX, 375+self.adicionalY))
-        self.parede2rect = self.parede.get_rect(topleft=(500+self.adicionalX, 500+self.adicionalY))
-        self.lista_colisoes_monstro = [self.parede0rect, self.parede1rect, self.parede2rect]
-        self.lista_colisoes_jogador = [self.parede0rect, self.parede1rect, self.parede2rect, inimigo.rect]
+        self.fundo = pygame.image.load("../Assets/Sprites/cenario/chaoGrande.png")
+        self.cenaJogavel = True
+        self.lista_colisoes_monstro = colisao.get_colisao_monstro()
+        self.lista_colisoes_jogador = colisao.get_colisao_jogador()
 
     def iniciar(self):
         print("iniciou")
@@ -27,35 +21,56 @@ class Saguao(Cena):
     def eventos(self):
         jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical, self.lista_colisoes_jogador)
         controlador.movimenta()
+        colisao.colisao_monstro()
 
-        if glob.cameraDirecaoV == 1:
-            self.adicionalY += jogador.velocidade
-        elif glob.cameraDirecaoV == -1:
-            self.adicionalY -= jogador.velocidade
+        if self.tecla == "p":
+            return "menuEmJogo"
+        elif self.tecla == "e":
+            return "inventario"
 
-        if glob.cameraDirecaoH == 1:
-            self.adicionalX -= jogador.velocidade
-        elif glob.cameraDirecaoH == -1:
-            self.adicionalX += jogador.velocidade
-
-        self.parede0rect = self.parede.get_rect(topleft=(100+self.adicionalX, 40+self.adicionalY))
-        self.parede1rect = self.parede.get_rect(topleft=(100+self.adicionalX, 375+self.adicionalY))
-        self.parede2rect = self.parede.get_rect(topleft=(500+self.adicionalX, 500+self.adicionalY))
-        self.lista_colisoes_jogador = [self.parede0rect, self.parede1rect, self.parede2rect, inimigo.rect]
+    def atualizar(self):
+        glob.tela.blit(self.fundo, (0, 0))
+        colisao.draw()
+        draw_groups()
+        update_groups()
 
 
-        for retangulo in self.lista_colisoes_monstro:
+class ColisaoSaguao(Colisao):
+
+    def __init__(self):
+        self.parede_sprite = pygame.image.load("../Assets/Sprites/cenario/parede.png")
+        self.x = [100, 100, 500]
+        self.y = [40, 375, 500]
+        self.parede_rect = [self.parede_sprite.get_rect(topleft=(self.x[0], self.y[0])),
+                            self.parede_sprite.get_rect(topleft=(self.x[1], self.y[1])),
+                            self.parede_sprite.get_rect(topleft=(self.x[2], self.y[2]))]
+
+    def draw(self):
+        glob.tela.blit(self.parede_sprite, (self.x[0], self.y[0]))
+        glob.tela.blit(self.parede_sprite, (self.x[1], self.y[1]))
+        glob.tela.blit(self.parede_sprite, (self.x[2], self.y[2]))
+
+    def get_colisao_jogador(self):
+        colisoes_jogador = self.parede_rect.copy()
+        colisoes_jogador.append(inimigo.rect)
+        return colisoes_jogador
+
+    def get_colisao_monstro(self):
+        return self.parede_rect
+
+    def colisao_monstro(self):
+        for retangulo in self.parede_rect:
             if inimigo.rect.colliderect(retangulo):
                 inimigo.resgata_posicao()
 
         if inimigo.movimento_falhou:
             controlador.movimenta_x()
-            for retangulo in self.lista_colisoes_monstro:
+            for retangulo in self.parede_rect:
                 if inimigo.rect.colliderect(retangulo):
                     inimigo.resgata_posicao()
         if inimigo.movimento_falhou:
             controlador.movimenta_y()
-            for retangulo in self.lista_colisoes_monstro:
+            for retangulo in self.parede_rect:
                 if inimigo.rect.colliderect(retangulo):
                     inimigo.resgata_posicao()
 
@@ -63,15 +78,4 @@ class Saguao(Cena):
             inimigo.resgata_posicao()
 
 
-        if self.tecla == "p":
-            return "menuEmJogo"
-        if self.tecla == "e":
-            return "inventario"
-
-    def atualizar(self):
-        glob.tela.blit(self.fundo, (0+self.adicionalX, 0+self.adicionalY))
-        glob.tela.blit(self.parede, (100+self.adicionalX, 40+self.adicionalY))
-        glob.tela.blit(self.parede, (100+self.adicionalX, 375+self.adicionalY))
-        glob.tela.blit(self.parede, (500+self.adicionalX, 500+self.adicionalY))
-        draw_groups()
-        update_groups()
+colisao = ColisaoSaguao()
