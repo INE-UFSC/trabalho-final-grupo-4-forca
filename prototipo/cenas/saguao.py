@@ -41,49 +41,12 @@ class ColisaoSaguao(Colisao):
 
     def __init__(self):
         super().__init__()
-        self.x = []
-        self.y = []
-        self.orientacao = []
-        self.parede_rect = []
-        self.construir_cenario()
-
-    def draw(self):
-        pass
 
     def construir_cenario(self):
-        self.construir_parede_horizontal(0, 0, 5)
-        self.construir_parede_horizontal(400, 200, 1)
-        self.construir_parede_vertical(0, 26, 30)
-        self.construir_parede_vertical(774, 26, 30)
-
-    def construir_parede_horizontal(self, x, y, quantidade):
-        for i in range(quantidade):
-            self.x.append(x + (i*183))
-            self.y.append(y)
-            self.orientacao.append("horizontal")
-            self.parede_rect.append(self.parede_sprite_h.get_rect(topleft=(self.x[-1], self.y[-1])))
-
-    def construir_parede_vertical(self, x, y, quantidade):
-        for i in range(quantidade):
-            self.x.append(x)
-            self.y.append(y + (i*26))
-            self.orientacao.append("vertical")
-            self.parede_rect.append(self.parede_sprite_v.get_rect(topleft=(self.x[-1], self.y[-1])))
-
-    def desenhar_paredes(self):
-        for i, orientacao in enumerate(self.orientacao):
-            if orientacao == "horizontal":
-                glob.tela.blit(self.parede_sprite_h, (self.x[i], self.y[i]))
-            elif orientacao == "vertical":
-                glob.tela.blit(self.parede_sprite_v, (self.x[i], self.y[i]))
-
-    def get_colisao_jogador(self):
-        colisoes_jogador = self.parede_rect.copy()
-        colisoes_jogador.append(inimigo.rect)
-        return colisoes_jogador
-
-    def get_colisao_monstro(self):
-        return self.parede_rect
+        self.construir_parede("horizontal", 0, 0, 5)
+        self.construir_parede("horizontal", 400, 200, 1)
+        self.construir_parede("vertical", 0, 26, 30)
+        self.construir_parede("vertical", 774, 26, 30)
 
 
 colisao = ColisaoSaguao()

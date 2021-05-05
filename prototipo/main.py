@@ -93,8 +93,6 @@ class Main:
                 self.cenaAtual = menuInventario
             elif self.cenaAtual.proximaCena == "menuSair0":
                 self.cenaAtual = menuSair0
-            elif self.cenaAtual.proximaCena == "saguao2":
-                self.cenaAtual = saguao2
             elif self.cenaAtual.proximaCena == "fecharJogo":
                 self.jogoAberto = False
 
