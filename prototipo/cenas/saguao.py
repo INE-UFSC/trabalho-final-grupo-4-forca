@@ -40,8 +40,7 @@ class Saguao(Cena):
 class ColisaoSaguao(Colisao):
 
     def __init__(self):
-        self.parede_sprite_h = pygame.image.load("../Assets/Sprites/cenario/parede_horizontal.png")
-        self.parede_sprite_v = pygame.image.load("../Assets/Sprites/cenario/parede_vertical.png")
+        super().__init__()
         self.x = []
         self.y = []
         self.orientacao = []
@@ -53,6 +52,7 @@ class ColisaoSaguao(Colisao):
 
     def construir_cenario(self):
         self.construir_parede_horizontal(0, 0, 5)
+        self.construir_parede_horizontal(400, 200, 1)
         self.construir_parede_vertical(0, 26, 30)
         self.construir_parede_vertical(774, 26, 30)
 
@@ -84,25 +84,6 @@ class ColisaoSaguao(Colisao):
 
     def get_colisao_monstro(self):
         return self.parede_rect
-
-    def colisao_monstro(self):
-        for retangulo in self.parede_rect:
-            if inimigo.rect.colliderect(retangulo):
-                inimigo.resgata_posicao()
-
-        if inimigo.movimento_falhou:
-            controlador.movimenta_x()
-            for retangulo in self.parede_rect:
-                if inimigo.rect.colliderect(retangulo):
-                    inimigo.resgata_posicao()
-        if inimigo.movimento_falhou:
-            controlador.movimenta_y()
-            for retangulo in self.parede_rect:
-                if inimigo.rect.colliderect(retangulo):
-                    inimigo.resgata_posicao()
-
-        if inimigo.rect.colliderect(jogador.rect):
-            inimigo.resgata_posicao()
 
 
 colisao = ColisaoSaguao()
