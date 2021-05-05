@@ -98,6 +98,7 @@ class Main:
 
         #   Limitar o FPS do jogo.
             self.clock.tick(60)
+            print(self.clock)
 
 
 jogo = Main()

@@ -186,14 +186,17 @@ class Inimigo(Personagem):
 
 
 def update_groups():
-    personagemGroup.update()
+    jogadorGroup.update()
+    monstroGroup.update()
 
 
 def draw_groups():
-    personagemGroup.draw(glob.tela)
+    jogadorGroup.draw(glob.tela)
+    monstroGroup.draw(glob.tela)
 
 
-personagemGroup = pygame.sprite.Group()
-jogador = Jogador(32, 40, personagemGroup)
-inimigo = Inimigo(64, 72, personagemGroup)
+jogadorGroup = pygame.sprite.Group()
+monstroGroup = pygame.sprite.Group()
+jogador = Jogador(32, 40, jogadorGroup)
+inimigo = Inimigo(64, 72, monstroGroup)
 inimigo.define_posicao((100, 250))

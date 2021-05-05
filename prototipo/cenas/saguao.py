@@ -16,14 +16,14 @@ class Saguao(Cena):
 
     def iniciar(self):
         print("iniciou")
-        jogador.rect.topleft = (500, 500)
-        inimigo.rect.right = 300
+        jogador.rect.topleft = (375, 550)
+        #inimigo.rect.right = 300
         self.iniciou = True
 
     def eventos(self):
         jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical, self.lista_colisoes_jogador)
-        controlador.movimenta()
-        colisao.colisao_monstro()
+        #controlador.movimenta()
+        #colisao.colisao_monstro()
 
         if self.tecla == "p":
             return "menuEmJogo"
@@ -33,20 +33,23 @@ class Saguao(Cena):
     def atualizar(self):
         glob.tela.blit(self.fundo, (0, 0))
         colisao.desenhar_paredes()
-        draw_groups()
-        update_groups()
+        colisao.desenhar_objetos()
+        jogadorGroup.draw(glob.tela)
+        jogadorGroup.update()
 
 
 class ColisaoSaguao(Colisao):
 
     def __init__(self):
         super().__init__()
+        self.temMonstro = False
 
     def construir_cenario(self):
+        estatua_sprite = pygame.image.load("../Assets/Sprites/cenario/estatua.png")
         self.construir_parede("horizontal", 0, 0, 5)
-        self.construir_parede("horizontal", 400, 200, 1)
         self.construir_parede("vertical", 0, 26, 30)
         self.construir_parede("vertical", 774, 26, 30)
+        self.construir_objeto(estatua_sprite, 350, 250)
 
 
 colisao = ColisaoSaguao()
