@@ -19,7 +19,10 @@ class Colisao:
     def construir_parede_horizontal(self, x, y, quantidade):
         pass
 
-    def desenhar_parede_horizontal(self):
+    def construir_parede_vertical(self, x, y, quantidade):
+        pass
+
+    def desenhar_paredes(self):
         pass
 
     def get_colisao_jogador(self):
