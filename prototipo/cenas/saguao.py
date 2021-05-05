@@ -16,6 +16,8 @@ class Saguao(Cena):
 
     def iniciar(self):
         print("iniciou")
+        jogador.rect.topleft = (500, 500)
+        inimigo.rect.right = 300
         self.iniciou = True
 
     def eventos(self):
@@ -30,7 +32,7 @@ class Saguao(Cena):
 
     def atualizar(self):
         glob.tela.blit(self.fundo, (0, 0))
-        colisao.draw()
+        colisao.desenhar_paredes()
         draw_groups()
         update_groups()
 
@@ -38,17 +40,42 @@ class Saguao(Cena):
 class ColisaoSaguao(Colisao):
 
     def __init__(self):
-        self.parede_sprite = pygame.image.load("../Assets/Sprites/cenario/parede.png")
-        self.x = [100, 100, 500]
-        self.y = [40, 375, 500]
-        self.parede_rect = [self.parede_sprite.get_rect(topleft=(self.x[0], self.y[0])),
-                            self.parede_sprite.get_rect(topleft=(self.x[1], self.y[1])),
-                            self.parede_sprite.get_rect(topleft=(self.x[2], self.y[2]))]
+        self.parede_sprite_h = pygame.image.load("../Assets/Sprites/cenario/parede_horizontal.png")
+        self.parede_sprite_v = pygame.image.load("../Assets/Sprites/cenario/parede_vertical.png")
+        self.x = []
+        self.y = []
+        self.orientacao = []
+        self.parede_rect = []
+        self.construir_cenario()
 
     def draw(self):
-        glob.tela.blit(self.parede_sprite, (self.x[0], self.y[0]))
-        glob.tela.blit(self.parede_sprite, (self.x[1], self.y[1]))
-        glob.tela.blit(self.parede_sprite, (self.x[2], self.y[2]))
+        pass
+
+    def construir_cenario(self):
+        self.construir_parede_horizontal(0, 0, 5)
+        self.construir_parede_vertical(0, 26, 30)
+        self.construir_parede_vertical(774, 26, 30)
+
+    def construir_parede_horizontal(self, x, y, quantidade):
+        for i in range(quantidade):
+            self.x.append(x + (i*183))
+            self.y.append(y)
+            self.orientacao.append("horizontal")
+            self.parede_rect.append(self.parede_sprite_h.get_rect(topleft=(self.x[-1], self.y[-1])))
+
+    def construir_parede_vertical(self, x, y, quantidade):
+        for i in range(quantidade):
+            self.x.append(x)
+            self.y.append(y + (i*26))
+            self.orientacao.append("vertical")
+            self.parede_rect.append(self.parede_sprite_v.get_rect(topleft=(self.x[-1], self.y[-1])))
+
+    def desenhar_paredes(self):
+        for i, orientacao in enumerate(self.orientacao):
+            if orientacao == "horizontal":
+                glob.tela.blit(self.parede_sprite_h, (self.x[i], self.y[i]))
+            elif orientacao == "vertical":
+                glob.tela.blit(self.parede_sprite_v, (self.x[i], self.y[i]))
 
     def get_colisao_jogador(self):
         colisoes_jogador = self.parede_rect.copy()

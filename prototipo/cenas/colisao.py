@@ -13,6 +13,15 @@ class Colisao:
     def draw(self):
         pass
 
+    def construir_cenario(self):
+        pass
+
+    def construir_parede_horizontal(self, x, y, quantidade):
+        pass
+
+    def desenhar_parede_horizontal(self):
+        pass
+
     def get_colisao_jogador(self):
         pass
 
