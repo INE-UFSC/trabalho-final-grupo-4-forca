@@ -11,10 +11,13 @@ class Cena:
         self.cenaJogavel = False
         self.proximaCena = "nenhuma"
         self.iniciou = False
+        self.delay = 10
 
     def iniciar(self):
         pass
 
+    def eventos(self):
+        pass
+
     def atualizar(self):
         pass
-        #atualizarGroups()

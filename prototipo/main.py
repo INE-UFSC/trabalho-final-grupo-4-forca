@@ -65,6 +65,8 @@ class Main:
                     self.cenaAtual.tecla = "shift"
                 elif pressed[pygame.K_e]:
                     self.cenaAtual.tecla = "e"
+                elif pressed[pygame.K_i]:
+                    self.cenaAtual.tecla = "i"
                 elif pressed[pygame.K_p]:
                     self.cenaAtual.tecla = "p"
                 elif pressed[pygame.K_RETURN]:
@@ -81,6 +83,8 @@ class Main:
         #   Verificar se a cena atual desencadeou algum evento.
             if self.cenaAtual.proximaCena == "saguao":
                 self.cenaAtual = saguao
+            elif self.cenaAtual.proximaCena == "porao":
+                self.cenaAtual = porao
             elif self.cenaAtual.proximaCena == "menuConfig":
                 self.cenaAtual = menuConfig
             elif self.cenaAtual.proximaCena == "menuControles":
