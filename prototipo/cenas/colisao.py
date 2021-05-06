@@ -22,12 +22,17 @@ class Colisao:
     def construir_cenario(self):
         pass
 
-    def construir_objeto(self, sprite, x, y, quantidade=1, orientacao="horizontal"):
+    def construir_objeto(self, sprite, x, y, quantidade=1, orientacao="horizontal", distancia=0):
+        if distancia == 0:
+            if orientacao == "horizontal":
+                distancia = sprite.get_width()
+            elif orientacao == "vertical":
+                distancia = sprite.get_height()
         if orientacao == "horizontal":
             for i in range(quantidade):
                 self.orientacao.append(orientacao)
                 self.objeto_sprites.append(sprite)
-                self.x.append(x + (i * sprite.get_width()))
+                self.x.append(x + (i * distancia))
                 self.y.append(y)
                 self.objeto_rect.append(sprite.get_rect(topleft=(self.x[-1], self.y[-1])))
         elif orientacao == "vertical":
@@ -35,7 +40,7 @@ class Colisao:
                 self.orientacao.append(orientacao)
                 self.objeto_sprites.append(sprite)
                 self.x.append(x)
-                self.y.append(y + (i * sprite.get_height()))
+                self.y.append(y + (i * distancia))
                 self.objeto_rect.append(sprite.get_rect(topleft=(self.x[-1], self.y[-1])))
 
     def desenhar_objetos(self):
