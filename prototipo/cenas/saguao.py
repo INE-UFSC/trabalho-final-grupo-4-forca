@@ -32,7 +32,6 @@ class Saguao(Cena):
 
     def atualizar(self):
         glob.tela.blit(self.fundo, (0, 0))
-        colisao.desenhar_paredes()
         colisao.desenhar_objetos()
         jogadorGroup.draw(glob.tela)
         jogadorGroup.update()
@@ -46,9 +45,9 @@ class ColisaoSaguao(Colisao):
 
     def construir_cenario(self):
         estatua_sprite = pygame.image.load("../Assets/Sprites/cenario/estatua.png")
-        self.construir_parede("horizontal", 0, 0, 5)
-        self.construir_parede("vertical", 0, 26, 30)
-        self.construir_parede("vertical", 774, 26, 30)
+        self.construir_objeto(self.parede_sprite_h, 0, 0, 5)
+        self.construir_objeto(self.parede_sprite_v, 0, 26, 30, "vertical")
+        self.construir_objeto(self.parede_sprite_v, 774, 26, 30, "vertical")
         self.construir_objeto(estatua_sprite, 350, 250)
 
 
