@@ -6,7 +6,7 @@ from prototipo.personagens import *
 import pygame
 
 
-class SpritesPorao(SpritesCena):
+class SpritesPorao(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
 
@@ -14,13 +14,26 @@ class SpritesPorao(SpritesCena):
 spritesPorao = SpritesPorao()
 
 
-class Porao(Cena):
+class ColisaoPorao(Colisao):  # Classe responsável por construir os objetos do cenário e suas colisões.
 
     def __init__(self):
         super().__init__()
+        self.temMonstro = False
+
+    def construir_cenario(self):
+        self.construir_objeto(spritesPorao.parede_sprite_h, 300, 300, "porao")
+
+
+colisao = ColisaoPorao()
+
+
+class Porao(Cena):  # Primeira parte do porão.
+
+    def __init__(self):  # É executado apenas na instanciação da cena.
+        super().__init__()
         self.cenaJogavel = True
 
-    def iniciar(self):
+    def iniciar(self):  # É executado 1 vez sempre que a cena é chamada.
         print("iniciou porao")
         if glob.cenaAtual == "saguao":
             jogador.rect.topleft = (50, 550)
@@ -29,7 +42,7 @@ class Porao(Cena):
         self.delay = 10
         self.iniciou = True
 
-    def eventos(self):
+    def eventos(self):  # Captura os eventos do teclado e do cenário.
         jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical, colisao.get_colisao_jogador("porao"))
 
         if self.delay > 0:
@@ -47,14 +60,14 @@ class Porao(Cena):
                 self.iniciou = False
                 return "porao2"
 
-    def atualizar(self):
+    def atualizar(self):  # Atualiza os sprites da cena.
         glob.tela.blit(spritesPorao.fundo, (0, 0))
         colisao.desenhar_objetos("porao")
         jogadorGroup.draw(glob.tela)
         jogadorGroup.update()
 
 
-class Porao2(Porao):
+class Porao2(Porao):  # Segunda parte do porão.
 
     def __init__(self):
         super().__init__()
@@ -88,15 +101,3 @@ class Porao2(Porao):
         jogadorGroup.draw(glob.tela)
         jogadorGroup.update()
 
-
-class ColisaoPorao(Colisao):
-
-    def __init__(self):
-        super().__init__()
-        self.temMonstro = False
-
-    def construir_cenario(self):
-        self.construir_objeto(spritesPorao.parede_sprite_h, 300, 300, "porao")
-
-
-colisao = ColisaoPorao()

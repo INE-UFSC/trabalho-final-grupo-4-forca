@@ -5,7 +5,7 @@ from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 
 
-class SpritesSaguao(SpritesCena):
+class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
         self.estatua_sprite = pygame.image.load("../Assets/Sprites/cenario/estatua.png")
@@ -16,7 +16,7 @@ class SpritesSaguao(SpritesCena):
 spritesSaguao = SpritesSaguao()
 
 
-class ColisaoSaguao(Colisao):
+class ColisaoSaguao(Colisao):  # Classe responsável por construir os objetos do cenário e suas colisões.
 
     def __init__(self):
         super().__init__()
@@ -36,8 +36,8 @@ class ColisaoSaguao(Colisao):
 colisao = ColisaoSaguao()
 
 
-class Saguao(Cena):
-    def __init__(self):
+class Saguao(Cena):  # Primeira cena do jogo.
+    def __init__(self):  # É executado apenas na instanciação da cena.
         super().__init__()
         self.teclaHorizontal = ""
         self.teclaVertical = ""
@@ -46,14 +46,14 @@ class Saguao(Cena):
         jogador.rect.topleft = (375, 550)
         colisao.construir_cenario()
 
-    def iniciar(self):
+    def iniciar(self):  # É executado 1 vez sempre que a cena é chamada.
         print("iniciou saguao")
         glob.cenaAtual = "saguao"
 
         self.delay = 10
         self.iniciou = True
 
-    def eventos(self):
+    def eventos(self):  # Captura os eventos do teclado e do cenário.
         jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical, colisao.get_colisao_jogador("saguao"))
         #controlador.movimenta()
         #colisao.colisao_monstro()
@@ -79,7 +79,7 @@ class Saguao(Cena):
                 self.iniciou = False
                 return "porao"
 
-    def atualizar(self):
+    def atualizar(self):  # Atualiza os sprites da cena.
         glob.tela.blit(spritesSaguao.fundo, (0, 0))
         colisao.desenhar_objetos("saguao")
         jogadorGroup.draw(glob.tela)
