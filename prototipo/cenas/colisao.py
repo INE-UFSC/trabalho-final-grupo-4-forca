@@ -6,15 +6,13 @@ import math
 class Colisao:
 
     def __init__(self):
-        self.parede_sprite_h = pygame.image.load("../Assets/Sprites/cenario/parede_horizontal.png")
-        self.parede_sprite_v = pygame.image.load("../Assets/Sprites/cenario/parede_vertical.png")
-
         self.x = []  # X dos objetos.
         self.y = []  # Y dos objetos.
         self.objeto_rect = []  # Hitbox dos objetos.
         self.objeto_sprites = []  # Sprites dos objetos.
         self.orientacao = []  # Orientação dos objetos.
         self.ids = []  # Identificações dos objetos.
+        self.cenas = []  # Cena na qual o objeto será construido.
 
         self.temMonstro = True
         self.construir_cenario()
@@ -25,7 +23,7 @@ class Colisao:
     def construir_cenario(self):
         pass
 
-    def construir_objeto(self, sprite, x, y, quantidade=1, orientacao="horizontal", distancia=0, identificacao=""):
+    def construir_objeto(self, sprite, x, y, cena, quantidade=1, orientacao="horizontal", distancia=0, identificacao=""):
         if distancia == 0:
             if orientacao == "horizontal":
                 distancia = sprite.get_width()
@@ -36,6 +34,7 @@ class Colisao:
                 self.orientacao.append(orientacao)
                 self.objeto_sprites.append(sprite)
                 self.ids.append(identificacao)
+                self.cenas.append(cena)
                 self.x.append(x + (i * distancia))
                 self.y.append(y)
                 self.objeto_rect.append(sprite.get_rect(topleft=(self.x[-1], self.y[-1])))
@@ -44,6 +43,7 @@ class Colisao:
                 self.orientacao.append(orientacao)
                 self.objeto_sprites.append(sprite)
                 self.ids.append(identificacao)
+                self.cenas.append(cena)
                 self.x.append(x)
                 self.y.append(y + (i * distancia))
                 self.objeto_rect.append(sprite.get_rect(topleft=(self.x[-1], self.y[-1])))
@@ -56,24 +56,33 @@ class Colisao:
                 self.objeto_rect.pop(i)
                 self.objeto_sprites.pop(i)
                 self.orientacao.pop(i)
+                self.cenas.pop(i)
                 self.ids.pop(i)
                 self.destruir_objeto(identificacao)
 
-    def desenhar_objetos(self):
-        for i, sprite in enumerate(self.objeto_sprites):
-            glob.tela.blit(sprite, (self.x[i], self.y[i]))
+    def desenhar_objetos(self, cena):
+        for i, cenaAtual in enumerate(self.cenas):
+            if cenaAtual == cena:
+                glob.tela.blit(self.objeto_sprites[i], (self.x[i], self.y[i]))
 
     def distancia(self, obj, x, y):
         return math.hypot(x - obj.rect.x, y - obj.rect.y)
 
-    def get_colisao_jogador(self):
-        colisoes_jogador = self.objeto_rect.copy()
+    def get_colisao_jogador(self, cena):
+        colisoes_jogador = []
+        for i, cenaAtual in enumerate(self.cenas):
+            if cenaAtual == cena:
+                colisoes_jogador.append(self.objeto_rect[i])
         if self.temMonstro:
             colisoes_jogador.append(inimigo.rect)
         return colisoes_jogador
 
-    def get_colisao_monstro(self):
-        return self.objeto_rect
+    def get_colisao_monstro(self, cena):
+        colisoes_monstro = []
+        for i, cenaAtual in enumerate(self.cenas):
+            if cenaAtual == cena:
+                colisoes_monstro.append(self.objeto_rect[i])
+        return colisoes_monstro
 
     def colisao_monstro(self):
         for retangulo in self.objeto_rect:

@@ -1,5 +1,6 @@
 from prototipo.cenas.cenas import *
 import pygame
+from variaveisGlobais import glob
 
 
 class Main:
@@ -85,6 +86,8 @@ class Main:
                 self.cenaAtual = saguao
             elif self.cenaAtual.proximaCena == "porao":
                 self.cenaAtual = porao
+            elif self.cenaAtual.proximaCena == "porao2":
+                self.cenaAtual = porao2
             elif self.cenaAtual.proximaCena == "menuConfig":
                 self.cenaAtual = menuConfig
             elif self.cenaAtual.proximaCena == "menuControles":
@@ -102,7 +105,7 @@ class Main:
 
         #   Limitar o FPS do jogo.
             self.clock.tick(60)
-            print(self.clock)
+            #print(glob.cenaAtual)
 
 
 jogo = Main()
