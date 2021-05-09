@@ -78,6 +78,9 @@ class Saguao(Cena):  # Primeira cena do jogo.
             elif colisao.distancia(jogador, 650, 100) < 50 and self.delay <= 0:
                 self.iniciou = False
                 return "porao"
+            elif colisao.distancia(jogador, 50, 100) < 50 and self.delay <= 0:
+                self.iniciou = False
+                return "cozinha"
 
     def atualizar(self):  # Atualiza os sprites da cena.
         glob.tela.blit(spritesSaguao.fundo, (0, 0))
