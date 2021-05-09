@@ -94,6 +94,8 @@ class Main:
                 self.cenaAtual = menuControles
             elif self.cenaAtual.proximaCena == "menuPrincipal":
                 self.cenaAtual = menuPrincipal
+            elif self.cenaAtual.proximaCena == "cozinha":
+                self.cenaAtual = cozinha
             elif self.cenaAtual.proximaCena == "menuEmJogo":
                 self.cenaAtual = menuEmJogo
             elif self.cenaAtual.proximaCena == "inventario":
