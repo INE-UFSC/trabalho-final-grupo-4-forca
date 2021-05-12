@@ -9,9 +9,9 @@ from prototipo.cenas.menu_em_jogo import MenuEmJogo
 class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
-        self.estatua_sprite = pygame.image.load("../Assets/Sprites/cenario/estatua.png")
-        self.vela_sprite = pygame.image.load("../Assets/Sprites/cenario/vela.png")
-        self.porao_sprite = pygame.image.load("../Assets/Sprites/cenario/porta_porao.png")
+        self.estatua_sprite = self.load_image("../Assets/Sprites/cenario/estatua.png", True)
+        self.vela_sprite = self.load_image("../Assets/Sprites/cenario/vela.png", True)
+        self.porao_sprite = self.load_image("../Assets/Sprites/cenario/porta_porao.png")
 
 
 spritesSaguao = SpritesSaguao()
