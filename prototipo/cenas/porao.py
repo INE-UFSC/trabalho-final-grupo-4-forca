@@ -105,8 +105,10 @@ class Porao2(Porao):  # Segunda parte do porão.
             self.delay -= 1
 
         if self.tecla == "p":
+            MenuEmJogo.cena_anterior = "porao2"
             return "menuEmJogo"
         elif self.tecla == "i":
+            MenuEmJogo.cena_anterior = "porao2"
             return "inventario"
         elif self.tecla == "e":
             if colisao.distancia(jogador, 760, 560) < 50 and self.delay <= 0:

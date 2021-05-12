@@ -37,7 +37,7 @@ class ColisaoSaguao(Colisao):  # Classe responsável por construir os objetos do
 colisao = ColisaoSaguao()
 
 
-class Saguao(Cena):  # Primeira cena do jogo.
+class Saguao(Cena):
     def __init__(self):  # É executado apenas na instanciação da cena.
         super().__init__()
         self.teclaHorizontal = ""
@@ -50,6 +50,8 @@ class Saguao(Cena):  # Primeira cena do jogo.
     def iniciar(self):  # É executado 1 vez sempre que a cena é chamada.
         print("iniciou saguao")
         MenuEmJogo.cena_anterior = "saguao"
+        if glob.cenaAtual == "inicio":
+            jogador.rect.topleft = (375, 550)
         glob.cenaAtual = "saguao"
 
         self.delay = 10

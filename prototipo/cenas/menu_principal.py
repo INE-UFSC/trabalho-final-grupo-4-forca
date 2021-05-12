@@ -71,7 +71,7 @@ class MenuPrincipal(Cena):  # ----------------------------------------------
 
         if self.tecla == "enter" and self.opcaoAtual == "novoJogo":
             MenuPrincipal.in_game = 1
-            return "saguao"
+            return "inicio"
         elif self.tecla == "enter" and self.opcaoAtual == "configuracoes":
             return "menuConfig"
         elif self.tecla == "enter" and self.opcaoAtual == "sair":
