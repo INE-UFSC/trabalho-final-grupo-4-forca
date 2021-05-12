@@ -3,6 +3,7 @@ from prototipo.variaveisGlobais import glob
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 from prototipo.personagens import *
+from prototipo.cenas.menu_em_jogo import MenuEmJogo
 import pygame
 
 
@@ -114,7 +115,11 @@ class Cozinha(Cena):
         if self.delay > 0:
             self.delay -= 1
 
+        if self.tecla == "p":
+            MenuEmJogo.cena_anterior = "cozinha"
+            return "menuEmJogo"
         if self.tecla == "i":
+            MenuEmJogo.cena_anterior = "cozinha"
             return "inventario"
         elif self.tecla == "e":
             if colisao.distancia(jogador, 400, 190) < 40 and self.delay <= 0:

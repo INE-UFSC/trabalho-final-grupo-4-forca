@@ -9,7 +9,6 @@ class MenuPrincipal(Cena):  # ----------------------------------------------
     in_game = 0
 
     def __init__(self):
-        self.config = 0
         save = Path("saves/save.txt")
         exist = 0
         if save.is_file():

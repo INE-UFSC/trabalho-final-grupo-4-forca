@@ -24,6 +24,7 @@ class MenuEmJogo(Cena):
         glob.tela.blit(menuSairEmJogo.sprite, (menuSairEmJogo.posicaoX, menuSairEmJogo.posicaoY))
 
     def eventos(self):
+
         if self.tecla == "baixo":
             if self.opcaoAtual == "continuar":    self.opcaoAtual = "configuracoes"
             elif self.opcaoAtual == "configuracoes":   self.opcaoAtual = "sair"
@@ -36,13 +37,13 @@ class MenuEmJogo(Cena):
             return None
 
         if self.tecla == "enter" and self.opcaoAtual == "continuar":
-            return "saguao"
+            return MenuEmJogo.cena_anterior
         elif self.tecla == "enter" and self.opcaoAtual == "configuracoes":
             return "menuConfig"
         elif self.tecla == "enter" and self.opcaoAtual == "sair":
             return "menuSair0"
         elif self.tecla == "esc":
-            return "saguao"
+            return MenuEmJogo.cena_anterior
 
     def atualizar(self):
         if self.opcaoAtual == "continuar" and menuSeta.posicaoY != 200:
@@ -75,7 +76,7 @@ class MenuInventario(Cena):
     def eventos(self):
         if not self.jaMudou:
             if self.tecla == "esc":
-                return "saguao"
+                return MenuEmJogo.cena_anterior
             if self.tecla == "cima" and self.box_y > 100:
                 self.box_y = self.box_y-100
                 self.itemindex = self.itemindex - 5

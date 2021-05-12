@@ -3,6 +3,7 @@ from prototipo.personagens import *
 from prototipo.controladorInimigo import *
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
+from prototipo.cenas.menu_em_jogo import MenuEmJogo
 
 
 class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
@@ -48,6 +49,7 @@ class Saguao(Cena):  # Primeira cena do jogo.
 
     def iniciar(self):  # É executado 1 vez sempre que a cena é chamada.
         print("iniciou saguao")
+        MenuEmJogo.cena_anterior = "saguao"
         glob.cenaAtual = "saguao"
 
         self.delay = 10
@@ -63,8 +65,10 @@ class Saguao(Cena):  # Primeira cena do jogo.
 
         if self.tecla == "p":
             colisao.destruir_objeto("portaCozinha")
+            MenuEmJogo.cena_anterior = "saguao"
             return "menuEmJogo"
         elif self.tecla == "i":
+            MenuEmJogo.cena_anterior = "saguao"
             return "inventario"
         elif self.tecla == "e":
             # Acionar a vela
