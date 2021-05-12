@@ -10,11 +10,16 @@ import pygame
 class SpritesCozinha(SpritesCena):
     def __init__(self):
         super().__init__()
-        self.sprite_mesa = pygame.image.load("../Assets/Sprites/cenario/mesa.png") 
-        self.sprite_cadeira_direita = pygame.image.load("../Assets/Sprites/cenario/cadeiradireita.png")
-        self.sprite_cadeira_esquerda = pygame.image.load("../Assets/Sprites/cenario/cadeiraesquerda.png")
-        self.sprite_cadeira_cima = pygame.image.load("../Assets/Sprites/cenario/cadeiracima.png")
-        self.sprite_cadeira_baixo = pygame.image.load("../Assets/Sprites/cenario/cadeirabaixo.png")
+        self.sprite_mesa = self.image_load("../Assets/Sprites/cenario/mesa.png") 
+        self.sprite_cadeira_direita = self.image_load("../Assets/Sprites/cenario/cadeiradireita.png")
+        self.sprite_cadeira_esquerda = self.image_load("../Assets/Sprites/cenario/cadeiraesquerda.png")
+        self.sprite_cadeira_cima = self.image_load("../Assets/Sprites/cenario/cadeiracima.png")
+        self.sprite_cadeira_baixo = self.image_load("../Assets/Sprites/cenario/cadeirabaixo.png")
+        self.sprite_forno = self.image_load("../Assets/Sprites/cenario/forno.png")
+        self.sprite_geladeira = self.image_load("../Assets/Sprites/cenario/geladeira.png")
+        self.sprite_pia = self.image_load("../Assets/Sprites/cenario/pia.png")
+        self.sprite_prato = self.image_load("../Assets/Sprites/cenario/prato.png")
+        self.sprite_garrafa = self.image_load("..Assets/Sprites/cenario/garrafavinho.png")
 cozinhasprites = SpritesCozinha()
 
 class ColisaoCozinha(Colisao):
@@ -22,10 +27,23 @@ class ColisaoCozinha(Colisao):
         super().__init__()
     
     def construir_cenario(self):
-        self.construir_objeto(cozinhasprites.sprite_cadeira_cima, 380, 205, "cozinha", 1, identificacao = "cadeiracima")
-        self.construir_objeto(cozinhasprites.sprite_cadeira_esquerda, 300, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
-        self.construir_objeto(cozinhasprites.sprite_cadeira_cima, 460, 250, "cozinha", 1, identificacao = "cadeiradireita")
-        self.construir_objeto(cozinhasprites.sprite_mesa, 340, 250, "cozinha", 1, identificacao = "mesa")
+        self.construir_objeto(cozinhasprites.parede_sprite_h, 0, 0, "cozinha", 5)
+        self.construir_objeto(cozinhasprites.parede_sprite_v, 774, 1, "cozinha", 24, "vertical")
+        self.construir_objeto(cozinhasprites.parede_sprite_v, 0, 1, "cozinha", 24, "vertical")
+        self.construir_objeto(cozinhasprites.sprite_cadeira_cima, 360, 205, "cozinha", 1, identificacao = "cadeiracima")
+        self.construir_objeto(cozinhasprites.sprite_cadeira_esquerda, 280, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
+        self.construir_objeto(cozinhasprites.sprite_cadeira_cima, 440, 250, "cozinha", 1, identificacao = "cadeiradireita")
+        self.construir_objeto(cozinhasprites.sprite_mesa, 320, 250, "cozinha", 1, identificacao = "mesa")
+        self.construir_objeto(cozinhasprites.sprite_geladeira, 60,40, "cozinha", 1, identificacao = "geladeira")
+        self.construir_objeto(cozinhasprites.sprite_forno, 250, 100, "cozinha", 3, identificacao = "forno")
+        self.construir_objeto(cozinhasprites.sprite_pia, 495, 100, "cozinha", identificacao = "pia")
+        self.construir_objeto(cozinhasprites.sprite_prato, 510, 105, "cozinha")
+        self.construir_objeto(cozinhasprites.sprite_prato, 615, 300, "cozinha")
+        self.construir_objeto(cozinhasprites.sprite_prato, 550, 450, "cozinha")
+        self.construir_objeto(cozinhasprites.sprite_prato, 740, 550, "cozinha")
+        self.construir_objeto(cozinhasprites.sprite_garrafa, 100, 250, "cozinha")
+        self.construir_objeto(cozinhasprites.sprite_garrafa, 250, 400, "cozinha")
+        self.construir_objeto(cozinhasprites.sprite_garrafa, 50, 500, "cozinha")
 
 colisao = ColisaoCozinha()
 class Cozinha(Cena):
@@ -51,50 +69,50 @@ class Cozinha(Cena):
             colisao.destruir_objeto("cadeiraesquerda")
             colisao.destruir_objeto("mesa")
             self.constroi_objeto("esquerda")
-            colisao.construir_objeto(cozinhasprites.sprite_mesa, 340, 250, "cozinha", 1, identificacao = "mesa")
+            colisao.construir_objeto(cozinhasprites.sprite_mesa, 320, 250, "cozinha", 1, identificacao = "mesa")
         elif cadeira == "cima":
             self.puzzle[1] = self.acha_posicao(self.puzzle[1])
             colisao.destruir_objeto("cadeiracima")
             colisao.destruir_objeto("mesa")
             self.constroi_objeto("cima")
-            colisao.construir_objeto(cozinhasprites.sprite_mesa, 340, 250, "cozinha", 1, identificacao = "mesa")
+            colisao.construir_objeto(cozinhasprites.sprite_mesa, 320, 250, "cozinha", 1, identificacao = "mesa")
         elif cadeira == "direita":
             self.puzzle[2] = self.acha_posicao(self.puzzle[2])
             colisao.destruir_objeto("cadeiradireita")
             colisao.destruir_objeto("mesa")
             self.constroi_objeto("direita")
-            colisao.construir_objeto(cozinhasprites.sprite_mesa, 340, 250, "cozinha", 1, identificacao = "mesa")
+            colisao.construir_objeto(cozinhasprites.sprite_mesa, 320, 250, "cozinha", 1, identificacao = "mesa")
             
     
     def constroi_objeto(self, cadeira):
         if cadeira == "esquerda":
             if self.puzzle[0] == "esquerda":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_esquerda, 300, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_esquerda, 280, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
             elif self.puzzle[0] == "cima":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_cima, 300, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_cima, 280, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
             elif self.puzzle[0] == "direita":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_direita, 300, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_direita, 280, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
             elif self.puzzle[0] == "baixo":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_baixo, 300, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_baixo, 280, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
         
         elif cadeira == "cima":
             if self.puzzle[1] == "esquerda":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_esquerda, 380, 205, "cozinha", 1, identificacao = "cadeiracima")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_esquerda, 360, 205, "cozinha", 1, identificacao = "cadeiracima")
             elif self.puzzle[1] == "cima":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_cima, 380, 205, "cozinha", 1, identificacao = "cadeiracima")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_cima, 360, 205, "cozinha", 1, identificacao = "cadeiracima")
             elif self.puzzle[1] == "direita":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_direita, 380, 205, "cozinha", 1, identificacao = "cadeiracima")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_direita, 360, 205, "cozinha", 1, identificacao = "cadeiracima")
             elif self.puzzle[1] == "baixo":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_baixo, 380, 205, "cozinha", 1, identificacao = "cadeiracima")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_baixo, 360, 205, "cozinha", 1, identificacao = "cadeiracima")
         elif cadeira == "direita":
             if self.puzzle[2] == "esquerda":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_esquerda, 460, 250, "cozinha", 1, identificacao = "cadeiradireita")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_esquerda, 440, 250, "cozinha", 1, identificacao = "cadeiradireita")
             elif self.puzzle[2] == "cima":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_cima, 460, 250, "cozinha", 1, identificacao = "cadeiradireita")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_cima, 440, 250, "cozinha", 1, identificacao = "cadeiradireita")
             elif self.puzzle[2] == "direita":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_direita, 460, 250, "cozinha", 1, identificacao = "cadeiradireita")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_direita, 440, 250, "cozinha", 1, identificacao = "cadeiradireita")
             elif self.puzzle[2] == "baixo":
-                colisao.construir_objeto(cozinhasprites.sprite_cadeira_baixo, 460, 250, "cozinha", 1, identificacao = "cadeiradireita")
+                colisao.construir_objeto(cozinhasprites.sprite_cadeira_baixo, 440, 250, "cozinha", 1, identificacao = "cadeiradireita")
     
     def acha_posicao(self, posicao):
         if posicao == "esquerda":
@@ -122,13 +140,13 @@ class Cozinha(Cena):
             MenuEmJogo.cena_anterior = "cozinha"
             return "inventario"
         elif self.tecla == "e":
-            if colisao.distancia(jogador, 400, 190) < 40 and self.delay <= 0:
+            if colisao.distancia(jogador, 380, 190) < 40 and self.delay <= 0:
                 self.muda_puzzle("cima")
                 self.delay = 20
-            elif colisao.distancia(jogador, 300, 260) < 40 and self.delay <= 0:
+            elif colisao.distancia(jogador, 280, 260) < 40 and self.delay <= 0:
                 self.muda_puzzle("esquerda")
                 self.delay = 20
-            elif colisao.distancia(jogador, 500, 260) < 40 and self.delay <= 0:
+            elif colisao.distancia(jogador, 480, 260) < 40 and self.delay <= 0:
                 self.delay = 20
                 self.muda_puzzle("direita")
             
