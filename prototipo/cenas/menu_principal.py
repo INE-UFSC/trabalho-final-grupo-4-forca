@@ -71,6 +71,10 @@ class MenuPrincipal(Cena):  # ----------------------------------------------
 
         if self.tecla == "enter" and self.opcaoAtual == "novoJogo":
             MenuPrincipal.in_game = 1
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load("../Assets/musicas/ambiente.mp3")
+            pygame.mixer.music.play(-1)
+            pygame.mixer.music.set_volume(glob.volume)
             return "tutorial1"
         elif self.tecla == "enter" and self.opcaoAtual == "configuracoes":
             return "menuConfig"

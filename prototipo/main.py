@@ -9,6 +9,9 @@ class Main:
         self.cenaAtual = cenas.menuPrincipal
         self.jogoAberto = True
         self.clock = pygame.time.Clock()
+        pygame.mixer.music.load("../Assets/musicas/menu.mp3")
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(glob.volume)
 
 #   Loop que mantém o jogo aberto.
     def run_game(self):
