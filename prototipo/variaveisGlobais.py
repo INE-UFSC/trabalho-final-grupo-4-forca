@@ -10,6 +10,7 @@ class Global:
         self.tela = pygame.display.set_mode(self.tamanhoTela)
         self.jogoAberto = True
         self.clock = pygame.time.Clock()
+        self.cenas = []
         self.cenaAtual = None
 
         # Cores --------------------

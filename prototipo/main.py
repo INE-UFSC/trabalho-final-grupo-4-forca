@@ -1,4 +1,4 @@
-from prototipo.cenas.cenas import *
+from prototipo.cenas.cenas import cenas
 import pygame
 from variaveisGlobais import glob
 
@@ -6,7 +6,7 @@ from variaveisGlobais import glob
 class Main:
 
     def __init__(self):
-        self.cenaAtual = menuPrincipal
+        self.cenaAtual = cenas.menuPrincipal
         self.jogoAberto = True
         self.clock = pygame.time.Clock()
 
@@ -34,10 +34,10 @@ class Main:
                     elif event.key == pygame.K_RETURN:
                         self.cenaAtual.tecla = "enter"
 
-                    if self.cenaAtual == menuPrincipal or self.cenaAtual == menuConfig or self.cenaAtual == menuControles:
+                    if self.cenaAtual == cenas.menuPrincipal or self.cenaAtual == cenas.menuConfig or self.cenaAtual == cenas.menuControles:
                         if event.key == pygame.K_RETURN:
                             self.cenaAtual.tecla = "enter"
-                    elif self.cenaAtual == menuInventario or self.cenaAtual == menuEmJogo:
+                    elif self.cenaAtual == cenas.menuInventario or self.cenaAtual == cenas.menuEmJogo:
                         if event.key == pygame.K_RETURN:
                             self.cenaAtual.tecla == "enter"
                         elif event.key == pygame.K_ESCAPE:
@@ -81,38 +81,15 @@ class Main:
         #   Atualizar os elementos na tela.
             pygame.display.flip()
 
-        #   Verificar se a cena atual desencadeou algum evento.
-            if self.cenaAtual.proximaCena == "saguao":
-                self.cenaAtual = saguao
-            elif self.cenaAtual.proximaCena == "porao":
-                self.cenaAtual = porao
-            elif self.cenaAtual.proximaCena == "porao2":
-                self.cenaAtual = porao2
-            elif self.cenaAtual.proximaCena == "menuConfig":
-                self.cenaAtual = menuConfig
-            elif self.cenaAtual.proximaCena == "menuControles":
-                self.cenaAtual = menuControles
-            elif self.cenaAtual.proximaCena == "menuPrincipal":
-                self.cenaAtual = menuPrincipal
-            elif self.cenaAtual.proximaCena == "inicio":
-                self.cenaAtual = inicio
-            elif self.cenaAtual.proximaCena == "tutorial1":
-                self.cenaAtual = tutorial1
-            elif self.cenaAtual.proximaCena == "tutorial2":
-                self.cenaAtual = tutorial2
-            elif self.cenaAtual.proximaCena == "cozinha":
-                self.cenaAtual = cozinha
-            elif self.cenaAtual.proximaCena == "menuEmJogo":
-                self.cenaAtual = menuEmJogo
-            elif self.cenaAtual.proximaCena == "inventario":
-                self.cenaAtual = menuInventario
-            elif self.cenaAtual.proximaCena == "menuSair0":
-                self.cenaAtual = menuSair0
-            elif self.cenaAtual.proximaCena == "fecharJogo":
+        #   Verificar se a cena atual desencadeou algum evento de mudança.
+            if self.cenaAtual.proximaCena in cenas.nomes:
+                self.cenaAtual = cenas.cenas[cenas.nomes.index(self.cenaAtual.proximaCena)]
+            if self.cenaAtual.proximaCena == "fecharJogo":
                 self.jogoAberto = False
 
         #   Limitar o FPS do jogo.
             self.clock.tick(60)
+            #print(self.clock)
             #print(glob.cenaAtual)
 
 
