@@ -23,7 +23,7 @@ class Colisao:
     def construir_cenario(self):
         pass
 
-    def construir_objeto(self, sprite, x, y, cena, quantidade=1, orientacao="horizontal", distancia=0, identificacao=""):
+    def construir_objeto(self, sprite, x, y, cena, quantidade=1, orientacao="horizontal", distancia=0, identificacao="", adicionalY=0):
         if distancia == 0:
             if orientacao == "horizontal":
                 distancia = sprite.get_width()
@@ -37,7 +37,7 @@ class Colisao:
                 self.cenas.append(cena)
                 self.x.append(x + (i * distancia))
                 self.y.append(y)
-                self.objeto_rect.append(sprite.get_rect(topleft=(self.x[-1], self.y[-1])))
+                self.objeto_rect.append(sprite.get_rect(topleft=(self.x[-1], self.y[-1] + adicionalY)))
         elif orientacao == "vertical":
             for i in range(quantidade):
                 self.orientacao.append(orientacao)
@@ -46,7 +46,7 @@ class Colisao:
                 self.cenas.append(cena)
                 self.x.append(x)
                 self.y.append(y + (i * distancia))
-                self.objeto_rect.append(sprite.get_rect(topleft=(self.x[-1], self.y[-1])))
+                self.objeto_rect.append(sprite.get_rect(topleft=(self.x[-1], self.y[-1] + adicionalY)))
 
     def destruir_objeto(self, identificacao: str):
         for i, identidade in enumerate(self.ids):

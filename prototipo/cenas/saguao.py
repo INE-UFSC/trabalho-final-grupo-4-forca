@@ -25,7 +25,7 @@ class ColisaoSaguao(Colisao):  # Classe responsável por construir os objetos do
 
     def construir_cenario(self):
 
-        self.construir_objeto(spritesSaguao.parede_sprite_h, 0, 0, "saguao", 5)  # Parede horizontal superior
+        self.construir_objeto(spritesSaguao.parede_sprite_h, 0, 0, "saguao", 5, adicionalY=-30)  # Parede horizontal superior
         self.construir_objeto(spritesSaguao.parede_sprite_v, 0, 26, "saguao", 10, "vertical")  # Parede esquerda 1
         self.construir_objeto(spritesSaguao.parede_sprite_v, 0, 280, "saguao", 3, "vertical", identificacao="portaCozinha")  # Porta cozinha
         self.construir_objeto(spritesSaguao.parede_sprite_v, 0, 350, "saguao", 10, "vertical")  # Parede esquerda 2
