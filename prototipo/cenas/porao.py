@@ -38,6 +38,7 @@ class ColisaoPorao(Colisao):  # Classe responsável por construir os objetos do 
         self.construir_objeto(spritesPorao.parede_labirinto, 0, 394, "porao", 28, "horizontal", 26, "lab11")
         self.construir_objeto(spritesPorao.parede_sprite_v, 728, 394, "porao", 4, "vertical", 26, "lab12")
         self.construir_objeto(spritesPorao.parede_labirinto, 208, 472, "porao", 20, "horizontal", 26, "lab13")
+        self.construir_objeto(spritesPorao.mesa_sprite, 50, 435, "porao")
 
 
 colisao = ColisaoPorao()
