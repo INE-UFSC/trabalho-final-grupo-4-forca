@@ -3,8 +3,14 @@ import pygame
 
 class SpritesCena:
     def __init__(self):
-        self.fundo = pygame.image.load("../Assets/Sprites/cenario/chaoGrande.png")
-        self.fundo_inicio = pygame.image.load("../Assets/Sprites/cenario/inicio.png")
-        self.parede_sprite_h = pygame.image.load("../Assets/Sprites/cenario/parede_horizontal.png")
-        self.parede_sprite_v = pygame.image.load("../Assets/Sprites/cenario/parede_vertical.png")
-        self.mesa_sprite = pygame.image.load("../Assets/Sprites/cenario/mesa.png")
+        self.fundo = self.load_image("../Assets/Sprites/cenario/chaoGrande.png")
+        self.fundo_inicio = self.load_image("../Assets/Sprites/cenario/inicio.png")
+        self.parede_sprite_h = self.load_image("../Assets/Sprites/cenario/parede_horizontal.png")
+        self.parede_sprite_v = self.load_image("../Assets/Sprites/cenario/parede_vertical.png")
+        self.mesa_sprite = self.load_image("../Assets/Sprites/cenario/mesa.png")
+
+    def load_image(self, imagem: str, transparente=False):
+        if not transparente:
+            return pygame.image.load(imagem).convert()
+        else:
+            return pygame.image.load(imagem).convert_alpha()

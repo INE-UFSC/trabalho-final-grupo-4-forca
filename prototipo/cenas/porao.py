@@ -10,7 +10,7 @@ import pygame
 class SpritesPorao(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
-        self.parede_labirinto = pygame.image.load("../Assets/Sprites/cenario/parede_verticalh.png")
+        self.parede_labirinto = self.load_image("../Assets/Sprites/cenario/parede_verticalh.png")
 
 
 spritesPorao = SpritesPorao()

@@ -31,7 +31,7 @@ class ColisaoSaguao(Colisao):  # Classe responsável por construir os objetos do
         self.construir_objeto(spritesSaguao.parede_sprite_v, 0, 350, "saguao", 10, "vertical")  # Parede esquerda 2
         self.construir_objeto(spritesSaguao.parede_sprite_v, 774, 26, "saguao", 30, "vertical")  # Parede direita
         self.construir_objeto(spritesSaguao.estatua_sprite, 350, 250, "saguao")
-        self.construir_objeto(spritesSaguao.vela_sprite, 380, 100, "saguao", identificacao="vela")
+        self.construir_objeto(spritesSaguao.vela_sprite, 380, 80, "saguao", identificacao="vela")
 
 
 colisao = ColisaoSaguao()
@@ -77,8 +77,8 @@ class Saguao(Cena):
             if colisao.distancia(jogador, 380, 100) < 50:
                 colisao.destruir_objeto("vela")
                 vela_sprite = pygame.transform.rotate(spritesSaguao.vela_sprite, 270)
-                colisao.construir_objeto(vela_sprite, 380, 100, "saguao")
-                colisao.construir_objeto(spritesSaguao.porao_sprite, 650, 35, "saguao")
+                colisao.construir_objeto(vela_sprite, 380, 80, "saguao")
+                colisao.construir_objeto(spritesSaguao.porao_sprite, 650, 35, "saguao", adicionalY=-30)
 
             # Entrar no porão
             elif colisao.distancia(jogador, 650, 100) < 50 and self.delay <= 0:
