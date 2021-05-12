@@ -57,7 +57,52 @@ class MenuEmJogo(Cena):
             menuSeta.posicaoY = 361
 
 
-class MenuInventario(Cena):
+class MenuTutorial1(Cena):  # ----------------------------------------------
+    def __init__(self):
+        super().__init__()
+        self.fundo3 = bkg3
+        self.opcaoAtual = "continuar"
+
+    def iniciar(self):
+        glob.tela.blit(self.fundo3, (0, 0))
+        glob.tela.blit(tutorial_titulo.sprite, (tutorial_titulo.posicaoX, tutorial_titulo.posicaoY))
+        glob.tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
+        glob.tela.blit(tutorial1.sprite, (tutorial1.posicaoX, tutorial1.posicaoY))
+        glob.tela.blit(menuContinuar3.sprite, (menuContinuar3.posicaoX, menuContinuar3.posicaoY))
+
+    def eventos(self):
+        if self.tecla == "enter" and self.opcaoAtual == "continuar":
+            return "tutorial2"
+
+    def atualizar(self):
+        if self.opcaoAtual == "continuar" and menuSeta.posicaoY != 520:
+            menuSeta.posicaoY = 520
+
+
+class MenuTutorial2(Cena):  # ----------------------------------------------
+    def __init__(self):
+        super().__init__()
+        self.fundo3 = bkg3
+        self.opcaoAtual = "continuar"
+
+    def iniciar(self):
+        glob.tela.blit(self.fundo3, (0, 0))
+        glob.tela.blit(tutorial_titulo.sprite, (tutorial_titulo.posicaoX, tutorial_titulo.posicaoY))
+        glob.tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
+        glob.tela.blit(tutorial2.sprite, (tutorial2.posicaoX, tutorial2.posicaoY))
+        glob.tela.blit(menuContinuar3.sprite, (menuContinuar3.posicaoX, menuContinuar3.posicaoY))
+
+    def eventos(self):
+        if self.tecla == "enter" and self.opcaoAtual == "continuar":
+            return "inicio"
+
+    def atualizar(self):
+        if self.opcaoAtual == "continuar" and menuSeta.posicaoY != 520:
+            menuSeta.posicaoY = 520
+
+
+
+class MenuInventario(Cena):  # ----------------------------------------------
     def __init__(self):
         super().__init__()
         self.fundo = ibkg
@@ -109,3 +154,5 @@ class MenuInventario(Cena):
             for j in range(0, 5):
                 if jogador.inventario[(i * 5) + j] != None:
                     glob.tela.blit(jogador.inventario[(i * 5) + j].image, (((j * 100) + 150), ((i * 100) + 100)))
+
+

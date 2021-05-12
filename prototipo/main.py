@@ -96,6 +96,10 @@ class Main:
                 self.cenaAtual = menuPrincipal
             elif self.cenaAtual.proximaCena == "inicio":
                 self.cenaAtual = inicio
+            elif self.cenaAtual.proximaCena == "tutorial1":
+                self.cenaAtual = tutorial1
+            elif self.cenaAtual.proximaCena == "tutorial2":
+                self.cenaAtual = tutorial2
             elif self.cenaAtual.proximaCena == "cozinha":
                 self.cenaAtual = cozinha
             elif self.cenaAtual.proximaCena == "menuEmJogo":
