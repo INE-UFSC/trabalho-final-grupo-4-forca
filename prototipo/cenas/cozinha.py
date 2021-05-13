@@ -4,23 +4,24 @@ from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
-import pygame
 
 
 class SpritesCozinha(SpritesCena):
     def __init__(self):
         super().__init__()
-        self.sprite_mesa = self.image_load("../Assets/Sprites/cenario/mesa.png") 
-        self.sprite_cadeira_direita = self.image_load("../Assets/Sprites/cenario/cadeiradireita.png")
-        self.sprite_cadeira_esquerda = self.image_load("../Assets/Sprites/cenario/cadeiraesquerda.png")
-        self.sprite_cadeira_cima = self.image_load("../Assets/Sprites/cenario/cadeiracima.png")
-        self.sprite_cadeira_baixo = self.image_load("../Assets/Sprites/cenario/cadeirabaixo.png")
-        self.sprite_forno = self.image_load("../Assets/Sprites/cenario/forno.png")
-        self.sprite_geladeira = self.image_load("../Assets/Sprites/cenario/geladeira.png")
-        self.sprite_pia = self.image_load("../Assets/Sprites/cenario/pia.png")
-        self.sprite_prato = self.image_load("../Assets/Sprites/cenario/prato.png")
-        self.sprite_garrafa = self.image_load("..Assets/Sprites/cenario/garrafavinho.png")
+        self.sprite_cadeira_direita = self.load_image("../Assets/Sprites/cenario/cadeiradireita.png", True)
+        self.sprite_cadeira_esquerda = self.load_image("../Assets/Sprites/cenario/cadeiraesquerda.png", True)
+        self.sprite_cadeira_cima = self.load_image("../Assets/Sprites/cenario/cadeiracima.png", True)
+        self.sprite_cadeira_baixo = self.load_image("../Assets/Sprites/cenario/cadeirabaixo.png", True)
+        self.sprite_forno = self.load_image("../Assets/Sprites/cenario/forno.png", True)
+        self.sprite_geladeira = self.load_image("../Assets/Sprites/cenario/geladeira.png", True)
+        self.sprite_pia = self.load_image("../Assets/Sprites/cenario/pia.png", True)
+        self.sprite_prato = self.load_image("../Assets/Sprites/cenario/prato.png", True)
+        self.sprite_garrafa = self.load_image("../Assets/Sprites/cenario/garrafavinho.png", True)
+
+
 cozinhasprites = SpritesCozinha()
+
 
 class ColisaoCozinha(Colisao):
     def __init__(self):
@@ -45,7 +46,10 @@ class ColisaoCozinha(Colisao):
         self.construir_objeto(cozinhasprites.sprite_garrafa, 250, 400, "cozinha")
         self.construir_objeto(cozinhasprites.sprite_garrafa, 50, 500, "cozinha")
 
+
 colisao = ColisaoCozinha()
+
+
 class Cozinha(Cena):
 
     def __init__(self):
@@ -55,10 +59,12 @@ class Cozinha(Cena):
         self.cenaJogavel = True
         colisao.construir_cenario()
         self.puzzle = ["esquerda", "cima", "cima"]
+
     def iniciar(self):
         glob.cenaAtual = "cozinha"
-        if glob.cenaAtual == "cozinha":
-            jogador.rect.topleft = (40, 40)
+        print(jogador.rect.topleft)
+        jogador.rect.topleft = (700, 250)
+        print(glob.cenaAtual)
 
         self.delay = 10
         self.iniciou = True
@@ -82,8 +88,7 @@ class Cozinha(Cena):
             colisao.destruir_objeto("mesa")
             self.constroi_objeto("direita")
             colisao.construir_objeto(cozinhasprites.sprite_mesa, 320, 250, "cozinha", 1, identificacao = "mesa")
-            
-    
+
     def constroi_objeto(self, cadeira):
         if cadeira == "esquerda":
             if self.puzzle[0] == "esquerda":
@@ -124,7 +129,6 @@ class Cozinha(Cena):
         elif posicao == "baixo":
             return "esquerda"
 
-
     def eventos(self):  # Captura os eventos do teclado e do cenário.
         jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical, colisao.get_colisao_jogador("cozinha"))
         #controlador.movimenta()
@@ -149,8 +153,7 @@ class Cozinha(Cena):
             elif colisao.distancia(jogador, 480, 260) < 40 and self.delay <= 0:
                 self.delay = 20
                 self.muda_puzzle("direita")
-            
-            
+
     def atualizar(self):  # Atualiza os sprites da cena.
         glob.tela.blit(cozinhasprites.fundo, (0, 0))
         colisao.desenhar_objetos("cozinha")
