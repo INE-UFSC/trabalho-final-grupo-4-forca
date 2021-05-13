@@ -4,6 +4,7 @@ from prototipo.controladorInimigo import *
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
+from prototipo import som
 
 
 class SpritesInicio(SpritesCena):  # Classe que armazena os sprites da cena.
@@ -62,7 +63,7 @@ class Inicio(Cena):  # Primeira cena do jogo.
             # Entrar na casa
             if colisao.distancia(jogador, 410, 400) < 50 and self.delay <= 0:
                 self.iniciou = False
-                glob.porta_som.play()
+                som.porta_som.play()
                 return "saguao"
 
     def atualizar(self):  # Atualiza os sprites da cena.

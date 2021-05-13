@@ -4,6 +4,7 @@ from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
+from prototipo import som
 import pygame
 
 
@@ -73,7 +74,7 @@ class Porao(Cena):  # Primeira parte do porão.
         elif self.tecla == "e":
             if colisao.distancia(jogador, 50, 550) < 50 and self.delay <= 0:
                 self.iniciou = False
-                glob.passos.play()
+                som.passos.play()
                 return "saguao"
 
     def atualizar(self):  # Atualiza os sprites da cena.

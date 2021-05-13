@@ -20,19 +20,7 @@ class Global:
 
         # Sons ---------------------
         pygame.mixer.init()
-        self.volume = 0.1
-        self.porta_som = pygame.mixer.Sound("../Assets/sons/porta.mp3")
-        self.porta_som.set_volume(self.volume)
-        self.passos = pygame.mixer.Sound("../Assets/sons/passos.wav")
-        self.passos.set_volume(self.volume)
-        self.monstro1 = pygame.mixer.Sound("../Assets/sons/monstro.mp3")
-        self.monstro1.set_volume(self.volume)
-        self.monstro2 = pygame.mixer.Sound("../Assets/sons/rugido.mp3")
-        self.monstro2.set_volume(self.volume)
-        self.vela = pygame.mixer.Sound("../Assets/sons/vela.wav")
-        self.vela.set_volume(self.volume)
-        self.pegar_item = pygame.mixer.Sound("../Assets/sons/pegar_item.wav")
-        self.pegar_item.set_volume(self.volume)
+        self.volume = 0.2
 
 
 glob = Global()

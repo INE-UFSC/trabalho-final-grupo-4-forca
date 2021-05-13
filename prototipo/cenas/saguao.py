@@ -4,6 +4,7 @@ from prototipo.controladorInimigo import *
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
+from prototipo import som
 
 
 class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
@@ -81,16 +82,16 @@ class Saguao(Cena):
                 colisao.construir_objeto(vela_sprite, 380, 80, "saguao")
                 colisao.construir_objeto(spritesSaguao.porao_sprite, 650, 35, "saguao", adicionalY=-30)
                 self.velaVirada = True
-                glob.vela.play()
+                som.vela.play()
 
             # Entrar no porão
             elif colisao.distancia(jogador, 650, 100) < 50 and self.delay <= 0 and self.velaVirada:
                 self.iniciou = False
-                glob.passos.play()
+                som.passos.play()
                 return "porao"
             elif colisao.distancia(jogador, 0, 280) < 50 and self.delay <= 0:
                 self.iniciou = False
-                glob.porta_som.play()
+                som.porta_som.play()
                 return "cozinha"
 
     def atualizar(self):  # Atualiza os sprites da cena.
