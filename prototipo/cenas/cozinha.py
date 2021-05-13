@@ -4,6 +4,7 @@ from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
+from prototipo import som
 
 
 class SpritesCozinha(SpritesCena):
@@ -164,7 +165,7 @@ class Cozinha(Cena):
                 self.muda_puzzle("direita")
             elif colisao.distancia(jogador, 800, 280) < 50 and self.delay <= 0:
                 self.iniciou = False
-                glob.porta_som.play()
+                som.porta_som.play()
                 return "saguao"
 
     def atualizar(self):  # Atualiza os sprites da cena.

@@ -1,6 +1,7 @@
 #from personagens import inimigo
 from personagens import *
 import math
+from prototipo import som
 
 
 class ControladorInimigo:
@@ -170,6 +171,11 @@ class ControladorInimigo:
     
 
 controlador = ControladorInimigo(inimigo, [(100, 250), (350, 250), (350, 450), (350, 250)])
+
+if inimigo.estado == "perseguindo":
+    som.music_fugir()
+else:
+    som.music_ambiente()
 '''
 se o caminho não for fechado ele deve ter a seguinte forma:
 sejam p1,p2,p3,p4,p5 os ponto pelos quais o inimigo deve passsar
