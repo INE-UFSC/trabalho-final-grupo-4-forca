@@ -8,6 +8,7 @@ class SpritesCena:
         self.parede_sprite_h = self.load_image("../Assets/Sprites/cenario/parede_horizontal.png")
         self.parede_sprite_v = self.load_image("../Assets/Sprites/cenario/parede_vertical.png")
         self.sprite_mesa = self.load_image("../Assets/Sprites/cenario/mesa.png", True)
+        self.sprite_iluminacao = self.load_image("../Assets/Sprites/cenario/efeitodeluzjogogrande.png", True)
 
     def load_image(self, imagem: str, transparente=False):
         if not transparente:

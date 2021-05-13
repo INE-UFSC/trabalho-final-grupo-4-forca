@@ -80,4 +80,5 @@ class Porao(Cena):  # Primeira parte do porão.
         glob.tela.blit(spritesPorao.fundo, (0, 0))
         colisao.desenhar_objetos("porao")
         jogadorGroup.draw(glob.tela)
+        glob.tela.blit(spritesPorao.sprite_iluminacao, (jogador.rect.center[0] - 1200, jogador.rect.center[1] - 900))
         jogadorGroup.update()

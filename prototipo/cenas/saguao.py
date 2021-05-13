@@ -92,6 +92,7 @@ class Saguao(Cena):
         glob.tela.blit(spritesSaguao.fundo, (0, 0))
         colisao.desenhar_objetos("saguao")
         jogadorGroup.draw(glob.tela)
+        glob.tela.blit(spritesSaguao.sprite_iluminacao, (jogador.rect.center[0] - 1200, jogador.rect.center[1] - 900))
         jogadorGroup.update()
 
 
