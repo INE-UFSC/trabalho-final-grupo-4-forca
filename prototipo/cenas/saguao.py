@@ -84,7 +84,7 @@ class Saguao(Cena):
             elif colisao.distancia(jogador, 650, 100) < 50 and self.delay <= 0:
                 self.iniciou = False
                 return "porao"
-            elif colisao.distancia(jogador, 50, 100) < 50 and self.delay <= 0:
+            elif colisao.distancia(jogador, 0, 280) < 50 and self.delay <= 0:
                 self.iniciou = False
                 return "cozinha"
 
