@@ -17,3 +17,6 @@ class SpritesCena:
             return pygame.image.load(imagem).convert()
         else:
             return pygame.image.load(imagem).convert_alpha()
+
+
+spritesCena = SpritesCena()

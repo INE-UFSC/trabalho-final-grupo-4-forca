@@ -5,6 +5,7 @@ from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import som
+from prototipo.hud import hud
 
 
 class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
@@ -93,13 +94,22 @@ class Saguao(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "cozinha"
+        if self.tecla == "e" and self.delay <= 0:
+            self.mostrarVida = True
+        else:
+            self.mostrarVida = False
+
+    def desenhar_objetos_externos(self):
+        jogadorGroup.draw(glob.tela)
+        glob.tela.blit(spritesSaguao.sprite_iluminacao, (jogador.rect.center[0] - 1200, jogador.rect.center[1] - 900))
+        hud.desenhar_hud(jogador.stamina, jogador.vida, jogador.rect.center[0] - 30, jogador.rect.top - 30,
+                         self.mostrarVida)
+        jogadorGroup.update()
 
     def atualizar(self):  # Atualiza os sprites da cena.
         glob.tela.blit(spritesSaguao.fundo, (0, 0))
         colisao.desenhar_objetos("saguao")
-        jogadorGroup.draw(glob.tela)
-        glob.tela.blit(spritesSaguao.sprite_iluminacao, (jogador.rect.center[0] - 1200, jogador.rect.center[1] - 900))
-        jogadorGroup.update()
+        self.desenhar_objetos_externos()
 
 
 
