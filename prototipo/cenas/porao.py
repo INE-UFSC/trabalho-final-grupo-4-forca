@@ -73,6 +73,7 @@ class Porao(Cena):  # Primeira parte do porão.
         elif self.tecla == "e":
             if colisao.distancia(jogador, 50, 550) < 50 and self.delay <= 0:
                 self.iniciou = False
+                glob.passos.play()
                 return "saguao"
 
     def atualizar(self):  # Atualiza os sprites da cena.

@@ -81,13 +81,16 @@ class Saguao(Cena):
                 colisao.construir_objeto(vela_sprite, 380, 80, "saguao")
                 colisao.construir_objeto(spritesSaguao.porao_sprite, 650, 35, "saguao", adicionalY=-30)
                 self.velaVirada = True
+                glob.vela.play()
 
             # Entrar no porão
             elif colisao.distancia(jogador, 650, 100) < 50 and self.delay <= 0 and self.velaVirada:
                 self.iniciou = False
+                glob.passos.play()
                 return "porao"
             elif colisao.distancia(jogador, 0, 280) < 50 and self.delay <= 0:
                 self.iniciou = False
+                glob.porta_som.play()
                 return "cozinha"
 
     def atualizar(self):  # Atualiza os sprites da cena.

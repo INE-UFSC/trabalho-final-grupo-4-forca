@@ -164,6 +164,7 @@ class Cozinha(Cena):
                 self.muda_puzzle("direita")
             elif colisao.distancia(jogador, 800, 280) < 50 and self.delay <= 0:
                 self.iniciou = False
+                glob.porta_som.play()
                 return "saguao"
 
     def atualizar(self):  # Atualiza os sprites da cena.

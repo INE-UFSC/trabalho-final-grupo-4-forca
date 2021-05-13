@@ -62,6 +62,7 @@ class Inicio(Cena):  # Primeira cena do jogo.
             # Entrar na casa
             if colisao.distancia(jogador, 410, 400) < 50 and self.delay <= 0:
                 self.iniciou = False
+                glob.porta_som.play()
                 return "saguao"
 
     def atualizar(self):  # Atualiza os sprites da cena.
