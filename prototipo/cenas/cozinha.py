@@ -29,8 +29,13 @@ class ColisaoCozinha(Colisao):
     
     def construir_cenario(self):
         self.construir_objeto(cozinhasprites.parede_sprite_h, 0, 0, "cozinha", 5)
-        self.construir_objeto(cozinhasprites.parede_sprite_v, 774, 1, "cozinha", 24, "vertical")
-        self.construir_objeto(cozinhasprites.parede_sprite_v, 0, 1, "cozinha", 24, "vertical")
+
+        self.construir_objeto(cozinhasprites.parede_sprite_v, 774, 26, "cozinha", 10, "vertical")
+        #self.construir_objeto(cozinhasprites.parede_sprite_v, 774, 280, "cozinha", 3, "vertical", identificacao="portaSaguao")  # Porta para o saguão.
+        self.construir_objeto(cozinhasprites.parede_sprite_v, 774, 350, "cozinha", 10, "vertical")
+
+        self.construir_objeto(cozinhasprites.parede_sprite_v, 0, 1, "cozinha", 24, "vertical")  # Parede esquerda.
+
         self.construir_objeto(cozinhasprites.sprite_cadeira_cima, 360, 205, "cozinha", 1, identificacao = "cadeiracima")
         self.construir_objeto(cozinhasprites.sprite_cadeira_esquerda, 280, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
         self.construir_objeto(cozinhasprites.sprite_cadeira_cima, 440, 250, "cozinha", 1, identificacao = "cadeiradireita")
@@ -63,7 +68,7 @@ class Cozinha(Cena):
     def iniciar(self):
         glob.cenaAtual = "cozinha"
         print(jogador.rect.topleft)
-        jogador.rect.topleft = (700, 250)
+        jogador.rect.topleft = (770, 300)
         print(glob.cenaAtual)
 
         self.delay = 10
@@ -153,6 +158,9 @@ class Cozinha(Cena):
             elif colisao.distancia(jogador, 480, 260) < 40 and self.delay <= 0:
                 self.delay = 20
                 self.muda_puzzle("direita")
+            elif colisao.distancia(jogador, 800, 280) < 50 and self.delay <= 0:
+                self.iniciou = False
+                return "saguao"
 
     def atualizar(self):  # Atualiza os sprites da cena.
         glob.tela.blit(cozinhasprites.fundo, (0, 0))

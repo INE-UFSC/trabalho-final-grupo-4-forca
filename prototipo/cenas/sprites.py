@@ -10,6 +10,7 @@ class SpritesCena:
         self.sprite_mesa = self.load_image("../Assets/Sprites/cenario/mesa.png", True)
         self.sprite_iluminacao = self.load_image("../Assets/Sprites/cenario/efeitodeluzjogogrande.png", True)
 
+    # Se o sprite tiver transparência, "transparente" precisa ser True.
     def load_image(self, imagem: str, transparente=False):
         if not transparente:
             return pygame.image.load(imagem).convert()
