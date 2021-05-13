@@ -10,7 +10,6 @@ import pygame
 class SpritesPorao(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
-        self.parede_labirinto = self.load_image("../Assets/Sprites/cenario/parede_verticalh.png")
 
 
 spritesPorao = SpritesPorao()
@@ -25,19 +24,19 @@ class ColisaoPorao(Colisao):  # Classe responsável por construir os objetos do 
     def construir_cenario(self):
         self.construir_objeto(spritesPorao.parede_sprite_v, 150, 0, "porao", 4, "vertical", 26, "paredecobre1")
         self.construir_objeto(spritesPorao.parede_sprite_v, 250, 0, "porao", 4, "vertical", 26, "paredecobre2")
-        self.construir_objeto(spritesPorao.parede_labirinto, 0, 160, "porao", 13, "horizontal", 26, "lab1")
+        self.construir_objeto(spritesPorao.parede_sprite_vh, 0, 160, "porao", 13, "horizontal", 26, "lab1")
         self.construir_objeto(spritesPorao.parede_sprite_v, 338, 56, "porao", 5, "vertical", 26, "lab2")
-        self.construir_objeto(spritesPorao.parede_labirinto, 364, 56, "porao", 6, "horizontal", 26, "lab3")
+        self.construir_objeto(spritesPorao.parede_sprite_vh, 364, 56, "porao", 6, "horizontal", 26, "lab3")
         self.construir_objeto(spritesPorao.parede_sprite_v, 494, 82, "porao", 7, "vertical", 26, "lab4")
         self.construir_objeto(spritesPorao.parede_sprite_v, 572, 82, "porao", 10, "vertical", 26, "lab5")
-        self.construir_objeto(spritesPorao.parede_labirinto, 572, 56, "porao", 6, "horizontal", 26, "lab6")
-        self.construir_objeto(spritesPorao.parede_labirinto, 0, 316, "porao", 22, "horizontal", 26, "lab7")
-        self.construir_objeto(spritesPorao.parede_labirinto, 78, 238, "porao", 16, "horizontal", 26, "lab8")
-        self.construir_objeto(spritesPorao.parede_labirinto, 650, 160, "porao", 6, "horizontal", 26, "lab9")
+        self.construir_objeto(spritesPorao.parede_sprite_vh, 572, 56, "porao", 6, "horizontal", 26, "lab6")
+        self.construir_objeto(spritesPorao.parede_sprite_vh, 0, 316, "porao", 22, "horizontal", 26, "lab7")
+        self.construir_objeto(spritesPorao.parede_sprite_vh, 78, 238, "porao", 16, "horizontal", 26, "lab8")
+        self.construir_objeto(spritesPorao.parede_sprite_vh, 650, 160, "porao", 6, "horizontal", 26, "lab9")
         self.construir_objeto(spritesPorao.parede_sprite_v, 650, 186, "porao", 6, "vertical", 26, "lab10")
-        self.construir_objeto(spritesPorao.parede_labirinto, 0, 394, "porao", 28, "horizontal", 26, "lab11")
+        self.construir_objeto(spritesPorao.parede_sprite_vh, 0, 394, "porao", 28, "horizontal", 26, "lab11")
         self.construir_objeto(spritesPorao.parede_sprite_v, 728, 394, "porao", 4, "vertical", 26, "lab12")
-        self.construir_objeto(spritesPorao.parede_labirinto, 208, 472, "porao", 20, "horizontal", 26, "lab13")
+        self.construir_objeto(spritesPorao.parede_sprite_vh, 208, 472, "porao", 20, "horizontal", 26, "lab13")
         self.construir_objeto(spritesPorao.sprite_mesa, 50, 435, "porao")
 
 
