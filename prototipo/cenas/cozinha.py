@@ -70,10 +70,10 @@ class Cozinha(Cena):
         self.puzzle = ["esquerda", "cima", "cima"]
 
     def iniciar(self):
+        print("iniciou cozinha")
+        if glob.cenaAtual == "saguao":
+            jogador.rect.topleft = (770, 300)
         glob.cenaAtual = "cozinha"
-        print(jogador.rect.topleft)
-        jogador.rect.topleft = (770, 300)
-        print(glob.cenaAtual)
 
         self.delay = 10
         self.iniciou = True

@@ -76,9 +76,9 @@ class Main:
                 elif pressed[pygame.K_RETURN]:
                     self.cenaAtual.tecla = "enter"
 
-            self.cenaAtual.proximaCena = self.cenaAtual.eventos()
             if not self.cenaAtual.iniciou:
                 self.cenaAtual.iniciar()
+            self.cenaAtual.proximaCena = self.cenaAtual.eventos()
             self.cenaAtual.atualizar()
 
         #   Atualizar os elementos na tela.

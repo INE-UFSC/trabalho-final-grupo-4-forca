@@ -10,6 +10,7 @@ import pygame
 class SpritesPorao(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
+        self.sprite_mesa = pygame.transform.scale(self.sprite_mesa, (90, 70))
 
 
 spritesPorao = SpritesPorao()
@@ -37,7 +38,8 @@ class ColisaoPorao(Colisao):  # Classe responsável por construir os objetos do 
         self.construir_objeto(spritesPorao.parede_sprite_vh, 0, 394, "porao", 28, "horizontal", 26, "lab11")
         self.construir_objeto(spritesPorao.parede_sprite_v, 728, 394, "porao", 4, "vertical", 26, "lab12")
         self.construir_objeto(spritesPorao.parede_sprite_vh, 208, 472, "porao", 20, "horizontal", 26, "lab13")
-        self.construir_objeto(spritesPorao.sprite_mesa, 50, 435, "porao")
+        self.construir_objeto(spritesPorao.sprite_mesa, 30, 425, "porao")
+        self.construir_objeto(spritesPorao.parede_sprite_vh, 104, 574, "porao", 30)
 
 
 colisao = ColisaoPorao()
@@ -51,9 +53,7 @@ class Porao(Cena):  # Primeira parte do porão.
 
     def iniciar(self):  # É executado 1 vez sempre que a cena é chamada.
         print("iniciou porao")
-        if glob.cenaAtual == "saguao":
-            jogador.rect.topleft = (50, 550)
-        glob.cenaAtual = "porao"
+        jogador.rect.topleft = (50, 550)
         colisao.construir_cenario()
         self.delay = 10
         self.iniciou = True
