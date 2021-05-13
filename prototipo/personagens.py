@@ -1,5 +1,6 @@
 import pygame
 import itens
+from itens import item
 from variaveisGlobais import glob
 
 
@@ -47,8 +48,8 @@ class Jogador(Personagem):
         self.vida = 3
         self.stamina = 100
         self.inventario = [None] * 20
-        self.inventario[0] = itens.chave
-        self.inventario[18] = itens.chave
+        #self.inventario[0] = itens.chave #adiciona chave no inventario
+        #self.inventario[18] = itens.chave #adiciona chave no inventario
 
     def move(self, direcao, direcaoHorizontal, direcaoVertical, colisoes):
 
@@ -116,6 +117,13 @@ class Jogador(Personagem):
 
     def aplica_efeito(self, index: int):
         pass
+
+    def adiciona_item(self, item: item):
+        control = 0
+        for inventory_index in range(0, 20):
+            if (self.inventario[inventory_index] == None) and (control == 0):
+                self.inventario[inventory_index] = item
+                control = 1
 
     def remove_item(self, index: int):
         self.inventario[index] = None

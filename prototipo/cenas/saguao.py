@@ -4,6 +4,7 @@ from prototipo.controladorInimigo import *
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
+from prototipo import itens
 from prototipo import som
 from prototipo.hud import hud
 
