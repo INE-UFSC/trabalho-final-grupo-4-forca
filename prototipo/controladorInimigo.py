@@ -1,24 +1,35 @@
 #from personagens import inimigo
+from abc import ABC, abstractmethod
 from personagens import *
 import math
-from prototipo import som
 
+class Controlador(ABC):
+    def __init__(self, enemy, player):
+        self.inimigo = enemy
+        self.jogador = player
+    
+    @abstractmethod
+    def movimenta(self):
+        pass
 
 class ControladorInimigo:
-    def __init__(self, enemy, caminho):
-        self.inimigo = enemy
-        self.jogador = jogador
+    def __init__(self, enemy, player, caminho, area):
+        super().__init__(enemy, player)
         self.caminho = caminho
         self.posicao_caminho = 1
+        self.movimentar = False
         self.ultimo_movimento = ""
-        self.distancia_percepcao = 300  # pixels
+        self.area_de_atuacao = area
+        self.XouY = 0
     
     def movimenta(self):
-        if self.inimigo.estado == "caminho":
+        self.movimentar = not self.movimentar
+        if self.inimigo.estado == "caminho" and self.movimentar:
             if math.dist(self.inimigo.rect.center, self.caminho[self.posicao_caminho]) <= self.inimigo.velocidade:
                 vetor_movimento = (self.caminho[self.posicao_caminho][0] - self.inimigo.rect.centerx, self.caminho[self.posicao_caminho][1] - self.inimigo.rect.centery)
             else:
                 vetor_movimento = self.melhor_caminho(self.caminho[self.posicao_caminho])
+            
             self.inimigo.move(vetor_movimento[0], vetor_movimento[1])
             if abs(vetor_movimento[0]) >= abs(vetor_movimento[1]):
                 if vetor_movimento[0] >= 0:
@@ -38,9 +49,16 @@ class ControladorInimigo:
                     self.posicao_caminho = (self.posicao_caminho + 1) % len(self.caminho)
 
         elif self.inimigo.estado == "perseguindo":
-            vetor_movimento = self.melhor_caminho(self.jogador.rect.center)
-            self.inimigo.move(vetor_movimento[0], vetor_movimento[1])
-            if math.dist(self.inimigo.rect.center, self.jogador.rect.center) > self.distancia_percepcao:
+            if self.esta_na_area():
+                self.XouY = (self.XouY + 1) % 2
+                vetor_movimento = self.melhor_caminho(self.jogador.rect.center)
+                if self.XouY == 0:
+                    self.inimigo.move(vetor_movimento[0], 0)
+                else:
+                    self.inimigo.move()
+                if math.dist(self.inimigo.rect.center, self.jogador.rect.center) > self.distancia_percepcao:
+                    self.inimigo.estado_setter("confuso")
+            else:
                 self.inimigo.estado_setter("confuso")
 
         elif self.inimigo.estado == "confuso":
@@ -52,13 +70,6 @@ class ControladorInimigo:
                     self.posicao_caminho = i
             self.inimigo.estado = "caminho"
     
-    def movimenta_x(self):
-        vetor_movimento = self.melhor_caminho(self.jogador.rect.center)
-        self.inimigo.move(vetor_movimento[0], 0)
-    
-    def movimenta_y(self):
-        vetor_movimento = self.melhor_caminho(self.jogador.rect.center)
-        self.inimigo.move(0, vetor_movimento[1])
 
     def melhor_caminho(self, ponto_objetivo):
         vetor_diferenca = (ponto_objetivo[0] - self.inimigo.rect.centerx, ponto_objetivo[1] - self.inimigo.rect.centery)
@@ -169,15 +180,22 @@ class ControladorInimigo:
         c = (-1)*(reta[0]*ponto[0] + reta[1]*ponto[1])
         return (reta[0], reta[1], c)
     
+    def esta_na_area(self):
+        intervalo_x = [self.area_de_atuacao[0][0], self.area_de_atuacao[0][0] + self.area_de_atuacao[1]]
+        intervalo_y = [self.area_de_atucao[0][1], self.area_de_atuacao[0][1] + self.area_de_atuacao[2]]
+        if self.inimigo.rect.centerx >= intervalo_x[0] and self.inimigo.rect.centerx <= intervalo_x[1]:
+            if self.inimigo.rect.centery >= intervalo_y[0] and self.inimigo.rect.center <= intervalo_y[1]:
+                return True
+        return False
 
-controlador = ControladorInimigo(inimigo, [(100, 250), (350, 250), (350, 450), (350, 250)])
-
+    
 if inimigo.estado == "perseguindo":
     som.music_fugir()
     pygame.mixer.music.set_volume(glob.volume_musica)
 else:
     som.music_ambiente()
     pygame.mixer.music.set_volume(glob.volume_musica)
+
 '''
 se o caminho não for fechado ele deve ter a seguinte forma:
 sejam p1,p2,p3,p4,p5 os ponto pelos quais o inimigo deve passsar
@@ -185,3 +203,4 @@ então a definição do caminho fica: [p1,p2,p3,p4,p5,p4,p3,p2]
 ou seja todos os pontos entre o último e o primeiro devem ser colocados
 de trás para frente no final.
 '''
+
