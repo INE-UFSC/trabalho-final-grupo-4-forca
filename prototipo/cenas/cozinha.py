@@ -6,6 +6,7 @@ from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import som
 from prototipo.hud import hud
+from prototipo.cenas.saguao import Saguao
 
 
 class SpritesCozinha(SpritesCena):
@@ -30,7 +31,7 @@ class ColisaoCozinha(Colisao):
         super().__init__()
     
     def construir_cenario(self):
-        self.construir_objeto(spritesCozinha.parede_sprite_h, 0, 0, "cozinha", 5)
+        self.construir_objeto(spritesCozinha.parede_sprite_h, 0, 0, "cozinha", 5, adicionalY=-30)
 
         self.construir_objeto(spritesCozinha.parede_sprite_v, 774, 26, "cozinha", 10, "vertical")  # Parede direita 1.
         #self.construir_objeto(spritesCozinha.parede_sprite_v, 774, 280, "cozinha", 3, "vertical", identificacao="portaSaguao")  # Porta para o saguão.
@@ -68,6 +69,7 @@ class Cozinha(Cena):
         self.cenaJogavel = True
         colisao.construir_cenario()
         self.puzzle = ["esquerda", "cima", "cima"]
+
 
     def iniciar(self):
         print("iniciou cozinha")
@@ -158,12 +160,24 @@ class Cozinha(Cena):
             if colisao.distancia(jogador, 380, 190) < 40 and self.delay <= 0:
                 self.muda_puzzle("cima")
                 self.delay = 20
+                if self.puzzle == ['direita', 'baixo', 'esquerda']:
+                    for e in som.sons:  e.set_volume(glob.volume_efeitos)
+                    som.puzzle_cozinha.play()
+                    Saguao.porta_sala = True
             elif colisao.distancia(jogador, 280, 260) < 40 and self.delay <= 0:
                 self.muda_puzzle("esquerda")
                 self.delay = 20
+                if self.puzzle == ['direita', 'baixo', 'esquerda']:
+                    for e in som.sons:  e.set_volume(glob.volume_efeitos)
+                    som.puzzle_cozinha.play()
+                    Saguao.porta_sala = True
             elif colisao.distancia(jogador, 480, 260) < 40 and self.delay <= 0:
                 self.delay = 20
                 self.muda_puzzle("direita")
+                if self.puzzle == ['direita', 'baixo', 'esquerda']:
+                    for e in som.sons:  e.set_volume(glob.volume_efeitos)
+                    som.puzzle_cozinha.play()
+                    Saguao.porta_sala = True
             elif colisao.distancia(jogador, 800, 280) < 50 and self.delay <= 0:
                 self.iniciou = False
                 som.porta_som.play()

@@ -8,7 +8,6 @@ config = ConfigParser()
 
 
 class MenuPrincipal(Cena):  # ----------------------------------------------
-
     in_game = 0
 
     def __init__(self):

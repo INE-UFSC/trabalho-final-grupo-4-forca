@@ -15,6 +15,7 @@ class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
         self.estatua_sprite = self.load_image("../Assets/Sprites/cenario/estatua.png", True)
         self.vela_sprite = self.load_image("../Assets/Sprites/cenario/vela.png", True)
         self.porao_sprite = self.load_image("../Assets/Sprites/cenario/porta_porao.png")
+        self.porta_sala = self.load_image("../Assets/Sprites/cenario/porta_sala.png", True)
 
 
 spritesSaguao = SpritesSaguao()
@@ -27,7 +28,6 @@ class ColisaoSaguao(Colisao):  # Classe responsável por construir os objetos do
         self.temMonstro = False
 
     def construir_cenario(self):
-
         self.construir_objeto(spritesSaguao.parede_sprite_h, 0, 0, "saguao", 5, adicionalY=-30)  # Parede horizontal superior
         self.construir_objeto(spritesSaguao.parede_sprite_v, 0, 26, "saguao", 10, "vertical")  # Parede esquerda 1
         #self.construir_objeto(spritesSaguao.parede_sprite_v, 0, 280, "saguao", 3, "vertical", identificacao="portaCozinha")  # Porta para a cozinha.
@@ -42,6 +42,8 @@ colisao = ColisaoSaguao()
 
 
 class Saguao(Cena):
+    porta_sala = False
+
     def __init__(self):  # É executado apenas na instanciação da cena.
         super().__init__()
         self.cenaJogavel = True
@@ -50,12 +52,17 @@ class Saguao(Cena):
         colisao.construir_cenario()
 
     def iniciar(self):  # É executado 1 vez sempre que a cena é chamada.
+        if Saguao.porta_sala:
+            colisao.construir_objeto(spritesSaguao.porta_sala, 100, 28, "saguao", adicionalY=-30)
         print("iniciou saguao")
         MenuEmJogo.cena_anterior = "saguao"
         if glob.cenaAtual == "inicio":
             jogador.rect.topleft = (375, 520)
         elif glob.cenaAtual == "cozinha":
             jogador.rect.topleft = (30, 280)
+        elif glob.cenaAtual == "sala":
+            jogador.rect.topleft = (122, 100)
+
         glob.cenaAtual = "saguao"
 
         self.delay = 10
@@ -86,11 +93,17 @@ class Saguao(Cena):
                 self.velaVirada = True
                 som.vela.play()
 
+            # Entrar na sala
+            elif colisao.distancia(jogador, 100, 93) < 50 and self.delay <= 0 and Saguao.porta_sala:
+                self.iniciou = False
+                som.porta_som.play()
+                return "sala"
             # Entrar no porão
             elif colisao.distancia(jogador, 650, 100) < 50 and self.delay <= 0 and self.velaVirada:
                 self.iniciou = False
                 som.passos.play()
                 return "porao"
+            # Entrar na cozinha
             elif colisao.distancia(jogador, 0, 280) < 50 and self.delay <= 0:
                 self.iniciou = False
                 som.porta_som.play()
