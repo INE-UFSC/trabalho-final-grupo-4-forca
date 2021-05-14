@@ -2,6 +2,7 @@
 from abc import ABC, abstractmethod
 from personagens import *
 import math
+from prototipo import som
 
 class Controlador(ABC):
     def __init__(self, enemy, player):

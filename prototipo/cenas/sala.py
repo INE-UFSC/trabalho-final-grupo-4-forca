@@ -14,6 +14,8 @@ class SpritesSala(SpritesCena):
         super().__init__()
         self.televisao_sprite = self.load_image("../Assets/Sprites/cenario/television.png", True)
         self.NPFerramenta = self.load_image("../Assets/Sprites/cenario/NPFerramenta.png", True)
+        self.porta_corredor = self.load_image("../Assets/Sprites/cenario/porta_metal.png", True)
+        self.NPCodigo = self.load_image("../Assets/Sprites/hud/NPCodigo.png", True)
 
 
 spritesSala = SpritesSala()
@@ -32,6 +34,7 @@ class ColisaoSala(Colisao):
         self.construir_objeto(spritesSala.parede_sprite_vh, 0, 574, "sala", 7)  # Parede inferior 1.
         self.construir_objeto(spritesSala.parede_sprite_vh, 252, 574, "sala", 21)  # Parede inferior 2.
         self.construir_objeto(spritesSala.televisao_sprite, 250, 75, "sala", 1, identificacao="televisao", adicionalY=-25)
+        self.construir_objeto(spritesSala.porta_corredor, 450, 28, "sala", 1, identificacao="porta_metal", adicionalY=-30)
 
 
 colisao = ColisaoSala()
@@ -39,6 +42,7 @@ colisao = ColisaoSala()
 
 class Sala(Cena):
     possui_ferramenta_sala = False
+    possui_codigo = False
 
     def __init__(self):
         super().__init__()
@@ -52,6 +56,8 @@ class Sala(Cena):
         print("iniciou sala")
         if glob.cenaAtual == "saguao":
             jogador.rect.topleft = (200, 545)
+        elif glob.cenaAtual == "corredor":
+            jogador.rect.topleft = (450, 60)
         glob.cenaAtual = "sala"
 
         self.delay = 10
@@ -77,6 +83,8 @@ class Sala(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "saguao"
+
+            # interagir televisao
             if colisao.distancia(jogador, 270, 92) < 50 and self.delay <= 0:
                 if Sala.possui_ferramenta_sala:
                     pass # inserir fio de cobre no inventario se possuir ferramenta.
@@ -85,6 +93,18 @@ class Sala(Cena):
                 else:
                     glob.tela.fill((glob.preto))
                     glob.tela.blit(spritesSala.NPFerramenta, spritesSala.NPFerramenta.get_rect(center = glob.tela.get_rect().center))
+                    pygame.display.flip()
+                    sleep(2)
+
+            # porta corredor
+            if colisao.distancia(jogador, 455, 80) < 50 and self.delay <= 0:
+                if Sala.possui_codigo:
+                    pass # destranca a porta se possuir o codigo.
+                    for e in som.sons:  e.set_volume(glob.volume_efeitos)
+                    som.puzzle_cozinha.play()
+                else:
+                    glob.tela.fill((glob.preto))
+                    glob.tela.blit(spritesSala.NPCodigo, spritesSala.NPCodigo.get_rect(center = glob.tela.get_rect().center))
                     pygame.display.flip()
                     sleep(2)
 
