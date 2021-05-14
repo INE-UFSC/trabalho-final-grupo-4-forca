@@ -136,7 +136,7 @@ class MenuInventario(Cena):  # ----------------------------------------------
                 self.itemindex = self.itemindex + 1
             if self.tecla == "enter" and jogador.inventario[self.itemindex]!= None:
                 if jogador.inventario[self.itemindex].usable == True:
-                    jogador.inventario[self.itemindex].aplica_efeito()                               # não entendo por que não
+                    jogador.inventario[self.itemindex].aplica_efeito(jogador)                               # não entendo por que não
                     jogador.remove_item(self.itemindex)                                 # funciona na mesma linha
 
         if self.tecla != "cima" and self.tecla != "baixo" and self.tecla != "direita" and self.tecla != "esquerda":
