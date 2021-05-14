@@ -20,3 +20,6 @@ pocao_vida.hp_change = 1
 pocao_stamina = item("Poção de Stamina",  "..\Assets\Sprites\itens\pocaostamina.png", True)
 pocao_stamina.stamina_change = 20
 cobre = item("Pedaço de Cobre",  "..\Assets\Sprites\itens\cobre.png", False)
+ferramenta1 = item("Ferramenta 1",  "..\Assets\Sprites\itens\\ferramenta1.png", False)
+ferramenta2 = item("Ferramenta 2",  "..\Assets\Sprites\itens\\ferramenta2.png", False)
+codigo = item("Código",  "..\Assets\Sprites\itens\codigo.png", False)
