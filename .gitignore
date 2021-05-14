@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 .idea/
+.idea/misc.xml
+.idea/trabalho-final-grupo-4-forca.iml

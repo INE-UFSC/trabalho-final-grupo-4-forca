@@ -115,9 +115,6 @@ class Jogador(Personagem):
     def resgata_posicao(self, colisoes):
         self.rect = self.surf.get_rect(topleft=self.coordant)
 
-    def aplica_efeito(self, index: int):
-        pass
-
     def adiciona_item(self, item: item):
         control = 0
         for inventory_index in range(0, 20):
