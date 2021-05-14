@@ -1,5 +1,6 @@
 import pygame
-
+import configparser
+config = configparser.ConfigParser()
 
 class Global:
 
@@ -20,7 +21,14 @@ class Global:
 
         # Sons ---------------------
         pygame.mixer.init()
-        self.volume = 0.2
+        config.read('config.ini')
+
+        try:
+            self.volume_efeitos = config.getfloat('volume', 'volume_efeitos')
+            self.volume_musica = config.getfloat('volume', 'volume_musica')
+        except:
+            self.volume_efeitos = 0.1
+            self.volume_musica = 0.1
 
 
 glob = Global()

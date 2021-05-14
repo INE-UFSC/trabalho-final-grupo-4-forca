@@ -1,7 +1,8 @@
 from prototipo.cenas.cenas import cenas
 import pygame
 from variaveisGlobais import glob
-
+from configparser import ConfigParser
+config = ConfigParser()
 
 class Main:
 
@@ -11,10 +12,11 @@ class Main:
         self.clock = pygame.time.Clock()
         pygame.mixer.music.load("../Assets/musicas/menu.mp3")
         pygame.mixer.music.play(-1)
-        pygame.mixer.music.set_volume(glob.volume)
+        pygame.mixer.music.set_volume(glob.volume_musica)
 
 #   Loop que mantém o jogo aberto.
     def run_game(self):
+
         while self.jogoAberto:
             self.cenaAtual.tecla = "outra"
             self.cenaAtual.teclaHorizontal = "outra"
@@ -42,7 +44,7 @@ class Main:
                             self.cenaAtual.tecla = "enter"
                     elif self.cenaAtual == cenas.menuInventario or self.cenaAtual == cenas.menuEmJogo:
                         if event.key == pygame.K_RETURN:
-                            self.cenaAtual.tecla == "enter"
+                            self.cenaAtual.tecla = "enter"
                         elif event.key == pygame.K_ESCAPE:
                             self.cenaAtual.tecla = "esc"
 

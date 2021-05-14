@@ -174,8 +174,10 @@ controlador = ControladorInimigo(inimigo, [(100, 250), (350, 250), (350, 450), (
 
 if inimigo.estado == "perseguindo":
     som.music_fugir()
+    pygame.mixer.music.set_volume(glob.volume_musica)
 else:
     som.music_ambiente()
+    pygame.mixer.music.set_volume(glob.volume_musica)
 '''
 se o caminho não for fechado ele deve ter a seguinte forma:
 sejam p1,p2,p3,p4,p5 os ponto pelos quais o inimigo deve passsar
