@@ -9,6 +9,8 @@ class Cena:
     def __init__(self):
         self.largura = glob.tamanhoTela[0]
         self.altura = glob.tamanhoTela[1]
+        self.teclaHorizontal = ""
+        self.teclaVertical = ""
         self.fundo = ""
         self.tecla = ""
         self.cenaJogavel = False

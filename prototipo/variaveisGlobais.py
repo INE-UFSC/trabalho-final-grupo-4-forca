@@ -2,6 +2,7 @@ import pygame
 import configparser
 config = configparser.ConfigParser()
 
+
 class Global:
 
     def __init__(self):

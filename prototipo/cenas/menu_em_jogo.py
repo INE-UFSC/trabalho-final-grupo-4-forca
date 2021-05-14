@@ -101,7 +101,6 @@ class MenuTutorial2(Cena):  # ----------------------------------------------
             menuSeta.posicaoY = 520
 
 
-
 class MenuInventario(Cena):  # ----------------------------------------------
     def __init__(self):
         super().__init__()

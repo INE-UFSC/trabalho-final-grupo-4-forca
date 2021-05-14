@@ -44,8 +44,6 @@ colisao = ColisaoSaguao()
 class Saguao(Cena):
     def __init__(self):  # É executado apenas na instanciação da cena.
         super().__init__()
-        self.teclaHorizontal = ""
-        self.teclaVertical = ""
         self.cenaJogavel = True
         self.velaVirada = False
         jogador.rect.topleft = (375, 550)
@@ -56,6 +54,8 @@ class Saguao(Cena):
         MenuEmJogo.cena_anterior = "saguao"
         if glob.cenaAtual == "inicio":
             jogador.rect.topleft = (375, 520)
+        elif glob.cenaAtual == "cozinha":
+            jogador.rect.topleft = (30, 280)
         glob.cenaAtual = "saguao"
 
         self.delay = 10

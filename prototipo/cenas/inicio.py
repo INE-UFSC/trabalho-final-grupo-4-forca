@@ -28,15 +28,12 @@ class ColisaoInicio(Colisao):  # Classe responsável por construir os objetos do
         self.construir_objeto(spritesInicio.parede_invisivel, 350, 350, "inicio", 4, "horizontal", 26, "ini4")
 
 
-
 colisao = ColisaoInicio()
 
 
 class Inicio(Cena):  # Primeira cena do jogo.
     def __init__(self):  # É executado apenas na instanciação da cena.
         super().__init__()
-        self.teclaHorizontal = ""
-        self.teclaVertical = ""
         self.cenaJogavel = True
         jogador.rect.topleft = (375, 550)
         colisao.construir_cenario()

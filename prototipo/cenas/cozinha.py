@@ -65,8 +65,6 @@ class Cozinha(Cena):
 
     def __init__(self):
         super().__init__()
-        self.teclaHorizontal = ""
-        self.teclaVertical = ""
         self.cenaJogavel = True
         colisao.construir_cenario()
         self.puzzle = ["esquerda", "cima", "cima"]
@@ -75,6 +73,8 @@ class Cozinha(Cena):
         print("iniciou cozinha")
         if glob.cenaAtual == "saguao":
             jogador.rect.topleft = (770, 300)
+        elif glob.cenaAtual == "armazem":
+            jogador.rect.topleft = (375, 570)
         glob.cenaAtual = "cozinha"
 
         self.delay = 10
@@ -168,6 +168,10 @@ class Cozinha(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "saguao"
+            elif colisao.distancia(jogador, 375, 600) < 50 and self.delay <= 0:
+                self.iniciou = False
+                som.porta_som.play()
+                return "armazem"
 
     def desenhar_objetos_externos(self):
         jogadorGroup.draw(glob.tela)
