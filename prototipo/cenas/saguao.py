@@ -42,7 +42,7 @@ colisao = ColisaoSaguao()
 
 
 class Saguao(Cena):
-    porta_sala = False
+    porta_sala = True
 
     def __init__(self):  # É executado apenas na instanciação da cena.
         super().__init__()

@@ -182,6 +182,10 @@ class Cozinha(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "saguao"
+            elif colisao.distancia(jogador, 400, 585) < 50 and self.delay <= 0:
+                self.iniciou = False
+                som.porta_som.play()
+                return "armazem"
 
     def desenhar_objetos_externos(self):
         jogadorGroup.draw(glob.tela)
