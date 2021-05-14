@@ -57,7 +57,7 @@ class Sala(Cena):
         if glob.cenaAtual == "saguao":
             jogador.rect.topleft = (200, 545)
         elif glob.cenaAtual == "corredor":
-            jogador.rect.topleft = (450, 60)
+            jogador.rect.topleft = (460, 100)
         glob.cenaAtual = "sala"
 
         self.delay = 10
@@ -99,9 +99,10 @@ class Sala(Cena):
             # porta corredor
             if colisao.distancia(jogador, 455, 80) < 50 and self.delay <= 0:
                 if Sala.possui_codigo:
-                    pass # destranca a porta se possuir o codigo.
+                    self.iniciou = False
                     for e in som.sons:  e.set_volume(glob.volume_efeitos)
-                    som.puzzle_cozinha.play()
+                    som.porta_som.play()
+                    return "corredor"
                 else:
                     glob.tela.fill((glob.preto))
                     glob.tela.blit(spritesSala.NPCodigo, spritesSala.NPCodigo.get_rect(center = glob.tela.get_rect().center))
