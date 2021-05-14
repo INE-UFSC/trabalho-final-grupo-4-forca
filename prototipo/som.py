@@ -14,14 +14,16 @@ monstro1.set_volume(glob.volume_efeitos)
 monstro2 = pygame.mixer.Sound("../Assets/sons/rugido.mp3")
 monstro2.set_volume(glob.volume_efeitos)
 
+puzzle_cozinha = pygame.mixer.Sound("../Assets/sons/puzzle_porta.ogg")
+puzzle_cozinha.set_volume(glob.volume_efeitos)
+
 vela = pygame.mixer.Sound("../Assets/sons/vela.wav")
 vela.set_volume(glob.volume_efeitos)
-
-sons = [porta_som, passos, monstro1, monstro2, vela]
 
 pegar_item = pygame.mixer.Sound("../Assets/sons/pegar_item.wav")
 pegar_item.set_volume(glob.volume_efeitos)
 
+sons = [porta_som, passos, monstro1, monstro2, vela, pegar_item]
 
 def music_ambiente():
     pygame.mixer.music.stop()
