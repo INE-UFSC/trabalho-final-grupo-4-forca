@@ -59,6 +59,7 @@ slider = MenuOpcao("../Assets/Sprites/menuPrincipal/slider.png", 292, 202)
 slider2 = MenuOpcao("../Assets/Sprites/menuPrincipal/slider.png", 292, 282)
 menuTituloFim = MenuOpcao("../Assets/Sprites/menuPrincipal/titulo_fim.png", 120, 50)
 menuFim = MenuOpcao("../Assets/Sprites/menuPrincipal/fim.png", 120, 150)
+fimMorte = MenuOpcao("../Assets/Sprites/menuPrincipal/fimMorte.png", 120, 150)
 
 bkg_img = pygame.image.load("../Assets/Sprites/menuPrincipal/fundo2.jpg")
 bkg2_img = pygame.image.load("../Assets/Sprites/menuPrincipal/fundo3.jpg")

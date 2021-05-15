@@ -191,3 +191,26 @@ class MenuFinal(Cena):  # ----------------------------------------------
         elif self.opcaoAtual == "voltar" and menuSeta.posicaoY != 520:
             menuSeta.posicaoY = 520
             menuSeta.posicaoX = 200
+
+
+class FimMorte(Cena):  # ----------------------------------------------
+    def __init__(self):
+        super().__init__()
+        self.fundo3 = bkg3
+        self.opcaoAtual = "sair"
+
+    def iniciar(self):
+        glob.tela.blit(self.fundo3, (0, 0))
+        glob.tela.blit(menuTituloFim.sprite, (menuTituloFim.posicaoX, menuTituloFim.posicaoY))
+        glob.tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
+        glob.tela.blit(menuSair.sprite, (menuSair.posicaoX, menuSair.posicaoY))
+        glob.tela.blit(fimMorte.sprite, (fimMorte.posicaoX, fimMorte.posicaoY))
+
+    def eventos(self):
+        if self.tecla == "enter" and self.opcaoAtual == "sair":
+            return "fecharJogo"
+
+    def atualizar(self):
+        if self.opcaoAtual == "sair" and menuSeta.posicaoY != 440:
+            menuSeta.posicaoY = 440
+            menuSeta.posicaoX = 200
