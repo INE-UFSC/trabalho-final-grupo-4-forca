@@ -43,7 +43,7 @@ class ControladorInimigo(Controlador):
                 else:
                     self.ultimo_movimento = "cima"
             teste = self.visao()
-            if teste:
+            if teste and self.esta_na_area():
                 self.inimigo.estado_setter("perseguindo")
             else:
                 if self.inimigo.rect.center == self.caminho[self.posicao_caminho]:
