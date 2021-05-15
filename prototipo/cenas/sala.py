@@ -46,11 +46,8 @@ class Sala(Cena):
 
     def __init__(self):
         super().__init__()
-        self.teclaHorizontal = ""
-        self.teclaVertical = ""
         self.cenaJogavel = True
         colisao.construir_cenario()
-        self.puzzle = ["esquerda", "cima", "cima"]
 
     def iniciar(self):
         print("iniciou sala")
@@ -83,6 +80,10 @@ class Sala(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "saguao"
+            if colisao.distancia(jogador, 770, 280) < 50 and self.delay <= 0:
+                self.iniciou = False
+                som.porta_som.play()
+                return "oficina"
 
             # interagir televisao
             if colisao.distancia(jogador, 270, 92) < 50 and self.delay <= 0:

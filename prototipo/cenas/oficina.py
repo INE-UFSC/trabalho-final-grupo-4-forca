@@ -1,9 +1,12 @@
 from prototipo.cenas.cena import Cena
-from prototipo.variaveisGlobais import glob
+from prototipo.personagens import *
+from prototipo.controladorInimigo import *
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
-from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
+from prototipo import itens
+from prototipo import som
+from prototipo.hud import hud
 
 
 class SpritesOficina(SpritesCena):
@@ -24,7 +27,8 @@ class ColisaoOficina(Colisao):
     
     def construir_cenario(self):
         self.construir_objeto(spritesOficina.parede_sprite_h, 0, 0, "oficina", 5)
-        self.construir_objeto(spritesOficina.parede_sprite_v, 0, 1, "oficina", 24, orientacao = "vertical")
+        self.construir_objeto(spritesOficina.parede_sprite_v, 0, 26, "oficina", 10, "vertical")  # Parede esquerda 1
+        self.construir_objeto(spritesOficina.parede_sprite_v, 0, 350, "oficina", 10, "vertical")  # Parede esquerda 2
         self.construir_objeto(spritesOficina.parede_sprite_v, 774, 1, "oficina", 24, orientacao = "vertical")
         self.construir_objeto(spritesOficina.sprite_caixa, 620, 120, "oficina")
         self.construir_objeto(spritesOficina.sprite_caixa, 550, 200, "oficina")
@@ -36,6 +40,7 @@ class ColisaoOficina(Colisao):
         self.construir_objeto(spritesOficina.sprite_machado, 140, 220, "oficina")
         self.construir_objeto(spritesOficina.sprite_martelo, 180, 220, "oficina")
         self.construir_objeto(spritesOficina.sprite_boneco, 100, 120, "oficina", 3)
+        self.construir_objeto(spritesOficina.parede_sprite_vh, 0, 574, "oficina", 35)
         
 
 colisao = ColisaoOficina()
@@ -44,10 +49,12 @@ class Oficina(Cena):
     def __init__(self):
         super().__init__()
         self.cenaJogavel = True
+        colisao.construir_cenario()
 
     def iniciar(self):  # É executado 1 vez sempre que a cena é chamada.
-        if glob.cenaAtual == "oficina":
-            jogador.rect.topleft = (500, 550)
+        print("iniciou oficina")
+        if glob.cenaAtual == "sala":
+            jogador.rect.topleft = (10, 290)
         glob.cenaAtual = "oficina"
         colisao.construir_cenario()
         self.delay = 10
@@ -65,10 +72,21 @@ class Oficina(Cena):
         elif self.tecla == "i":
             MenuEmJogo.cena_anterior = "oficina"
             return "inventario"
+        elif self.tecla == "e":
+            if colisao.distancia(jogador, 0, 280) < 50 and self.delay <= 0:
+                self.iniciou = False
+                som.porta_som.play()
+                return "sala"
         
+    def desenhar_objetos_externos(self):
+        jogadorGroup.draw(glob.tela)
+        glob.tela.blit(spritesOficina.sprite_iluminacao, (jogador.rect.center[0] - 1200, jogador.rect.center[1] - 900))
+        hud.desenhar_hud(jogador.stamina, jogador.vida, jogador.rect.center[0] - 30, jogador.rect.top - 30,
+                         self.mostrarVida)
+        jogadorGroup.update()
+
 
     def atualizar(self):  # Atualiza os sprites da cena.
         glob.tela.blit(spritesOficina.fundo, (0, 0))
         colisao.desenhar_objetos("oficina")
-        jogadorGroup.draw(glob.tela)
-        jogadorGroup.update()
+        self.desenhar_objetos_externos()
