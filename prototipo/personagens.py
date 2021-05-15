@@ -150,6 +150,7 @@ class Inimigo(Personagem):
         self.raio_de_visao = 160  # pixels
         self.angulo_de_visao = 60  # graus
         self.movimento_falhou = False
+        self.velocidade = 2
 
     def raio_de_visao_setter(self, raio_de_visao):
         self.raio_de_visao = raio_de_visao
