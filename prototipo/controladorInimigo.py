@@ -2,7 +2,6 @@
 from abc import ABC, abstractmethod
 from personagens import *
 import math
-from prototipo import som
 
 class Controlador(ABC):
     def __init__(self, enemy, player):
@@ -13,7 +12,7 @@ class Controlador(ABC):
     def movimenta(self):
         pass
 
-class ControladorInimigo:
+class ControladorInimigo(Controlador):
     def __init__(self, enemy, player, caminho, area):
         super().__init__(enemy, player)
         self.caminho = caminho
@@ -21,6 +20,7 @@ class ControladorInimigo:
         self.movimentar = False
         self.ultimo_movimento = ""
         self.area_de_atuacao = area
+        self.distancia_percepcao = 200 # pixels
         self.XouY = 0
     
     def movimenta(self):
@@ -56,7 +56,7 @@ class ControladorInimigo:
                 if self.XouY == 0:
                     self.inimigo.move(vetor_movimento[0], 0)
                 else:
-                    self.inimigo.move()
+                    self.inimigo.move(0, vetor_movimento[1])
                 if math.dist(self.inimigo.rect.center, self.jogador.rect.center) > self.distancia_percepcao:
                     self.inimigo.estado_setter("confuso")
             else:
@@ -183,20 +183,14 @@ class ControladorInimigo:
     
     def esta_na_area(self):
         intervalo_x = [self.area_de_atuacao[0][0], self.area_de_atuacao[0][0] + self.area_de_atuacao[1]]
-        intervalo_y = [self.area_de_atucao[0][1], self.area_de_atuacao[0][1] + self.area_de_atuacao[2]]
+        intervalo_y = [self.area_de_atuacao[0][1], self.area_de_atuacao[0][1] + self.area_de_atuacao[2]]
         if self.inimigo.rect.centerx >= intervalo_x[0] and self.inimigo.rect.centerx <= intervalo_x[1]:
-            if self.inimigo.rect.centery >= intervalo_y[0] and self.inimigo.rect.center <= intervalo_y[1]:
+            if self.inimigo.rect.centery >= intervalo_y[0] and self.inimigo.rect.centery <= intervalo_y[1]:
                 return True
         return False
 
     
-if inimigo.estado == "perseguindo":
-    som.music_fugir()
-    pygame.mixer.music.set_volume(glob.volume_musica)
-else:
-    som.music_ambiente()
-    pygame.mixer.music.set_volume(glob.volume_musica)
-
+controlador = ControladorInimigo(inimigo, jogador, [(250, 250), (250, 300), (250, 350), (250, 450), (250, 350), (250, 300) ], [[20, 20], 800, 600])
 '''
 se o caminho não for fechado ele deve ter a seguinte forma:
 sejam p1,p2,p3,p4,p5 os ponto pelos quais o inimigo deve passsar
@@ -204,4 +198,5 @@ então a definição do caminho fica: [p1,p2,p3,p4,p5,p4,p3,p2]
 ou seja todos os pontos entre o último e o primeiro devem ser colocados
 de trás para frente no final.
 '''
+
 
