@@ -62,6 +62,8 @@ class Saguao(Cena):
             jogador.rect.topleft = (375, 520)
         elif glob.cenaAtual == "sala":
             jogador.rect.topleft = (122, 100)
+        elif glob.cenaAtual == "cozinha":
+            jogador.rect.topleft = (20, 300)
         glob.cenaAtual = "saguao"
 
         self.delay = 10
