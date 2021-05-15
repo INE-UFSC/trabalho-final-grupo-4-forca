@@ -25,7 +25,7 @@ class ColisaoSaguao(Colisao):  # Classe responsável por construir os objetos do
 
     def __init__(self):
         super().__init__()
-        self.temMonstro = False
+        self.temMonstro = True
 
     def construir_cenario(self):
         self.construir_objeto(spritesSaguao.parede_sprite_h, 0, 0, "saguao", 5, adicionalY=-30)  # Parede horizontal superior
@@ -70,7 +70,7 @@ class Saguao(Cena):
     def eventos(self):  # Captura os eventos do teclado e do cenário.
         jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical, colisao.get_colisao_jogador("saguao"))
         #controlador.movimenta()
-        colisao.colisao_monstro()
+        colisao.colisao_monstro("saguao")
 
         if self.delay > 0:
             self.delay -= 1

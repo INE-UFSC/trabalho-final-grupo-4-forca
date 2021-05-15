@@ -84,13 +84,9 @@ class Colisao:
                 colisoes_monstro.append(self.objeto_rect[i])
         return colisoes_monstro
 
-    def colisao_monstro(self):
+    def colisao_monstro(self, cena):
         controlador.movimenta()
-        for retangulo in self.objeto_rect:
-            if inimigo.rect.colliderect(retangulo):
-                inimigo.resgata_posicao()
-        controlador.movimenta()
-        for retangulo in self.objeto_rect:
+        for retangulo in self.get_colisao_monstro(cena):
             if inimigo.rect.colliderect(retangulo):
                 inimigo.resgata_posicao()
 
