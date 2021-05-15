@@ -77,6 +77,10 @@ class Corredor(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "sala"
+            elif colisao.distancia(jogador, 400, 90) < 50 and self.delay <= 0:
+                self.iniciou = False
+                som.monstro1.play()
+                return "menuFim"
 
         if self.tecla == "e" and self.delay <= 0:
             self.mostrarVida = True

@@ -155,3 +155,39 @@ class MenuInventario(Cena):  # ----------------------------------------------
                     glob.tela.blit(jogador.inventario[(i * 5) + j].image, (((j * 100) + 150), ((i * 100) + 100)))
 
 
+class MenuFinal(Cena):  # ----------------------------------------------
+    def __init__(self):
+        super().__init__()
+        self.fundo3 = bkg3
+        self.opcaoAtual = "sair"
+
+    def iniciar(self):
+        glob.tela.blit(self.fundo3, (0, 0))
+        glob.tela.blit(menuTituloFim.sprite, (menuTituloFim.posicaoX, menuTituloFim.posicaoY))
+        glob.tela.blit(menuSeta.sprite, (menuSeta.posicaoX, menuSeta.posicaoY))
+        glob.tela.blit(menuSair.sprite, (menuSair.posicaoX, menuSair.posicaoY))
+        glob.tela.blit(menuFim.sprite, (menuFim.posicaoX, menuFim.posicaoY))
+        glob.tela.blit(menuVoltar2.sprite, (menuVoltar2.posicaoX, menuVoltar2.posicaoY))
+
+    def eventos(self):
+        if self.tecla == "baixo":
+            if self.opcaoAtual == "voltar":    self.opcaoAtual = "sair"
+            elif self.opcaoAtual == "sair":   self.opcaoAtual = "voltar"
+            return None
+        elif self.tecla == "cima":
+            if self.opcaoAtual == "sair":    self.opcaoAtual = "voltar"
+            elif self.opcaoAtual == "voltar":    self.opcaoAtual = "sair"
+            return None
+
+        elif self.tecla == "enter" and self.opcaoAtual == "sair":
+            return "fecharJogo"
+        elif self.tecla == "enter" and self.opcaoAtual == "voltar":
+            return "corredor"
+
+    def atualizar(self):
+        if self.opcaoAtual == "sair" and menuSeta.posicaoY != 440:
+            menuSeta.posicaoY = 440
+            menuSeta.posicaoX = 200
+        elif self.opcaoAtual == "voltar" and menuSeta.posicaoY != 520:
+            menuSeta.posicaoY = 520
+            menuSeta.posicaoX = 200

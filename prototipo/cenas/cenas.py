@@ -2,7 +2,7 @@ from prototipo.cenas.menu_principal import MenuPrincipal, MenuConfig, MenuContro
 from prototipo.cenas.saguao import Saguao
 from prototipo.cenas.inicio import Inicio
 from prototipo.cenas.porao import Porao
-from prototipo.cenas.menu_em_jogo import MenuEmJogo, MenuInventario, MenuTutorial1, MenuTutorial2
+from prototipo.cenas.menu_em_jogo import MenuEmJogo, MenuInventario, MenuTutorial1, MenuTutorial2, MenuFinal
 from prototipo.cenas.cozinha import Cozinha
 from prototipo.cenas.armazem import Armazem
 from prototipo.cenas.sala import Sala
@@ -31,13 +31,14 @@ class Cenas:
         self.corredor = Corredor()
         self.armazem = Armazem()
         self.oficina = Oficina()
+        self.menuFim = MenuFinal()
 
         self.cenas = [self.menuPrincipal, self.tutorial1, self.tutorial2, self.inicio, self.saguao, self.porao,
                       self.menuConfig, self.menuControles, self.menuEmJogo, self.menuInventario, self.menuSair0,
-                      self.cozinha, self.menuVolume, self.sala, self.corredor, self.armazem, self.oficina, self.corredor]
+                      self.cozinha, self.menuVolume, self.sala, self.corredor, self.armazem, self.oficina, self.corredor, self.menuFim]
         self.nomes = ["menuPrincipal", "tutorial1", "tutorial2", "inicio", "saguao", "porao",
                       "menuConfig", "menuControles", "menuEmJogo", "inventario", "menuSair0",
-                      "cozinha", "menuVolume", "sala", "corredor", "armazem", "oficina", "corredor"]
+                      "cozinha", "menuVolume", "sala", "corredor", "armazem", "oficina", "corredor", "menuFim"]
 
 
 cenas = Cenas()
