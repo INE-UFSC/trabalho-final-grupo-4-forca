@@ -16,7 +16,7 @@ class Personagem(pygame.sprite.Sprite):
         self.image = self.imagesIdle[0]
         self.rect = self.surf.get_rect(topleft=(0, 0))
         self.coordant = self.rect.topleft
-        self.velocidade = 4
+        self.velocidade = 1.5
         self.estado = ""
         self.imageIndex = 0
         self.ultimaDirecaoH = "direita"

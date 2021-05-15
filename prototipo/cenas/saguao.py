@@ -80,7 +80,7 @@ class Saguao(Cena):
         if self.delayMonstro > 0:
             self.delayMonstro -= 1
 
-        if colisao.distancia(jogador, inimigo.rect.center[0], inimigo.rect.center[1]) < 80 and self.delayMonstro <= 0:
+        if colisao.distancia(jogador, inimigo.rect.center[0], inimigo.rect.center[1]) < 45 and self.delayMonstro <= 0:
             if jogador.vida > 0:
                 jogador.vida -= 1
                 self.mostrarVida = True
