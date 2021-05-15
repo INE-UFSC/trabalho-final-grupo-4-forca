@@ -1,6 +1,6 @@
 from variaveisGlobais import glob
 import pygame
-import menu
+from controladorInimigo import ControladorInimigo
 
 porta_som = pygame.mixer.Sound("../Assets/sons/porta.mp3")
 porta_som.set_volume(glob.volume_efeitos)
@@ -29,11 +29,8 @@ def music_ambiente():
     pygame.mixer.music.stop()
     pygame.mixer.music.load("../Assets/musicas/ambiente.mp3")
     pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(glob.volume_musica)
 
 def music_fugir():
     pygame.mixer.music.stop()
     pygame.mixer.music.load("../Assets/musicas/fugir.ogg")
     pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(glob.volume_musica)
-

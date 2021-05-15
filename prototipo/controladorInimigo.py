@@ -2,6 +2,7 @@
 from abc import ABC, abstractmethod
 from personagens import *
 import math
+from prototipo import som
 
 class Controlador(ABC):
     def __init__(self, enemy, player):
@@ -44,6 +45,8 @@ class ControladorInimigo(Controlador):
                     self.ultimo_movimento = "cima"
             teste = self.visao()
             if teste and self.esta_na_area():
+                som.monstro2.play()
+                som.music_fugir()
                 self.inimigo.estado_setter("perseguindo")
             else:
                 if self.inimigo.rect.center == self.caminho[self.posicao_caminho]:
@@ -63,6 +66,7 @@ class ControladorInimigo(Controlador):
                 self.inimigo.estado_setter("confuso")
 
         elif self.inimigo.estado == "confuso":
+            som.music_ambiente()
             menor_dist = math.dist(self.inimigo.rect.center, self.caminho[0])
             for i in range(len(self.caminho)):
                 dist = math.dist(self.caminho[i], self.inimigo.rect.center)

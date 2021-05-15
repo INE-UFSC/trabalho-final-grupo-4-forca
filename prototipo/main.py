@@ -1,6 +1,7 @@
 from prototipo.cenas.cenas import cenas
 import pygame
 from variaveisGlobais import glob
+from controladorInimigo import ControladorInimigo
 from configparser import ConfigParser
 config = ConfigParser()
 
@@ -18,6 +19,7 @@ class Main:
     def run_game(self):
 
         while self.jogoAberto:
+
             self.cenaAtual.tecla = "outra"
             self.cenaAtual.teclaHorizontal = "outra"
             self.cenaAtual.teclaVertical = "outra"
