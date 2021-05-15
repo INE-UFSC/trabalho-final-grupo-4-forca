@@ -50,6 +50,7 @@ class Saguao(Cena):
         self.velaVirada = False
         jogador.rect.topleft = (375, 550)
         colisao.construir_cenario()
+        self.delayMonstro = 0
 
     def iniciar(self):  # É executado 1 vez sempre que a cena é chamada.
         if Saguao.porta_sala:
@@ -65,6 +66,7 @@ class Saguao(Cena):
         glob.cenaAtual = "saguao"
 
         self.delay = 10
+        self.delayMonstro = 0
         self.iniciou = True
 
     def eventos(self):  # Captura os eventos do teclado e do cenário.
@@ -74,6 +76,20 @@ class Saguao(Cena):
 
         if self.delay > 0:
             self.delay -= 1
+
+        if self.delayMonstro > 0:
+            self.delayMonstro -= 1
+
+        if colisao.distancia(jogador, inimigo.rect.center[0], inimigo.rect.center[1]) < 80 and self.delayMonstro <= 0:
+            if jogador.vida > 0:
+                jogador.vida -= 1
+                self.mostrarVida = True
+                self.delayMonstro = 125
+            else:
+                return "fimMorte"
+        else:
+            self.mostrarVida = False
+
 
         if self.tecla == "p":
             colisao.destruir_objeto("portaCozinha")
@@ -107,10 +123,6 @@ class Saguao(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "cozinha"
-        if self.tecla == "e" and self.delay <= 0:
-            self.mostrarVida = True
-        else:
-            self.mostrarVida = False
 
     def desenhar_objetos_externos(self):
         draw_groups()
