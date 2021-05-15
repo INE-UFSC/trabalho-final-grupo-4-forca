@@ -70,7 +70,7 @@ class Saguao(Cena):
     def eventos(self):  # Captura os eventos do teclado e do cenário.
         jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical, colisao.get_colisao_jogador("saguao"))
         #controlador.movimenta()
-        #colisao.colisao_monstro()
+        colisao.colisao_monstro()
 
         if self.delay > 0:
             self.delay -= 1
@@ -113,11 +113,11 @@ class Saguao(Cena):
             self.mostrarVida = False
 
     def desenhar_objetos_externos(self):
-        jogadorGroup.draw(glob.tela)
+        draw_groups()
         glob.tela.blit(spritesSaguao.sprite_iluminacao, (jogador.rect.center[0] - 1200, jogador.rect.center[1] - 900))
         hud.desenhar_hud(jogador.stamina, jogador.vida, jogador.rect.center[0] - 30, jogador.rect.top - 30,
                          self.mostrarVida)
-        jogadorGroup.update()
+        update_groups()
 
     def atualizar(self):  # Atualiza os sprites da cena.
         glob.tela.blit(spritesSaguao.fundo, (0, 0))
