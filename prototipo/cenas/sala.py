@@ -42,7 +42,7 @@ colisao = ColisaoSala()
 
 class Sala(Cena):
     possui_ferramenta_sala = False
-    possui_codigo = False
+    possui_codigo = True
 
     def __init__(self):
         super().__init__()

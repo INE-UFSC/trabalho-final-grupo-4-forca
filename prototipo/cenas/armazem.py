@@ -1,9 +1,13 @@
 from prototipo.cenas.cena import Cena
-from prototipo.variaveisGlobais import glob
+from prototipo.personagens import *
+from prototipo.controladorInimigo import *
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
-from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
+
+from prototipo import itens
+from prototipo import som
+
 from prototipo.hud import hud
 
 
@@ -18,7 +22,7 @@ class SpritesArmazem(SpritesCena):
         self.sprite_mesa = self.load_image("../Assets/Sprites/cenario/mesa_trabalho.png", True)
         self.sprite_parede_vh = self.load_image("../Assets/Sprites/cenario/parede_verticalh.png")
         self.sprite_bau = self.load_image("../Assets/Sprites/cenario/bau.png", True)
-        self.sprite_entrada = self.load_image("../Assets/Sprites/cenario/porta_normal.png")
+        self.sprite_porta = self.load_image("../Assets/Sprites/cenario/porta_sala.png", True)
 spritesArmazem = SpritesArmazem()
 
 class ColisaoArmazem(Colisao):
@@ -27,7 +31,7 @@ class ColisaoArmazem(Colisao):
     
     def construir_cenario(self):
         self.construir_objeto(spritesArmazem.sprite_mesa, 26, 220, "armazem")
-        self.construir_objeto(spritesArmazem.parede_sprite_h, 0, 0, "armazem", 5)
+        self.construir_objeto(spritesArmazem.parede_sprite_h, 0, 0, "armazem", 5, adicionalY=-30)
         self.construir_objeto(spritesArmazem.parede_sprite_v, 0, 1, "armazem", 24, orientacao = "vertical")
         self.construir_objeto(spritesArmazem.parede_sprite_v, 774, 1, "armazem", 24, orientacao = "vertical")
         self.construir_objeto(spritesArmazem.sprite_caixa, 620, 120, "armazem")
@@ -41,7 +45,8 @@ class ColisaoArmazem(Colisao):
         self.construir_objeto(spritesArmazem.sprite_barril, 100, 176, "armazem", 3)
         self.construir_objeto(spritesArmazem.sprite_parede_vh, 384, 400, "armazem", 15)
         self.construir_objeto(spritesArmazem.sprite_bau, 600, 426, "armazem")
-        self.construir_objeto(spritesArmazem.sprite_entrada, 400, 40, "armazem")
+        self.construir_objeto(spritesArmazem.parede_sprite_vh, 0, 574, "armazem", 35)
+        self.construir_objeto(spritesArmazem.sprite_porta, 375, 28, "armazem", 1, identificacao="porta_armazem", adicionalY=-30)
         
 
 colisao = ColisaoArmazem()
@@ -54,7 +59,7 @@ class Armazem(Cena):
     def iniciar(self): 
         print("iniciou armazem")
         if glob.cenaAtual == "cozinha":
-            jogador.rect.topleft = (400, 125)
+            jogador.rect.topleft = (385, 110)
         glob.cenaAtual = "armazem"
         colisao.construir_cenario()
         self.delay = 10
@@ -72,9 +77,10 @@ class Armazem(Cena):
         elif self.tecla == "i":
             MenuEmJogo.cena_anterior = "armazem"
             return "inventario"
-        elif self.tecla == "e" and self.delay <= 0:
-            if colisao.distancia(jogador, 400, 115) < 50:
+        elif self.tecla == "e":
+            if colisao.distancia(jogador, 400, 115) < 50 and self.delay <= 0:
                 self.iniciou = False
+                som.porta_som.play()
                 return "cozinha"
 
     def desenhar_objetos_externos(self):
