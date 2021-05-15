@@ -85,20 +85,14 @@ class Colisao:
         return colisoes_monstro
 
     def colisao_monstro(self):
+        controlador.movimenta()
         for retangulo in self.objeto_rect:
             if inimigo.rect.colliderect(retangulo):
                 inimigo.resgata_posicao()
-
-        if inimigo.movimento_falhou:
-            controlador.movimenta_x()
-            for retangulo in self.objeto_rect:
-                if inimigo.rect.colliderect(retangulo):
-                    inimigo.resgata_posicao()
-        if inimigo.movimento_falhou:
-            controlador.movimenta_y()
-            for retangulo in self.objeto_rect:
-                if inimigo.rect.colliderect(retangulo):
-                    inimigo.resgata_posicao()
+        controlador.movimenta()
+        for retangulo in self.objeto_rect:
+            if inimigo.rect.colliderect(retangulo):
+                inimigo.resgata_posicao()
 
         if inimigo.rect.colliderect(jogador.rect):
             inimigo.resgata_posicao()
