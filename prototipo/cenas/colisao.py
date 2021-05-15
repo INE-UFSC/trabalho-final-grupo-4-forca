@@ -89,6 +89,13 @@ class Colisao:
         for retangulo in self.get_colisao_monstro(cena):
             if inimigo.rect.colliderect(retangulo):
                 inimigo.resgata_posicao()
+            
+        if inimigo.rect.colliderect(jogador.rect):
+            inimigo.resgata_posicao()
+        controlador.movimenta()
+        for retangulo in self.get_colisao_monstro(cena):
+            if inimigo.rect.colliderect(retangulo):
+                inimigo.resgata_posicao()
 
         if inimigo.rect.colliderect(jogador.rect):
             inimigo.resgata_posicao()
