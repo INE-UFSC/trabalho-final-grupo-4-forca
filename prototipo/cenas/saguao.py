@@ -13,11 +13,11 @@ from time import sleep
 class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
-        self.estatua_sprite = self.load_image("../Assets/Sprites/cenario/estatua.png", True)
-        self.vela_sprite = self.load_image("../Assets/Sprites/cenario/vela.png", True)
-        self.porao_sprite = self.load_image("../Assets/Sprites/cenario/porta_porao.png")
-        self.porta_sala = self.load_image("../Assets/Sprites/cenario/porta_sala.png", True)
-        self.NPChave = self.load_image("../Assets/Sprites/hud/NPChave.png", True)
+        self.estatua_sprite = self.load_image("Assets/Sprites/cenario/estatua.png", True)
+        self.vela_sprite = self.load_image("Assets/Sprites/cenario/vela.png", True)
+        self.porao_sprite = self.load_image("Assets/Sprites/cenario/porta_porao.png")
+        self.porta_sala = self.load_image("Assets/Sprites/cenario/porta_sala.png", True)
+        self.NPChave = self.load_image("Assets/Sprites/hud/NPChave.png", True)
 
 
 spritesSaguao = SpritesSaguao()

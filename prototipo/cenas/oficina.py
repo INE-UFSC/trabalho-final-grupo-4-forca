@@ -15,15 +15,15 @@ class SpritesOficina(SpritesCena):
 
     def __init__(self):
         super().__init__()
-        self.sprite_caixa = self.load_image("../Assets/Sprites/cenario/caixas.png", True)
-        self.sprite_machado = self.load_image("../Assets/Sprites/cenario/machado.png", True)
-        self.sprite_martelo = self.load_image("../Assets/Sprites/cenario/martelo.png", True)
-        self.sprite_mesa_grande = self.load_image("../Assets/Sprites/cenario/mesa_grande.png", True)
-        self.sprite_parede_vh = self.load_image("../Assets/Sprites/cenario/parede_verticalh.png")
-        self.sprite_bau = self.load_image("../Assets/Sprites/cenario/bau.png", True)
-        self.sprite_boneco = self.load_image("../Assets/Sprites/cenario/boneco.png", True)
-        self.pegou_ferramenta2 = self.load_image("../Assets/Sprites/hud/pegou_ferramenta2.png", True)
-        self.sprite_bau_si = self.load_image("../Assets/Sprites/cenario/bau_sem_item.png", True)
+        self.sprite_caixa = self.load_image("Assets/Sprites/cenario/caixas.png", True)
+        self.sprite_machado = self.load_image("Assets/Sprites/cenario/machado.png", True)
+        self.sprite_martelo = self.load_image("Assets/Sprites/cenario/martelo.png", True)
+        self.sprite_mesa_grande = self.load_image("Assets/Sprites/cenario/mesa_grande.png", True)
+        self.sprite_parede_vh = self.load_image("Assets/Sprites/cenario/parede_verticalh.png")
+        self.sprite_bau = self.load_image("Assets/Sprites/cenario/bau.png", True)
+        self.sprite_boneco = self.load_image("Assets/Sprites/cenario/boneco.png", True)
+        self.pegou_ferramenta2 = self.load_image("Assets/Sprites/hud/pegou_ferramenta2.png", True)
+        self.sprite_bau_si = self.load_image("Assets/Sprites/cenario/bau_sem_item.png", True)
 
 
 spritesOficina = SpritesOficina()

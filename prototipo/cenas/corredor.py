@@ -12,9 +12,9 @@ from time import sleep
 class SpritesCorredor(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
-        self.porta_corredor = self.load_image("../Assets/Sprites/cenario/porta_metal.png", True)
-        self.final_padrao = self.load_image("../Assets/Sprites/hud/final_padrao.png", True)
-        self.final_bom = self.load_image("../Assets/Sprites/hud/final_bom.png", True)
+        self.porta_corredor = self.load_image("Assets/Sprites/cenario/porta_metal.png", True)
+        self.final_padrao = self.load_image("Assets/Sprites/hud/final_padrao.png", True)
+        self.final_bom = self.load_image("Assets/Sprites/hud/final_bom.png", True)
 
 
 spritesCorredor = SpritesCorredor()
