@@ -14,7 +14,7 @@ class SpritesSala(SpritesCena):
     def __init__(self):
         super().__init__()
         self.televisao_sprite = self.load_image("../Assets/Sprites/cenario/television.png", True)
-        self.NPFerramenta = self.load_image("../Assets/Sprites/hud/NPFerramenta.png", True)
+        self.NPFerramenta = self.load_image("../Assets/Sprites/hud/NPFerramenta1.png", True)
         self.pegou_cobre = self.load_image("../Assets/Sprites/hud/pegou_cobre.png", True)
         self.porta_corredor = self.load_image("../Assets/Sprites/cenario/porta_metal.png", True)
         self.NPCodigo = self.load_image("../Assets/Sprites/hud/NPCodigo.png", True)
@@ -88,7 +88,6 @@ class Sala(Cena):
             if colisao.distancia(jogador, 270, 92) < 50 and self.delay <= 0 and not item.cobre3:
                 if item.possui_ferramenta_sala:
                     item.cobre3 = True
-                    for e in som.sons:  e.set_volume(glob.volume_efeitos)
                     som.pegar_item.play()
                     glob.tela.fill((glob.preto))
                     glob.tela.blit(spritesSala.pegou_cobre, spritesSala.pegou_cobre.get_rect(center=glob.tela.get_rect().center))

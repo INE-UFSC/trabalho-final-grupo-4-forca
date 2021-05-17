@@ -7,6 +7,7 @@ from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import som
 from prototipo.hud import hud
 from prototipo.cenas.saguao import Saguao
+from time import sleep
 
 
 class SpritesCozinha(SpritesCena):
@@ -21,6 +22,9 @@ class SpritesCozinha(SpritesCena):
         self.sprite_pia = self.load_image("../Assets/Sprites/cenario/pia.png", True)
         self.sprite_prato = self.load_image("../Assets/Sprites/cenario/prato.png", True)
         self.sprite_garrafa = self.load_image("../Assets/Sprites/cenario/garrafavinho.png", True)
+        self.NPFerramenta = self.load_image("../Assets/Sprites/hud/NPFerramenta2.png", True)
+        self.pegou_cobre = self.load_image("../Assets/Sprites/hud/pegou_cobre.png", True)
+        self.pegou_codigo = self.load_image("../Assets/Sprites/hud/pegou_codigo.png", True)
 
 
 spritesCozinha = SpritesCozinha()
@@ -186,6 +190,26 @@ class Cozinha(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "armazem"
+
+            if colisao.distancia(jogador, 95, 145) < 35 and self.delay <= 0 and not item.cobre2:
+                if item.possui_ferramenta_cozinha:
+                    item.cobre2 = True
+                    item.possui_codigo = True
+                    som.pegar_item.play()
+                    glob.tela.fill((glob.preto))
+                    glob.tela.blit(spritesCozinha.pegou_cobre, spritesCozinha.pegou_cobre.get_rect(center=glob.tela.get_rect().center))
+                    pygame.display.flip()
+                    sleep(2)
+                    som.pegar_item.play()
+                    glob.tela.fill((glob.preto))
+                    glob.tela.blit(spritesCozinha.pegou_codigo, spritesCozinha.pegou_codigo.get_rect(center=glob.tela.get_rect().center))
+                    pygame.display.flip()
+                    sleep(4)
+                else:
+                    glob.tela.fill((glob.preto))
+                    glob.tela.blit(spritesCozinha.NPFerramenta, spritesCozinha.NPFerramenta.get_rect(center = glob.tela.get_rect().center))
+                    pygame.display.flip()
+                    sleep(2)
 
     def desenhar_objetos_externos(self):
         jogadorGroup.draw(glob.tela)

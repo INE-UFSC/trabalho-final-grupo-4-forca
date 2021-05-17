@@ -1,12 +1,12 @@
 import pygame
 
 class item:
-    cobre1 = True
+    cobre1 = False
     cobre2 = False
     cobre3 = False
     possui_ferramenta_sala = False
     possui_ferramenta_cozinha = False
-    possui_chave_cozinha = True
+    possui_chave_cozinha = False
     possui_codigo = False
 
     def __init__(self, nome: str, imgpath: str, usable: bool):

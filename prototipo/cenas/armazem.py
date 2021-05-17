@@ -4,7 +4,7 @@ from prototipo.controladorInimigo import *
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
-
+from time import sleep
 from prototipo import itens
 from prototipo import som
 
@@ -23,6 +23,9 @@ class SpritesArmazem(SpritesCena):
         self.sprite_parede_vh = self.load_image("../Assets/Sprites/cenario/parede_verticalh.png")
         self.sprite_bau = self.load_image("../Assets/Sprites/cenario/bau.png", True)
         self.sprite_porta = self.load_image("../Assets/Sprites/cenario/porta_sala.png", True)
+        self.pegou_ferramenta1 = self.load_image("../Assets/Sprites/hud/pegou_ferramenta1.png", True)
+        self.sprite_bau_si = self.load_image("../Assets/Sprites/cenario/bau_sem_item.png", True)
+
 spritesArmazem = SpritesArmazem()
 
 class ColisaoArmazem(Colisao):
@@ -44,7 +47,7 @@ class ColisaoArmazem(Colisao):
         self.construir_objeto(spritesArmazem.sprite_barril, 100, 140, "armazem", 3, adicionalY=-28)
         self.construir_objeto(spritesArmazem.sprite_barril, 100, 176, "armazem", 3, adicionalY=-28)
         self.construir_objeto(spritesArmazem.sprite_parede_vh, 384, 400, "armazem", 15)
-        self.construir_objeto(spritesArmazem.sprite_bau, 600, 426, "armazem", adicionalY=-28)
+        self.construir_objeto(spritesArmazem.sprite_bau, 600, 426, "armazem", adicionalY=-28, identificacao="bau")
         self.construir_objeto(spritesArmazem.parede_sprite_vh, 0, 574, "armazem", 35)
         self.construir_objeto(spritesArmazem.sprite_porta, 375, 28, "armazem", 1, identificacao="porta_armazem", adicionalY=-30)
         
@@ -82,6 +85,15 @@ class Armazem(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "cozinha"
+            if colisao.distancia(jogador, 625, 453) < 30 and self.delay <= 0 and not item.possui_ferramenta_sala:
+                item.possui_ferramenta_sala = True
+                colisao.destruir_objeto("bau")
+                colisao.construir_objeto(spritesArmazem.sprite_bau_si, 600, 426, "armazem", adicionalY=-28)
+                som.pegar_item.play()
+                glob.tela.fill((glob.preto))
+                glob.tela.blit(spritesArmazem.pegou_ferramenta1, spritesArmazem.pegou_ferramenta1.get_rect(center=glob.tela.get_rect().center))
+                pygame.display.flip()
+                sleep(2)
 
     def desenhar_objetos_externos(self):
         jogadorGroup.draw(glob.tela)

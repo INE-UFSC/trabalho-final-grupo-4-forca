@@ -7,7 +7,7 @@ from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import itens
 from prototipo import som
 from prototipo.hud import hud
-
+from time import sleep
 
 class SpritesOficina(SpritesCena):
     def __init__(self):
@@ -19,6 +19,9 @@ class SpritesOficina(SpritesCena):
         self.sprite_parede_vh = self.load_image("../Assets/Sprites/cenario/parede_verticalh.png")
         self.sprite_bau = self.load_image("../Assets/Sprites/cenario/bau.png", True)
         self.sprite_boneco = self.load_image("../Assets/Sprites/cenario/boneco.png", True)
+        self.pegou_ferramenta2 = self.load_image("../Assets/Sprites/hud/pegou_ferramenta2.png", True)
+        self.sprite_bau_si = self.load_image("../Assets/Sprites/cenario/bau_sem_item.png", True)
+
 spritesOficina = SpritesOficina()
 
 class ColisaoOficina(Colisao):
@@ -35,7 +38,7 @@ class ColisaoOficina(Colisao):
         self.construir_objeto(spritesOficina.sprite_caixa, 680, 240, "oficina")
         self.construir_objeto(spritesOficina.sprite_caixa, 450, 120, "oficina")
         self.construir_objeto(spritesOficina.sprite_parede_vh, 384, 400, "oficina", 15)
-        self.construir_objeto(spritesOficina.sprite_bau, 600, 426, "oficina")
+        self.construir_objeto(spritesOficina.sprite_bau, 600, 426, "oficina", adicionalY=-28, identificacao="bau")
         self.construir_objeto(spritesOficina.sprite_mesa_grande, 120, 200, "oficina")
         self.construir_objeto(spritesOficina.sprite_machado, 140, 220, "oficina")
         self.construir_objeto(spritesOficina.sprite_martelo, 180, 220, "oficina")
@@ -77,12 +80,20 @@ class Oficina(Cena):
                 self.iniciou = False
                 som.porta_som.play()
                 return "sala"
+            if colisao.distancia(jogador, 625, 453) < 30 and self.delay <= 0 and not item.possui_ferramenta_cozinha:
+                item.possui_ferramenta_cozinha = True
+                colisao.destruir_objeto("bau")
+                colisao.construir_objeto(spritesOficina.sprite_bau_si, 600, 426, "oficina", adicionalY=-28)
+                som.pegar_item.play()
+                glob.tela.fill((glob.preto))
+                glob.tela.blit(spritesOficina.pegou_ferramenta2, spritesOficina.pegou_ferramenta2.get_rect(center=glob.tela.get_rect().center))
+                pygame.display.flip()
+                sleep(2)
         
     def desenhar_objetos_externos(self):
         jogadorGroup.draw(glob.tela)
         glob.tela.blit(spritesOficina.sprite_iluminacao, (jogador.rect.center[0] - 1200, jogador.rect.center[1] - 900))
-        hud.desenhar_hud(jogador.stamina, jogador.vida, jogador.rect.center[0] - 30, jogador.rect.top - 30,
-                         self.mostrarVida)
+        hud.desenhar_hud(jogador.stamina, jogador.vida, jogador.rect.center[0] - 30, jogador.rect.top - 30, self.mostrarVida)
         jogadorGroup.update()
 
 
