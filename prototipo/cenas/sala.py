@@ -7,13 +7,15 @@ from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import som
 from prototipo.hud import hud
 from time import sleep
+from prototipo.itens import item
 
 
 class SpritesSala(SpritesCena):
     def __init__(self):
         super().__init__()
         self.televisao_sprite = self.load_image("../Assets/Sprites/cenario/television.png", True)
-        self.NPFerramenta = self.load_image("../Assets/Sprites/cenario/NPFerramenta.png", True)
+        self.NPFerramenta = self.load_image("../Assets/Sprites/hud/NPFerramenta.png", True)
+        self.pegou_cobre = self.load_image("../Assets/Sprites/hud/pegou_cobre.png", True)
         self.porta_corredor = self.load_image("../Assets/Sprites/cenario/porta_metal.png", True)
         self.NPCodigo = self.load_image("../Assets/Sprites/hud/NPCodigo.png", True)
 
@@ -27,7 +29,6 @@ class ColisaoSala(Colisao):
 
     def construir_cenario(self):
         self.construir_objeto(spritesSala.parede_sprite_h, 0, 0, "sala", 5, adicionalY=-30) # Parede cima
-
         self.construir_objeto(spritesSala.parede_sprite_v, 774, 26, "sala", 8, "vertical")  # Parede direita 1.
         self.construir_objeto(spritesSala.parede_sprite_v, 774, 300, "sala", 12, "vertical")  # Parede direita 2.
         self.construir_objeto(spritesSala.parede_sprite_v, 0, 1, "sala", 24, "vertical")  # Parede esquerda.
@@ -41,8 +42,6 @@ colisao = ColisaoSala()
 
 
 class Sala(Cena):
-    possui_ferramenta_sala = False
-    possui_codigo = True
 
     def __init__(self):
         super().__init__()
@@ -86,11 +85,15 @@ class Sala(Cena):
                 return "oficina"
 
             # interagir televisao
-            if colisao.distancia(jogador, 270, 92) < 50 and self.delay <= 0:
-                if Sala.possui_ferramenta_sala:
-                    pass # inserir fio de cobre no inventario se possuir ferramenta.
+            if colisao.distancia(jogador, 270, 92) < 50 and self.delay <= 0 and not item.cobre3:
+                if item.possui_ferramenta_sala:
+                    item.cobre3 = True
                     for e in som.sons:  e.set_volume(glob.volume_efeitos)
                     som.pegar_item.play()
+                    glob.tela.fill((glob.preto))
+                    glob.tela.blit(spritesSala.pegou_cobre, spritesSala.pegou_cobre.get_rect(center=glob.tela.get_rect().center))
+                    pygame.display.flip()
+                    sleep(2)
                 else:
                     glob.tela.fill((glob.preto))
                     glob.tela.blit(spritesSala.NPFerramenta, spritesSala.NPFerramenta.get_rect(center = glob.tela.get_rect().center))
@@ -99,7 +102,7 @@ class Sala(Cena):
 
             # porta corredor
             if colisao.distancia(jogador, 455, 80) < 50 and self.delay <= 0:
-                if Sala.possui_codigo:
+                if item.possui_codigo:
                     self.iniciou = False
                     for e in som.sons:  e.set_volume(glob.volume_efeitos)
                     som.porta_som.play()

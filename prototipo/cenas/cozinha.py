@@ -47,7 +47,7 @@ class ColisaoCozinha(Colisao):
         self.construir_objeto(spritesCozinha.sprite_cadeira_esquerda, 280, 250, "cozinha", 1, identificacao = "cadeiraesquerda")
         self.construir_objeto(spritesCozinha.sprite_cadeira_cima, 440, 250, "cozinha", 1, identificacao = "cadeiradireita")
         self.construir_objeto(spritesCozinha.sprite_mesa, 320, 250, "cozinha", 1, identificacao = "mesa")
-        self.construir_objeto(spritesCozinha.sprite_geladeira, 60,40, "cozinha", 1, identificacao = "geladeira")
+        self.construir_objeto(spritesCozinha.sprite_geladeira, 60,40, "cozinha", 1, identificacao = "geladeira", adicionalY=-28)
         self.construir_objeto(spritesCozinha.sprite_forno, 250, 100, "cozinha", 3, identificacao = "forno", adicionalY=-20)
         self.construir_objeto(spritesCozinha.sprite_pia, 495, 100, "cozinha", identificacao = "pia", adicionalY=-20)
         self.construir_objeto(spritesCozinha.sprite_prato, 510, 105, "cozinha")

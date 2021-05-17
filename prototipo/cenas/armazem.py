@@ -30,7 +30,7 @@ class ColisaoArmazem(Colisao):
         super().__init__()
     
     def construir_cenario(self):
-        self.construir_objeto(spritesArmazem.sprite_mesa, 26, 220, "armazem")
+        self.construir_objeto(spritesArmazem.sprite_mesa, 26, 220, "armazem", adicionalY=-28)
         self.construir_objeto(spritesArmazem.parede_sprite_h, 0, 0, "armazem", 5, adicionalY=-30)
         self.construir_objeto(spritesArmazem.parede_sprite_v, 0, 1, "armazem", 24, orientacao = "vertical")
         self.construir_objeto(spritesArmazem.parede_sprite_v, 774, 1, "armazem", 24, orientacao = "vertical")
@@ -41,10 +41,10 @@ class ColisaoArmazem(Colisao):
         self.construir_objeto(spritesArmazem.sprite_machado, 30, 250, "armazem")
         self.construir_objeto(spritesArmazem.sprite_martelo, 30, 290, "armazem")
         self.construir_objeto(spritesArmazem.sprite_vassoura, 60, 20, "armazem", 3)
-        self.construir_objeto(spritesArmazem.sprite_barril, 100, 140, "armazem", 3)
-        self.construir_objeto(spritesArmazem.sprite_barril, 100, 176, "armazem", 3)
+        self.construir_objeto(spritesArmazem.sprite_barril, 100, 140, "armazem", 3, adicionalY=-28)
+        self.construir_objeto(spritesArmazem.sprite_barril, 100, 176, "armazem", 3, adicionalY=-28)
         self.construir_objeto(spritesArmazem.sprite_parede_vh, 384, 400, "armazem", 15)
-        self.construir_objeto(spritesArmazem.sprite_bau, 600, 426, "armazem")
+        self.construir_objeto(spritesArmazem.sprite_bau, 600, 426, "armazem", adicionalY=-28)
         self.construir_objeto(spritesArmazem.parede_sprite_vh, 0, 574, "armazem", 35)
         self.construir_objeto(spritesArmazem.sprite_porta, 375, 28, "armazem", 1, identificacao="porta_armazem", adicionalY=-30)
         

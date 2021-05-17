@@ -7,13 +7,18 @@ from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import som
 import pygame
 from prototipo.hud import hud
+from time import sleep
 
 
 class SpritesPorao(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
         self.sprite_mesa = pygame.transform.scale(self.sprite_mesa, (90, 70))
-
+        self.sprite_bau = self.load_image("../Assets/Sprites/cenario/bau.png", True)
+        self.sprite_bau_si = self.load_image("../Assets/Sprites/cenario/bau_sem_item.png", True)
+        self.sprite_chave = self.load_image("../Assets/Sprites/cenario/chave.png", True)
+        self.pegou_chave = self.load_image("../Assets/Sprites/hud/pegou_chave.png", True)
+        self.pegou_cobre = self.load_image("../Assets/Sprites/hud/pegou_cobre.png", True)
 
 spritesPorao = SpritesPorao()
 
@@ -40,7 +45,10 @@ class ColisaoPorao(Colisao):  # Classe responsável por construir os objetos do 
         self.construir_objeto(spritesPorao.parede_sprite_vh, 0, 394, "porao", 28, "horizontal", 26, "lab11")
         self.construir_objeto(spritesPorao.parede_sprite_v, 728, 394, "porao", 4, "vertical", 26, "lab12")
         self.construir_objeto(spritesPorao.parede_sprite_vh, 208, 472, "porao", 20, "horizontal", 26, "lab13")
-        self.construir_objeto(spritesPorao.sprite_mesa, 30, 425, "porao")
+        self.construir_objeto(spritesPorao.sprite_mesa, 30, 425, "porao", adicionalY=-40)
+        self.construir_objeto(spritesPorao.sprite_bau_si, 403, 92, "porao", adicionalY=-28)
+        self.construir_objeto(spritesPorao.sprite_bau, 403, 92, "porao", adicionalY=-28, identificacao="bau")
+        self.construir_objeto(spritesPorao.sprite_chave, 65, 429, "porao", identificacao="chave")
         self.construir_objeto(spritesPorao.parede_sprite_vh, 104, 574, "porao", 30)
 
 
@@ -77,6 +85,22 @@ class Porao(Cena):  # Primeira parte do porão.
                 self.iniciou = False
                 som.passos.play()
                 return "saguao"
+            if colisao.distancia(jogador, 80, 454) < 50 and self.delay <= 0 and not item.possui_chave_cozinha:
+                item.possui_chave_cozinha = True
+                colisao.destruir_objeto("chave")
+                som.pegar_item.play()
+                glob.tela.fill((glob.preto))
+                glob.tela.blit(spritesPorao.pegou_chave, spritesPorao.pegou_chave.get_rect(center=glob.tela.get_rect().center))
+                pygame.display.flip()
+                sleep(2)
+            if colisao.distancia(jogador, 430, 103) < 30 and self.delay <= 0 and not item.cobre1:
+                item.cobre1 = True
+                colisao.destruir_objeto("bau")
+                som.pegar_item.play()
+                glob.tela.fill((glob.preto))
+                glob.tela.blit(spritesPorao.pegou_cobre, spritesPorao.pegou_cobre.get_rect(center=glob.tela.get_rect().center))
+                pygame.display.flip()
+                sleep(2)
 
     def desenhar_objetos_externos(self):
         jogadorGroup.draw(glob.tela)

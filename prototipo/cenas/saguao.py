@@ -7,6 +7,7 @@ from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import itens
 from prototipo import som
 from prototipo.hud import hud
+from time import sleep
 
 
 class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
@@ -16,7 +17,7 @@ class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
         self.vela_sprite = self.load_image("../Assets/Sprites/cenario/vela.png", True)
         self.porao_sprite = self.load_image("../Assets/Sprites/cenario/porta_porao.png")
         self.porta_sala = self.load_image("../Assets/Sprites/cenario/porta_sala.png", True)
-
+        self.NPChave = self.load_image("../Assets/Sprites/hud/NPChave.png", True)
 
 spritesSaguao = SpritesSaguao()
 
@@ -120,9 +121,15 @@ class Saguao(Cena):
                 return "porao"
             # Entrar na cozinha
             elif colisao.distancia(jogador, 0, 280) < 50 and self.delay <= 0:
-                self.iniciou = False
-                som.porta_som.play()
-                return "cozinha"
+                if item.possui_chave_cozinha:
+                    self.iniciou = False
+                    som.porta_som.play()
+                    return "cozinha"
+                else:
+                    glob.tela.fill((glob.preto))
+                    glob.tela.blit(spritesSaguao.NPChave, spritesSaguao.NPChave.get_rect(center=glob.tela.get_rect().center))
+                    pygame.display.flip()
+                    sleep(2)
 
     def desenhar_objetos_externos(self):
         draw_groups()
