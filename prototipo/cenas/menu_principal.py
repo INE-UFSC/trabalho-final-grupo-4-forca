@@ -3,6 +3,8 @@ from prototipo.menu import *
 from pathlib import Path
 from prototipo.variaveisGlobais import glob
 from prototipo import som
+from prototipo.personagens import *
+from prototipo import itens
 from configparser import ConfigParser
 config = ConfigParser()
 

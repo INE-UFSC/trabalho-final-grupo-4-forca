@@ -1,11 +1,11 @@
 from prototipo.cenas.cena import Cena
-from prototipo.personagens import *
-from prototipo.controladorInimigo import *
+from prototipo.variaveisGlobais import glob
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
+from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
-from prototipo import itens
 from prototipo import som
+import pygame
 from prototipo.hud import hud
 from time import sleep
 
@@ -82,6 +82,7 @@ class Oficina(Cena):
                 return "sala"
             if colisao.distancia(jogador, 625, 453) < 30 and self.delay <= 0 and not item.possui_ferramenta_cozinha:
                 item.possui_ferramenta_cozinha = True
+                jogador.adiciona_item(itens.ferramenta2)
                 colisao.destruir_objeto("bau")
                 colisao.construir_objeto(spritesOficina.sprite_bau_si, 600, 426, "oficina", adicionalY=-28)
                 som.pegar_item.play()

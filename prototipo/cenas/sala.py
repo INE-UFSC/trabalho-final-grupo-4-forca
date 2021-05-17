@@ -5,9 +5,9 @@ from prototipo.cenas.sprites import SpritesCena
 from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import som
+import pygame
 from prototipo.hud import hud
 from time import sleep
-from prototipo.itens import item
 
 
 class SpritesSala(SpritesCena):
@@ -54,6 +54,8 @@ class Sala(Cena):
             jogador.rect.topleft = (200, 545)
         elif glob.cenaAtual == "corredor":
             jogador.rect.topleft = (460, 100)
+        elif glob.cenaAtual == "oficina":
+            jogador.rect.topleft = (750, 250)
         glob.cenaAtual = "sala"
 
         self.delay = 10
@@ -88,6 +90,7 @@ class Sala(Cena):
             if colisao.distancia(jogador, 270, 92) < 50 and self.delay <= 0 and not item.cobre3:
                 if item.possui_ferramenta_sala:
                     item.cobre3 = True
+                    jogador.adiciona_item(itens.cobre)
                     som.pegar_item.play()
                     glob.tela.fill((glob.preto))
                     glob.tela.blit(spritesSala.pegou_cobre, spritesSala.pegou_cobre.get_rect(center=glob.tela.get_rect().center))

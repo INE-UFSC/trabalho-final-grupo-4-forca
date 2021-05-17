@@ -1,14 +1,13 @@
 from prototipo.cenas.cena import Cena
-from prototipo.personagens import *
-from prototipo.controladorInimigo import *
+from prototipo.variaveisGlobais import glob
 from prototipo.cenas.colisao import Colisao
 from prototipo.cenas.sprites import SpritesCena
+from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
-from time import sleep
-from prototipo import itens
 from prototipo import som
-
+import pygame
 from prototipo.hud import hud
+from time import sleep
 
 
 class SpritesArmazem(SpritesCena):
@@ -87,6 +86,7 @@ class Armazem(Cena):
                 return "cozinha"
             if colisao.distancia(jogador, 625, 453) < 30 and self.delay <= 0 and not item.possui_ferramenta_sala:
                 item.possui_ferramenta_sala = True
+                jogador.adiciona_item(itens.ferramenta1)
                 colisao.destruir_objeto("bau")
                 colisao.construir_objeto(spritesArmazem.sprite_bau_si, 600, 426, "armazem", adicionalY=-28)
                 som.pegar_item.play()

@@ -195,6 +195,8 @@ class Cozinha(Cena):
                 if item.possui_ferramenta_cozinha:
                     item.cobre2 = True
                     item.possui_codigo = True
+                    jogador.adiciona_item(itens.cobre)
+                    jogador.adiciona_item(itens.codigo)
                     som.pegar_item.play()
                     glob.tela.fill((glob.preto))
                     glob.tela.blit(spritesCozinha.pegou_cobre, spritesCozinha.pegou_cobre.get_rect(center=glob.tela.get_rect().center))

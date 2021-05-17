@@ -87,6 +87,7 @@ class Porao(Cena):  # Primeira parte do porão.
                 return "saguao"
             if colisao.distancia(jogador, 80, 454) < 50 and self.delay <= 0 and not item.possui_chave_cozinha:
                 item.possui_chave_cozinha = True
+                jogador.adiciona_item(itens.chave)
                 colisao.destruir_objeto("chave")
                 som.pegar_item.play()
                 glob.tela.fill((glob.preto))
@@ -95,6 +96,7 @@ class Porao(Cena):  # Primeira parte do porão.
                 sleep(2)
             if colisao.distancia(jogador, 430, 103) < 30 and self.delay <= 0 and not item.cobre1:
                 item.cobre1 = True
+                jogador.adiciona_item(itens.cobre)
                 colisao.destruir_objeto("bau")
                 som.pegar_item.play()
                 glob.tela.fill((glob.preto))
