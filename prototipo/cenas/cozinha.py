@@ -70,6 +70,7 @@ class Cozinha(Cena):
 
     def __init__(self):
         super().__init__()
+        self.temMonstro = False
         self.cenaJogavel = True
         colisao.construir_cenario()
         self.puzzle = ["esquerda", "cima", "cima"]

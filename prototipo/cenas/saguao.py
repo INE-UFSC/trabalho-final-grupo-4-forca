@@ -26,7 +26,7 @@ class ColisaoSaguao(Colisao):  # Classe responsável por construir os objetos do
 
     def __init__(self):
         super().__init__()
-        self.temMonstro = False
+        self.temMonstro = True
 
     def construir_cenario(self):
         self.construir_objeto(spritesSaguao.parede_sprite_h, 0, 0, "saguao", 5, adicionalY=-30)  # Parede horizontal superior

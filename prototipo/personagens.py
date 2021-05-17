@@ -48,8 +48,8 @@ class Jogador(Personagem):
         self.vida = 3
         self.stamina = 100
         self.inventario = [None] * 20
-        self.inventario[19] = itens.pocao_vida #adiciona pocaovida no inventario
-        self.inventario[20] = itens.pocao_stamina  # adiciona pocaovida no inventario
+        self.inventario[18] = itens.pocao_vida #adiciona pocaovida no inventario
+        self.inventario[19] = itens.pocao_stamina  # adiciona pocaovida no inventario
 
 
     def move(self, direcao, direcaoHorizontal, direcaoVertical, colisoes):

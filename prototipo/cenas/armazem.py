@@ -46,7 +46,9 @@ class ColisaoArmazem(Colisao):
         self.construir_objeto(spritesArmazem.sprite_barril, 100, 140, "armazem", 3, adicionalY=-28)
         self.construir_objeto(spritesArmazem.sprite_barril, 100, 176, "armazem", 3, adicionalY=-28)
         self.construir_objeto(spritesArmazem.sprite_parede_vh, 384, 400, "armazem", 15)
-        self.construir_objeto(spritesArmazem.sprite_bau, 600, 426, "armazem", adicionalY=-28, identificacao="bau")
+        self.construir_objeto(spritesArmazem.sprite_bau_si, 600, 426, "armazem", adicionalY=-28)
+        if not item.possui_ferramenta_sala:
+            self.construir_objeto(spritesArmazem.sprite_bau, 600, 426, "armazem", adicionalY=-28, identificacao="bau")
         self.construir_objeto(spritesArmazem.parede_sprite_vh, 0, 574, "armazem", 35)
         self.construir_objeto(spritesArmazem.sprite_porta, 375, 28, "armazem", 1, identificacao="porta_armazem", adicionalY=-30)
         
@@ -88,7 +90,6 @@ class Armazem(Cena):
                 item.possui_ferramenta_sala = True
                 jogador.adiciona_item(itens.ferramenta1)
                 colisao.destruir_objeto("bau")
-                colisao.construir_objeto(spritesArmazem.sprite_bau_si, 600, 426, "armazem", adicionalY=-28)
                 som.pegar_item.play()
                 glob.tela.fill((glob.preto))
                 glob.tela.blit(spritesArmazem.pegou_ferramenta1, spritesArmazem.pegou_ferramenta1.get_rect(center=glob.tela.get_rect().center))

@@ -47,8 +47,10 @@ class ColisaoPorao(Colisao):  # Classe responsável por construir os objetos do 
         self.construir_objeto(spritesPorao.parede_sprite_vh, 208, 472, "porao", 20, "horizontal", 26, "lab13")
         self.construir_objeto(spritesPorao.sprite_mesa, 30, 425, "porao", adicionalY=-40)
         self.construir_objeto(spritesPorao.sprite_bau_si, 403, 92, "porao", adicionalY=-28)
-        self.construir_objeto(spritesPorao.sprite_bau, 403, 92, "porao", adicionalY=-28, identificacao="bau")
-        self.construir_objeto(spritesPorao.sprite_chave, 65, 429, "porao", identificacao="chave")
+        if not item.cobre1:
+            self.construir_objeto(spritesPorao.sprite_bau, 403, 92, "porao", adicionalY=-28, identificacao="bau")
+        if not item.possui_chave_cozinha:
+            self.construir_objeto(spritesPorao.sprite_chave, 65, 429, "porao", identificacao="chave")
         self.construir_objeto(spritesPorao.parede_sprite_vh, 104, 574, "porao", 30)
 
 

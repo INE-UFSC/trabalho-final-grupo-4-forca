@@ -38,7 +38,9 @@ class ColisaoOficina(Colisao):
         self.construir_objeto(spritesOficina.sprite_caixa, 680, 240, "oficina")
         self.construir_objeto(spritesOficina.sprite_caixa, 450, 120, "oficina")
         self.construir_objeto(spritesOficina.sprite_parede_vh, 384, 400, "oficina", 15)
-        self.construir_objeto(spritesOficina.sprite_bau, 600, 426, "oficina", adicionalY=-28, identificacao="bau")
+        self.construir_objeto(spritesOficina.sprite_bau_si, 600, 426, "oficina", adicionalY=-28)
+        if not item.possui_ferramenta_cozinha:
+            self.construir_objeto(spritesOficina.sprite_bau, 600, 426, "oficina", adicionalY=-28, identificacao="bau")
         self.construir_objeto(spritesOficina.sprite_mesa_grande, 120, 200, "oficina")
         self.construir_objeto(spritesOficina.sprite_machado, 140, 220, "oficina")
         self.construir_objeto(spritesOficina.sprite_martelo, 180, 220, "oficina")
@@ -84,7 +86,6 @@ class Oficina(Cena):
                 item.possui_ferramenta_cozinha = True
                 jogador.adiciona_item(itens.ferramenta2)
                 colisao.destruir_objeto("bau")
-                colisao.construir_objeto(spritesOficina.sprite_bau_si, 600, 426, "oficina", adicionalY=-28)
                 som.pegar_item.play()
                 glob.tela.fill((glob.preto))
                 glob.tela.blit(spritesOficina.pegou_ferramenta2, spritesOficina.pegou_ferramenta2.get_rect(center=glob.tela.get_rect().center))
