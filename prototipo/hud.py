@@ -6,11 +6,11 @@ class HUD(SpritesCena):
 
     def __init__(self):
         super().__init__()
-        self.barraStamina = [self.load_image("../Assets/Sprites/hud/stamina0.png", True), self.load_image("../Assets/Sprites/hud/stamina1.png", True),
-                             self.load_image("../Assets/Sprites/hud/stamina2.png", True), self.load_image("../Assets/Sprites/hud/stamina3.png", True),
-                             self.load_image("../Assets/Sprites/hud/stamina4.png", True), self.load_image("../Assets/Sprites/hud/staminaCheia.png", True)]
-        self.barraVida = [self.load_image("../Assets/Sprites/hud/vida0.png", True), self.load_image("../Assets/Sprites/hud/vida1.png", True),
-                          self.load_image("../Assets/Sprites/hud/vida2.png", True), self.load_image("../Assets/Sprites/hud/vidaCheia.png", True)]
+        self.barraStamina = [self.load_image("Assets/Sprites/hud/stamina0.png", True), self.load_image("Assets/Sprites/hud/stamina1.png", True),
+                             self.load_image("Assets/Sprites/hud/stamina2.png", True), self.load_image("Assets/Sprites/hud/stamina3.png", True),
+                             self.load_image("Assets/Sprites/hud/stamina4.png", True), self.load_image("Assets/Sprites/hud/staminaCheia.png", True)]
+        self.barraVida = [self.load_image("Assets/Sprites/hud/vida0.png", True), self.load_image("Assets/Sprites/hud/vida1.png", True),
+                          self.load_image("Assets/Sprites/hud/vida2.png", True), self.load_image("Assets/Sprites/hud/vidaCheia.png", True)]
         self.delay_vida = 0
 
     def desenhar_hud(self, stamina: int, vida: int, vida_x: float, vida_y: float, mostrar_vida: bool):

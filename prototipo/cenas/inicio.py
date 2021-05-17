@@ -10,7 +10,7 @@ from prototipo import som
 class SpritesInicio(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
-        self.parede_invisivel = pygame.image.load("../Assets/Sprites/cenario/parede_invisivel.png")
+        self.parede_invisivel = pygame.image.load("Assets/Sprites/cenario/parede_invisivel.png")
 
 spritesInicio = SpritesInicio()
 

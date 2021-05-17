@@ -1,6 +1,6 @@
 #from personagens import inimigo
 from abc import ABC, abstractmethod
-from personagens import *
+from prototipo.personagens import *
 import math
 from prototipo import som
 

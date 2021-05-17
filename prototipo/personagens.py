@@ -1,7 +1,7 @@
 import pygame
-import itens
-from itens import item
-from variaveisGlobais import glob
+from prototipo import itens
+from prototipo.itens import item
+from prototipo.variaveisGlobais import glob
 
 
 class Personagem(pygame.sprite.Sprite):
@@ -30,16 +30,16 @@ class Jogador(Personagem):
     def __init__(self, largura, altura, *groups):
         super().__init__(largura, altura, *groups)
 
-        self.imagesIdle[0] = pygame.image.load("../Assets/Sprites/jogador/playerIdle0.png")
-        self.imagesIdle[1] = pygame.image.load("../Assets/Sprites/jogador/playerIdle1.png")
-        self.imagesIdle[2] = pygame.image.load("../Assets/Sprites/jogador/playerIdle2.png")
-        self.imagesIdle[3] = pygame.image.load("../Assets/Sprites/jogador/playerIdle3.png")
-        self.imagesIdle[4] = pygame.image.load("../Assets/Sprites/jogador/playerIdle0.png")
-        self.imagesRun[0] = pygame.image.load("../Assets/Sprites/jogador/playerRun0.png")
-        self.imagesRun[1] = pygame.image.load("../Assets/Sprites/jogador/playerRun1.png")
-        self.imagesRun[2] = pygame.image.load("../Assets/Sprites/jogador/playerRun2.png")
-        self.imagesRun[3] = pygame.image.load("../Assets/Sprites/jogador/playerRun3.png")
-        self.imagesRun[4] = pygame.image.load("../Assets/Sprites/jogador/playerRun2.png")
+        self.imagesIdle[0] = pygame.image.load("Assets/Sprites/jogador/playerIdle0.png")
+        self.imagesIdle[1] = pygame.image.load("Assets/Sprites/jogador/playerIdle1.png")
+        self.imagesIdle[2] = pygame.image.load("Assets/Sprites/jogador/playerIdle2.png")
+        self.imagesIdle[3] = pygame.image.load("Assets/Sprites/jogador/playerIdle3.png")
+        self.imagesIdle[4] = pygame.image.load("Assets/Sprites/jogador/playerIdle0.png")
+        self.imagesRun[0] = pygame.image.load("Assets/Sprites/jogador/playerRun0.png")
+        self.imagesRun[1] = pygame.image.load("Assets/Sprites/jogador/playerRun1.png")
+        self.imagesRun[2] = pygame.image.load("Assets/Sprites/jogador/playerRun2.png")
+        self.imagesRun[3] = pygame.image.load("Assets/Sprites/jogador/playerRun3.png")
+        self.imagesRun[4] = pygame.image.load("Assets/Sprites/jogador/playerRun2.png")
 
         self.image = pygame.transform.scale(self.imagesIdle[self.imageIndex], [self.largura, self.altura])
         self.surf.blit(self.image, self.coordant)
@@ -131,11 +131,11 @@ class Inimigo(Personagem):
     def __init__(self, largura, altura, *groups):
         super().__init__(largura, altura, *groups)
 
-        self.imagesRun[0] = pygame.image.load("../Assets/Sprites/monstro/monsterRun0.png")
-        self.imagesRun[1] = pygame.image.load("../Assets/Sprites/monstro/monsterRun1.png")
-        self.imagesRun[2] = pygame.image.load("../Assets/Sprites/monstro/monsterRun2.png")
-        self.imagesRun[3] = pygame.image.load("../Assets/Sprites/monstro/monsterRun3.png")
-        self.imagesRun[4] = pygame.image.load("../Assets/Sprites/monstro/monsterRun0.png")
+        self.imagesRun[0] = pygame.image.load("Assets/Sprites/monstro/monsterRun0.png")
+        self.imagesRun[1] = pygame.image.load("Assets/Sprites/monstro/monsterRun1.png")
+        self.imagesRun[2] = pygame.image.load("Assets/Sprites/monstro/monsterRun2.png")
+        self.imagesRun[3] = pygame.image.load("Assets/Sprites/monstro/monsterRun3.png")
+        self.imagesRun[4] = pygame.image.load("Assets/Sprites/monstro/monsterRun0.png")
 
         self.image = pygame.transform.scale(self.imagesRun[self.imageIndex], [largura, altura])
         self.surf.blit(self.image, self.coordant)

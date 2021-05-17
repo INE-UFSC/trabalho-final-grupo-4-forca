@@ -14,11 +14,11 @@ class SpritesPorao(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
         self.sprite_mesa = pygame.transform.scale(self.sprite_mesa, (90, 70))
-        self.sprite_bau = self.load_image("../Assets/Sprites/cenario/bau.png", True)
-        self.sprite_bau_si = self.load_image("../Assets/Sprites/cenario/bau_sem_item.png", True)
-        self.sprite_chave = self.load_image("../Assets/Sprites/cenario/chave.png", True)
-        self.pegou_chave = self.load_image("../Assets/Sprites/hud/pegou_chave.png", True)
-        self.pegou_cobre = self.load_image("../Assets/Sprites/hud/pegou_cobre.png", True)
+        self.sprite_bau = self.load_image("Assets/Sprites/cenario/bau.png", True)
+        self.sprite_bau_si = self.load_image("Assets/Sprites/cenario/bau_sem_item.png", True)
+        self.sprite_chave = self.load_image("Assets/Sprites/cenario/chave.png", True)
+        self.pegou_chave = self.load_image("Assets/Sprites/hud/pegou_chave.png", True)
+        self.pegou_cobre = self.load_image("Assets/Sprites/hud/pegou_cobre.png", True)
 
 spritesPorao = SpritesPorao()
 

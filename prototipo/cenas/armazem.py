@@ -13,17 +13,17 @@ from time import sleep
 class SpritesArmazem(SpritesCena):
     def __init__(self):
         super().__init__()
-        self.sprite_caixa = self.load_image("../Assets/Sprites/cenario/caixas.png", True)
-        self.sprite_machado = self.load_image("../Assets/Sprites/cenario/machado.png", True)
-        self.sprite_martelo = self.load_image("../Assets/Sprites/cenario/martelo.png", True)
-        self.sprite_vassoura = self.load_image("../Assets/Sprites/cenario/vassoura.png", True)
-        self.sprite_barril = self.load_image("../Assets/Sprites/cenario/barril.png", True)
-        self.sprite_mesa = self.load_image("../Assets/Sprites/cenario/mesa_trabalho.png", True)
-        self.sprite_parede_vh = self.load_image("../Assets/Sprites/cenario/parede_verticalh.png")
-        self.sprite_bau = self.load_image("../Assets/Sprites/cenario/bau.png", True)
-        self.sprite_porta = self.load_image("../Assets/Sprites/cenario/porta_sala.png", True)
-        self.pegou_ferramenta1 = self.load_image("../Assets/Sprites/hud/pegou_ferramenta1.png", True)
-        self.sprite_bau_si = self.load_image("../Assets/Sprites/cenario/bau_sem_item.png", True)
+        self.sprite_caixa = self.load_image("Assets/Sprites/cenario/caixas.png", True)
+        self.sprite_machado = self.load_image("Assets/Sprites/cenario/machado.png", True)
+        self.sprite_martelo = self.load_image("Assets/Sprites/cenario/martelo.png", True)
+        self.sprite_vassoura = self.load_image("Assets/Sprites/cenario/vassoura.png", True)
+        self.sprite_barril = self.load_image("Assets/Sprites/cenario/barril.png", True)
+        self.sprite_mesa = self.load_image("Assets/Sprites/cenario/mesa_trabalho.png", True)
+        self.sprite_parede_vh = self.load_image("Assets/Sprites/cenario/parede_verticalh.png")
+        self.sprite_bau = self.load_image("Assets/Sprites/cenario/bau.png", True)
+        self.sprite_porta = self.load_image("Assets/Sprites/cenario/porta_sala.png", True)
+        self.pegou_ferramenta1 = self.load_image("Assets/Sprites/hud/pegou_ferramenta1.png", True)
+        self.sprite_bau_si = self.load_image("Assets/Sprites/cenario/bau_sem_item.png", True)
 
 spritesArmazem = SpritesArmazem()
 

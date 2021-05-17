@@ -13,11 +13,11 @@ from time import sleep
 class SpritesSala(SpritesCena):
     def __init__(self):
         super().__init__()
-        self.televisao_sprite = self.load_image("../Assets/Sprites/cenario/television.png", True)
-        self.NPFerramenta = self.load_image("../Assets/Sprites/hud/NPFerramenta1.png", True)
-        self.pegou_cobre = self.load_image("../Assets/Sprites/hud/pegou_cobre.png", True)
-        self.porta_corredor = self.load_image("../Assets/Sprites/cenario/porta_metal.png", True)
-        self.NPCodigo = self.load_image("../Assets/Sprites/hud/NPCodigo.png", True)
+        self.televisao_sprite = self.load_image("Assets/Sprites/cenario/television.png", True)
+        self.NPFerramenta = self.load_image("Assets/Sprites/hud/NPFerramenta1.png", True)
+        self.pegou_cobre = self.load_image("Assets/Sprites/hud/pegou_cobre.png", True)
+        self.porta_corredor = self.load_image("Assets/Sprites/cenario/porta_metal.png", True)
+        self.NPCodigo = self.load_image("Assets/Sprites/hud/NPCodigo.png", True)
 
 
 spritesSala = SpritesSala()
