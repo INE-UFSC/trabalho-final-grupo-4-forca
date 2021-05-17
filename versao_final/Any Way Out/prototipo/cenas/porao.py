@@ -85,7 +85,7 @@ class Porao(Cena):  # Primeira parte do porão.
             self.delayMonstro -= 1
 
         #  Este trecho do código é repetido no saguão, porão e na oficina. Porém ainda não pensei num jeito de melhorar isso.
-        if colisao.distancia(jogador, inimigo.rect.center[0], inimigo.rect.center[1]) < 65 and self.delayMonstro <= 0 and inimigo.estado == "perseguindo":
+        if colisao.distancia(jogador, inimigo.rect.center[0], inimigo.rect.center[1]) < 65 and self.delayMonstro <= 0:
             if jogador.vida > 0:
                 jogador.vida -= 1
                 self.mostrarVida = True
