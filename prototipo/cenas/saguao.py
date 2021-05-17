@@ -19,6 +19,7 @@ class SpritesSaguao(SpritesCena):  # Classe que armazena os sprites da cena.
         self.porta_sala = self.load_image("../Assets/Sprites/cenario/porta_sala.png", True)
         self.NPChave = self.load_image("../Assets/Sprites/hud/NPChave.png", True)
 
+
 spritesSaguao = SpritesSaguao()
 
 
@@ -64,8 +65,12 @@ class Saguao(Cena):
             jogador.rect.topleft = (20, 300)
         elif glob.cenaAtual == "sala":
             jogador.rect.topleft = (122, 100)
+        elif glob.cenaAtual == "porao":
+            jogador.rect.topleft = (650, 95)
         glob.cenaAtual = "saguao"
 
+        inimigo.estado = "caminho"
+        inimigo.rect.topleft = (250, 250)
         self.delay = 10
         self.delayMonstro = 0
         self.iniciou = True
@@ -81,7 +86,8 @@ class Saguao(Cena):
         if self.delayMonstro > 0:
             self.delayMonstro -= 1
 
-        if colisao.distancia(jogador, inimigo.rect.center[0], inimigo.rect.center[1]) < 45 and self.delayMonstro <= 0:
+        #  Este trecho do código é repetido no saguão, porão e na oficina. Porém ainda não pensei num jeito de melhorar isso.
+        if colisao.distancia(jogador, inimigo.rect.center[0], inimigo.rect.center[1]) < 65 and self.delayMonstro <= 0:
             if jogador.vida > 0:
                 jogador.vida -= 1
                 self.mostrarVida = True
@@ -90,7 +96,6 @@ class Saguao(Cena):
                 return "fimMorte"
         else:
             self.mostrarVida = False
-
 
         if self.tecla == "p":
             colisao.destruir_objeto("portaCozinha")

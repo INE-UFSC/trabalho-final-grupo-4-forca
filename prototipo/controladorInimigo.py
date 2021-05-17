@@ -195,6 +195,10 @@ class ControladorInimigo(Controlador):
 
     
 controlador = ControladorInimigo(inimigo, jogador, [(250, 250), (250, 300), (250, 350), (250, 450), (250, 350), (250, 300) ], [[20, 20], 800, 600])
+controladorPorao = ControladorInimigo(inimigo, jogador, [(50, 50), (60, 60)], [[0, 0], 300, 200])
+controladorOficina = ControladorInimigo(inimigo, jogador, [(400, 300), (400, 200), (550, 350), (400, 200)], [[300, 150], 550, 350])
+
+
 '''
 se o caminho não for fechado ele deve ter a seguinte forma:
 sejam p1,p2,p3,p4,p5 os ponto pelos quais o inimigo deve passsar

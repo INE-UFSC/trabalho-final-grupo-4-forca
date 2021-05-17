@@ -14,7 +14,7 @@ class Colisao:
         self.ids = []  # Identificações dos objetos.
         self.cenas = []  # Cena na qual o objeto será construido.
 
-        self.temMonstro = True
+        self.temMonstro = False
         self.construir_cenario()
 
     def draw(self):
@@ -84,15 +84,15 @@ class Colisao:
                 colisoes_monstro.append(self.objeto_rect[i])
         return colisoes_monstro
 
-    def colisao_monstro(self, cena):
-        controlador.movimenta()
+    def colisao_monstro(self, cena, controladorMonstro=controlador):
+        controladorMonstro.movimenta()
         for retangulo in self.get_colisao_monstro(cena):
             if inimigo.rect.colliderect(retangulo):
                 inimigo.resgata_posicao()
             
         if inimigo.rect.colliderect(jogador.rect):
             inimigo.resgata_posicao()
-        controlador.movimenta()
+        controladorMonstro.movimenta()
         for retangulo in self.get_colisao_monstro(cena):
             if inimigo.rect.colliderect(retangulo):
                 inimigo.resgata_posicao()

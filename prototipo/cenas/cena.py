@@ -18,6 +18,8 @@ class Cena:
         self.iniciou = False
         self.delay = 10
         self.mostrarVida = False
+        self.jogadorMorreu = False
+        self.delayMonstro = 0
 
     def iniciar(self):
         pass
@@ -34,5 +36,6 @@ class Cena:
         hud.desenhar_hud(jogador.stamina, jogador.vida, jogador.rect.center[0] - 30, jogador.rect.top - 30,
                          self.mostrarVida)
         jogadorGroup.update()
+
 
 

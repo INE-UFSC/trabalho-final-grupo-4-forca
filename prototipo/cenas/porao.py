@@ -5,6 +5,7 @@ from prototipo.cenas.sprites import SpritesCena
 from prototipo.personagens import *
 from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import som
+from prototipo.controladorInimigo import *
 import pygame
 from prototipo.hud import hud
 from time import sleep
@@ -20,6 +21,7 @@ class SpritesPorao(SpritesCena):  # Classe que armazena os sprites da cena.
         self.pegou_chave = self.load_image("../Assets/Sprites/hud/pegou_chave.png", True)
         self.pegou_cobre = self.load_image("../Assets/Sprites/hud/pegou_cobre.png", True)
 
+
 spritesPorao = SpritesPorao()
 
 
@@ -27,10 +29,10 @@ class ColisaoPorao(Colisao):  # Classe responsável por construir os objetos do 
 
     def __init__(self):
         super().__init__()
-        self.temMonstro = False
+        self.temMonstro = True
 
     def construir_cenario(self):
-        self.construir_objeto(spritesPorao.parede_sprite_v, 150, 0, "porao", 4, "vertical", 26, "paredecobre1")
+        self.construir_objeto(spritesPorao.parede_sprite_v, 150, 0, "porao", 2, "vertical", 26, "paredecobre1")
         self.construir_objeto(spritesPorao.parede_sprite_v, 250, 0, "porao", 4, "vertical", 26, "paredecobre2")
         self.construir_objeto(spritesPorao.parede_sprite_vh, 0, 160, "porao", 13, "horizontal", 26, "lab1")
         self.construir_objeto(spritesPorao.parede_sprite_v, 338, 56, "porao", 5, "vertical", 26, "lab2")
@@ -67,14 +69,31 @@ class Porao(Cena):  # Primeira parte do porão.
         print("iniciou porao")
         jogador.rect.topleft = (50, 550)
         colisao.construir_cenario()
+        inimigo.rect.topleft = (50, 50)
+        glob.cenaAtual = "porao"
         self.delay = 10
         self.iniciou = True
 
     def eventos(self):  # Captura os eventos do teclado e do cenário.
         jogador.move(self.tecla, self.teclaHorizontal, self.teclaVertical, colisao.get_colisao_jogador("porao"))
+        colisao.colisao_monstro("porao", controladorPorao)
 
         if self.delay > 0:
             self.delay -= 1
+
+        if self.delayMonstro > 0:
+            self.delayMonstro -= 1
+
+        #  Este trecho do código é repetido no saguão, porão e na oficina. Porém ainda não pensei num jeito de melhorar isso.
+        if colisao.distancia(jogador, inimigo.rect.center[0], inimigo.rect.center[1]) < 65 and self.delayMonstro <= 0:
+            if jogador.vida > 0:
+                jogador.vida -= 1
+                self.mostrarVida = True
+                self.delayMonstro = 125
+            else:
+                return "fimMorte"
+        else:
+            self.mostrarVida = False
 
         if self.tecla == "p":
             MenuEmJogo.cena_anterior = "porao"
@@ -107,11 +126,11 @@ class Porao(Cena):  # Primeira parte do porão.
                 sleep(2)
 
     def desenhar_objetos_externos(self):
-        jogadorGroup.draw(glob.tela)
+        draw_groups()
         glob.tela.blit(spritesPorao.sprite_iluminacao, (jogador.rect.center[0] - 1200, jogador.rect.center[1] - 900))
         hud.desenhar_hud(jogador.stamina, jogador.vida, jogador.rect.center[0] - 30, jogador.rect.top - 30,
                          self.mostrarVida)
-        jogadorGroup.update()
+        update_groups()
 
     def atualizar(self):  # Atualiza os sprites da cena.
         glob.tela.blit(spritesPorao.fundo, (0, 0))

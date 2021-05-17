@@ -5,6 +5,7 @@ from controladorInimigo import ControladorInimigo
 from configparser import ConfigParser
 config = ConfigParser()
 
+
 class Main:
 
     def __init__(self):
