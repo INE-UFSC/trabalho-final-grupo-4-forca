@@ -7,12 +7,15 @@ from prototipo.cenas.menu_em_jogo import MenuEmJogo
 from prototipo import itens
 from prototipo import som
 from prototipo.hud import hud
-
+from time import sleep
 
 class SpritesCorredor(SpritesCena):  # Classe que armazena os sprites da cena.
     def __init__(self):
         super().__init__()
         self.porta_corredor = self.load_image("../Assets/Sprites/cenario/porta_metal.png", True)
+        self.final_padrao = self.load_image("../Assets/Sprites/hud/final_padrao.png", True)
+        self.final_bom = self.load_image("../Assets/Sprites/hud/final_bom.png", True)
+
 
 spritesCorredor = SpritesCorredor()
 
@@ -79,7 +82,16 @@ class Corredor(Cena):
                 return "sala"
             elif colisao.distancia(jogador, 400, 90) < 50 and self.delay <= 0:
                 self.iniciou = False
-                som.monstro1.play()
+                if item.cobre1 and item.cobre2 and item.cobre3:
+                    glob.tela.fill((glob.preto))
+                    glob.tela.blit(spritesCorredor.final_bom, spritesCorredor.final_bom.get_rect(center=glob.tela.get_rect().center))
+                    pygame.display.flip()
+                    sleep(5)
+                else:
+                    glob.tela.fill((glob.preto))
+                    glob.tela.blit(spritesCorredor.final_padrao, spritesCorredor.final_padrao.get_rect(center=glob.tela.get_rect().center))
+                    pygame.display.flip()
+                    sleep(7)
                 return "menuFim"
 
         if self.tecla == "e" and self.delay <= 0:

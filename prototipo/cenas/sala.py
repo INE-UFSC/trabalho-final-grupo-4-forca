@@ -106,8 +106,8 @@ class Sala(Cena):
             if colisao.distancia(jogador, 455, 80) < 50 and self.delay <= 0:
                 if item.possui_codigo:
                     self.iniciou = False
-                    for e in som.sons:  e.set_volume(glob.volume_efeitos)
                     som.porta_som.play()
+                    som.monstro1.play()
                     return "corredor"
                 else:
                     glob.tela.fill((glob.preto))
