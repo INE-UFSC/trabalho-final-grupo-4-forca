@@ -26,13 +26,16 @@ class ControladorInimigo(Controlador):
     
     def movimenta(self):
         self.movimentar = not self.movimentar
-        if self.inimigo.estado == "caminho" and self.movimentar:
+        if self.inimigo.estado == "caminho":
+            self.movimentar = not self.movimentar
             if math.dist(self.inimigo.rect.center, self.caminho[self.posicao_caminho]) <= self.inimigo.velocidade:
                 vetor_movimento = (self.caminho[self.posicao_caminho][0] - self.inimigo.rect.centerx, self.caminho[self.posicao_caminho][1] - self.inimigo.rect.centery)
             else:
                 vetor_movimento = self.melhor_caminho(self.caminho[self.posicao_caminho])
-            
-            self.inimigo.move(vetor_movimento[0], vetor_movimento[1])
+            if self.movimentar:
+                self.inimigo.move(vetor_movimento[0], 0)
+            else:
+                self.inimigo.move(0, vetor_movimento[1])
             if abs(vetor_movimento[0]) >= abs(vetor_movimento[1]):
                 if vetor_movimento[0] >= 0:
                     self.ultimo_movimento = "direita"
